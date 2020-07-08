@@ -5,7 +5,6 @@ export default function Sidebar() {
     <sidebar>
       <nav id="navbar">
         <header>
-          {" "}
           <h2 id="nav-title">Navegación</h2>
         </header>
 
