@@ -8,11 +8,11 @@ export default function Sidebar() {
           <h2 id="nav-title">Navegación</h2>
         </header>
 
-        <a href="!#" class="nav-link">
+        <a href="/" class="nav-link">
           <i class="fas fa-home"></i> <span class="nav-text"> Home</span>
         </a>
-        <a href="!#" class="nav-link">
-          <i class="fas fa-ambulance"></i> <span class="nav-text">Moviles</span>
+        <a href="/moviles" class="nav-link">
+          <i class="fas fa-ambulance"></i> <span class="nav-text">Móviles</span>
         </a>
         <a href="!#" class="nav-link">
           <i class="fas fa-archive"></i> <span class="nav-text">Historico</span>
