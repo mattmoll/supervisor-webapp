@@ -5,79 +5,79 @@ export default class Home extends Component {
     return (
       <div>
         <div id="summary-container">
-          <div class="panel summary">
-            <div class="summary-panel-title">
+          <div className="panel summary">
+            <div className="summary-panel-title">
               <h4>Servicios</h4>
-              <i class="fas fa-user-md fa-3x"></i>
+              <i className="fas fa-user-md fa-3x"></i>
             </div>
-            <div class="info-panel">
-              <div class="info-item">
+            <div className="info-panel">
+              <div className="info-item">
                 <span>
-                  Cerrados: <strong class="info-value"> 20</strong>{" "}
+                  Cerrados: <strong className="info-value"> 20</strong>{" "}
                 </span>
               </div>
-              <div class="info-item">
+              <div className="info-item">
                 <span>
-                  En Curso: <strong class="info-value"> 35</strong>{" "}
+                  En Curso: <strong className="info-value"> 35</strong>{" "}
                 </span>
               </div>
             </div>
           </div>
-          <div class="panel summary">
-            <div class="summary-panel-title">
+          <div className="panel summary">
+            <div className="summary-panel-title">
               <h4>Móviles</h4>
-              <i class="fas fa-ambulance fa-3x"></i>
+              <i className="fas fa-ambulance fa-3x"></i>
             </div>
-            <div class="info-panel">
-              <div class="info-item">
+            <div className="info-panel">
+              <div className="info-item">
                 <span>
-                  Activos: <strong class="info-value"> 20</strong>{" "}
+                  Activos: <strong className="info-value"> 20</strong>{" "}
                 </span>
               </div>
-              <div class="info-item">
+              <div className="info-item">
                 <span>
-                  Sin Serv.: <strong class="info-value"> 35</strong>{" "}
+                  Sin Serv.: <strong className="info-value"> 35</strong>{" "}
                 </span>
               </div>
             </div>
           </div>
-          <div class="panel summary">
-            <div class="summary-panel-title">
+          <div className="panel summary">
+            <div className="summary-panel-title">
               <h4>Operadores</h4>
-              <i class="fas fa-users fa-3x"></i>
+              <i className="fas fa-users fa-3x"></i>
             </div>
-            <div class="info-panel">
-              <div class="info-item">
+            <div className="info-panel">
+              <div className="info-item">
                 <span>
-                  Receptores: <strong class="info-value"> 20</strong>{" "}
+                  Receptores: <strong className="info-value"> 20</strong>{" "}
                 </span>
               </div>
-              <div class="info-item">
+              <div className="info-item">
                 <span>
-                  Despachadores: <strong class="info-value"> 35</strong>{" "}
+                  Despachadores: <strong className="info-value"> 35</strong>{" "}
                 </span>
               </div>
             </div>
           </div>
-          <div class="panel summary">
-            <div class="summary-panel-title">
+          <div className="panel summary">
+            <div className="summary-panel-title">
               <h4>Estado General</h4>
-              <i class="fas fa-info-circle fa-3x"></i>
+              <i className="fas fa-info-circle fa-3x"></i>
             </div>
-            <div class="info-panel">
-              <div class="info-item">
-                <span class="text-danger">
-                  GPS: <strong class="info-value"> X</strong>{" "}
+            <div className="info-panel">
+              <div className="info-item">
+                <span className="text-danger">
+                  GPS: <strong className="info-value"> X</strong>{" "}
                 </span>
               </div>
-              <div class="info-item">
-                <span class="text-success">
-                  Interfaces: <strong class="info-value"> OK</strong>{" "}
+              <div className="info-item">
+                <span className="text-success">
+                  Interfaces: <strong className="info-value"> OK</strong>{" "}
                 </span>
               </div>
-              <div class="info-item">
-                <span class="text-success">
-                  Grabadora: <strong class="info-value"> OK</strong>{" "}
+              <div className="info-item">
+                <span className="text-success">
+                  Grabadora: <strong className="info-value"> OK</strong>{" "}
                 </span>
               </div>
             </div>
@@ -85,10 +85,10 @@ export default class Home extends Component {
         </div>
 
         <div id="content-container">
-          <div class="panel content">
-            <div id="chartdiv" class="chart"></div>
+          <div className="panel content">
+            <div id="chartdiv" className="chart"></div>
           </div>
-          <div class="panel content">
+          <div className="panel content">
             <h4> Some Relevant Info</h4>
             <p>
               {" "}
@@ -104,14 +104,14 @@ export default class Home extends Component {
               Lorem Ipsum.
             </p>
           </div>
-          <div class="panel content">
-            <div id="chartpiediv" class="chart"></div>
+          <div className="panel content">
+            <div id="chartpiediv" className="chart"></div>
           </div>
-          <div class="panel content"></div>
-          <div class="panel content"></div>
-          <div class="panel content"></div>
-          <div class="panel content"></div>
-          <div class="panel content"></div>
+          <div className="panel content"></div>
+          <div className="panel content"></div>
+          <div className="panel content"></div>
+          <div className="panel content"></div>
+          <div className="panel content"></div>
         </div>
       </div>
     );

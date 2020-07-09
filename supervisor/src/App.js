@@ -5,6 +5,8 @@ import Topbar from "./components/layout/Topbar";
 import Sidebar from "./components/layout/Sidebar";
 import Home from "./components/dashboards/Home";
 import Moviles from "./components/dashboards/Moviles";
+import Historico from "./components/dashboards/Historico";
+import Operadores from "./components/dashboards/Operadores";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
             <Switch>
               <Route exact path="/" component={Home}></Route>
               <Route exact path="/moviles" component={Moviles}></Route>
+              <Route exact path="/historico" component={Historico}></Route>
+              <Route exact path="/operadores" component={Operadores}></Route>
             </Switch>
           </main>
         </div>

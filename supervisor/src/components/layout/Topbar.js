@@ -5,7 +5,7 @@ export default function Topbar() {
   return (
     <header id="topbar">
       <a href="!#" id="menu-btn">
-        <i class="fa fa-bars" aria-hidden="true"></i>
+        <i className="fa fa-bars" aria-hidden="true"></i>
       </a>
       <div id="trademark">
         <img id="app-icon" src={icon} alt="Supervisor Icon" />

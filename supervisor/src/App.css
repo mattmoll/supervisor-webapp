@@ -136,7 +136,7 @@ body a{
   height: 100%;
 }
 
-sidebar{
+#sidebar{
   color:white;
   width:var(--sidebar-size);
   background-color:#2B3E4D;
@@ -145,24 +145,24 @@ sidebar{
   padding:50px 0px 0px 0px;
 }
 
-sidebar header{
+#sidebar header{
   margin-left: 20px;
   margin-bottom:40px;
 }
 
-sidebar nav i{
+#sidebar nav i{
   margin-right:10px;
 }
 
-sidebar a{
+#sidebar a{
   color:#d6d6d6;
   font-weight: 500;
   font-size: 17px;
 }
 
 .small-sidebar{
-  width:60px;
-  padding:0px;
+  width:60px !important;
+  padding:0px !important;
 }
 
 
