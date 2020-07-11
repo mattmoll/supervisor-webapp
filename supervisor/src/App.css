@@ -75,6 +75,17 @@ body a{
   margin:auto;
 }
 
+#user-panel{
+  position:absolute;
+  right:40px;
+  top:var(--topbar-height);
+  width:300px;
+  height:150px;
+  background-color:#FFFFFF;
+  border:rgba(0,0,0,0.1) 1px solid;
+  border-top:none;
+}
+
 #menu-btn{
   color:black;
   padding-top:2px;

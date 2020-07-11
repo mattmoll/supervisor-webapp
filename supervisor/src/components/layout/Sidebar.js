@@ -3,20 +3,24 @@ import React, { Component } from "react";
 class Sidebar extends Component {
   constructor(props) {
     super(props);
-
-    console.log("test");
-
     var media = window.matchMedia("(max-width: 980px)");
-
     media.addEventListener("change", (e) => {
       if (e.matches) {
-        /* the viewport is 980 pixels wide or less */
+        /* the viewport is 980 pixels wide or less (match media above)*/
         this.compressSidebar();
       } else {
         /* the viewport is more than than 980 pixels wide */
         this.expandSidebar();
       }
     });
+  }
+
+  componentDidUpdate() {
+    if (this.props.compressedSidebar) {
+      this.compressSidebar();
+    } else {
+      this.expandSidebar();
+    }
   }
 
   onCompressClicked = (e) => {
@@ -69,16 +73,6 @@ class Sidebar extends Component {
 
     var sidebar = document.getElementById("sidebar");
     sidebar.classList.remove("small-sidebar");
-  };
-
-  toggleSidebar = (e) => {
-    e.preventDefault();
-    var sidebar = document.getElementsByTagName("Sidebar")[0];
-    if (sidebar.classList.contains("small-sidebar")) {
-      this.expandSidebar();
-    } else {
-      this.compressSidebar();
-    }
   };
 
   render() {
