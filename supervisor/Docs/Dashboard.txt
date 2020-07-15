@@ -1,0 +1,120 @@
+Filtros generales:
+	Seleccionar Colores
+	Seleciconar Moviles
+	Seleciconar Tipo
+	Seleciconar Empresa (CN)
+
+	Rango de Tiempo
+		Ult xx horas -(default 24)
+		Hoy
+		Ayer
+
+///////////////////////////////////////////////////////
+Notas mati:
+revisar integracion con MQTT para react:
+https://dev.to/preciouschicken/a-taste-of-mqtt-in-react-2jc6
+Home, renglon resumen, como estan los 4 cuadros, sumarle al de servicios:
+cancelados. Reordenar: En curso, cerrados, cancelados.
+
+Primer grafico es uno de barras (pensar opciones) con el total por estado de servicio:
+Activos, demorados, apoyos y atenciones multiples. (buscar colores para cada estado, tipo pasteles)
+activos tipo verde. los demas tirando a warning, error. Demorados es el mas critico. apoyo es el siguiente.
+
+
+En el grafico de al lado - 
+Estado por tipo de movil. Es decir, que moviles tiene y en que estado estan, ejemplo data:
+UTIM, Autito, interface, etc y cada estado son siempre dos, activos y no activos.
+Opcion de grafico de barras estaqueables por estado. la cantidad de tipos de moviles es dinamica, entre 4 y 8 en teoria.
+
+
+El siguiente cuadro deabjo de servicios es la idea de
+una especie de grilla donde las filas son los estados de servicios:
+Activos, demorados, apoyos y atenciones multiples.
+Y las columnas son por color:
+Grilla modelo en excel.
+
+Activos	25 32 10 56
+
+
+
+Pensar esquema para cambio de "tema" (color de la topbar y algun icono marca) que diga que esta aplicado un filtro global.
+
+
+
+
+Grafico de alguna manera para esta info: (no stack)
+Son las primeras cuatro para el receptor y las otras 4 para despachador.
+Son 2 graficos, uno para esta info. 
+Receptor		- #tomados, #cancelados,
+Despachador		- #despachados, #cancelados,
+
+y otro para esta:
+Receptor  prom(colorting), prom(recepcion)
+Despachador #redespach, prom(asig)
+Por un tema de escalas. Los primeros 4 valores son numeros y los siguientes son %.
+
+Dibujo idea graficos guardado.
+
+
+
+
+
+///////////////////////////////////////////////////////
+Cuadros OnLine
+--------
+Por Color: 
+	Servicios Realizados # Total y desgloce 
+	Servicios Cancelados # Total y desgloce 
+
+Por Empresa: 
+	2 Niveles: GF, AP, CN
+	CN- 15 empresas???
+Servicios Activos # desgloce (con %)
+Servicios Demorados # desgloce 
+Servicios Realizados # desgloce 
+Servicios Cancelados # desgloce 
+
+
+
+Imagen del dashboard, no va en el home, probablemente otro menu., 2 opciones:
+1) Imagen prefijada del mapa en svg va con la distro. Y el front end despues recibe configuracion de colores para cada zona 
+tengo que parsear el xml del svg y modificar los colores segun config. 
+
+2) Revisar si la biblioteca de graficos tiene esa dona de 2 niveles. Estoy casi seguro que si 
+
+
+
+///////////////////////////////////////////////////////
+Cuadros Historia
+--------
+Serv Realizados y Cancelados (hoy y ayer) 4 numeros
+
+
+
+Chart Historia
+-------
+Colores por Hora (ult. 24 hs) EjeX cada 6	(Stac???) - Solo realizados 
+						            Filtro por color-es posible??
+							    Ampliar el grafico. esposible?
+								
+Estados por Hora (ult. 24 hs) EjeX cada 6	(Stac???) - Real,Canc, Demorados RTA
+							    Ampliar el grafico. esposible?
+
+Demora por Hora (ult. 24 hs) EjeX cada 6	(barras???) - Demora en Despacho - Puede ser una char por color en barra
+							    Ampliar el grafico. esposible?
+
+# Servicios por Movil (ult. 24 hs) 		(barras horiz)
+							- cantidad con barras stack de color
+
+Servicios por Movil por hora (ult. 24 hs) 	(barras horiz)
+							- barras del color ocupando el tiempo stack de color
+
+
+Grilla Hist
+--------
+# tomados, cance x receptor  (ult. 24 hs)
+# despachados cance x despachador  (ult. 24 hs)
+
+
+
+
