@@ -261,7 +261,7 @@ main{
 .summary{
   justify-self: center;
   width:350px;
-  height:120px;
+  height:130px;
   display:flex;
   flex-direction:row;
   justify-content: space-evenly;
@@ -302,8 +302,8 @@ main{
 }
 
 .info-item{
-  margin:5px 0;
-  font-size: 1.4em;
+  margin: 0;
+  font-size: 1.2em;
 }
 
 .chart {

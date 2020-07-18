@@ -1,89 +1,35 @@
 import React, { Component } from "react";
+import SummaryHome from "./SummaryHome";
 
 export default class Home extends Component {
+  state = {
+    resumen: {
+      servicios: {
+        enCurso: 35,
+        cerrados: 20,
+        cancelados: 12,
+      },
+      moviles: {
+        activos: 20,
+        fueraServicio: 35,
+      },
+      operadores: {
+        receptores: 24,
+        despachadores: 7,
+      },
+      estadoGeneral: {
+        gps: false,
+        interfaces: true,
+        grabadora: true,
+      },
+    },
+  };
+
   render() {
     return (
       <div>
-        <div id="summary-container">
-          <div className="panel summary">
-            <div className="summary-panel-title">
-              <h4>Servicios</h4>
-              <i className="fas fa-user-md fa-3x"></i>
-            </div>
-            <div className="info-panel">
-              <div className="info-item">
-                <span>
-                  Cerrados: <strong className="info-value"> 20</strong>{" "}
-                </span>
-              </div>
-              <div className="info-item">
-                <span>
-                  En Curso: <strong className="info-value"> 35</strong>{" "}
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="panel summary">
-            <div className="summary-panel-title">
-              <h4>Móviles</h4>
-              <i className="fas fa-ambulance fa-3x"></i>
-            </div>
-            <div className="info-panel">
-              <div className="info-item">
-                <span>
-                  Activos: <strong className="info-value"> 20</strong>{" "}
-                </span>
-              </div>
-              <div className="info-item">
-                <span>
-                  Sin Serv.: <strong className="info-value"> 35</strong>{" "}
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="panel summary">
-            <div className="summary-panel-title">
-              <h4>Operadores</h4>
-              <i className="fas fa-users fa-3x"></i>
-            </div>
-            <div className="info-panel">
-              <div className="info-item">
-                <span>
-                  Receptores: <strong className="info-value"> 20</strong>{" "}
-                </span>
-              </div>
-              <div className="info-item">
-                <span>
-                  Despachadores: <strong className="info-value"> 35</strong>{" "}
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="panel summary">
-            <div className="summary-panel-title">
-              <h4>Estado General</h4>
-              <i className="fas fa-info-circle fa-3x"></i>
-            </div>
-            <div className="info-panel">
-              <div className="info-item">
-                <span className="text-danger">
-                  GPS: <strong className="info-value"> X</strong>{" "}
-                </span>
-              </div>
-              <div className="info-item">
-                <span className="text-success">
-                  Interfaces: <strong className="info-value"> OK</strong>{" "}
-                </span>
-              </div>
-              <div className="info-item">
-                <span className="text-success">
-                  Grabadora: <strong className="info-value"> OK</strong>{" "}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        <SummaryHome summary={this.state.resumen}/>
+        
         <div id="content-container">
           <div className="panel content">
             <div id="chartdiv" className="chart"></div>
