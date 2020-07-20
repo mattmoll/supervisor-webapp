@@ -13,8 +13,7 @@ Filtros generales:
 Notas mati:
 revisar integracion con MQTT para react:
 https://dev.to/preciouschicken/a-taste-of-mqtt-in-react-2jc6
-Home, renglon resumen, como estan los 4 cuadros, sumarle al de servicios:
-cancelados. Reordenar: En curso, cerrados, cancelados.
+
 
 Primer grafico es uno de barras (pensar opciones) con el total por estado de servicio:
 Activos, demorados, apoyos y atenciones multiples. (buscar colores para cada estado, tipo pasteles)
