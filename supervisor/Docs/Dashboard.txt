@@ -15,29 +15,8 @@ revisar integracion con MQTT para react:
 https://dev.to/preciouschicken/a-taste-of-mqtt-in-react-2jc6
 
 
-Primer grafico es uno de barras (pensar opciones) con el total por estado de servicio:
-Activos, demorados, apoyos y atenciones multiples. (buscar colores para cada estado, tipo pasteles)
-activos tipo verde. los demas tirando a warning, error. Demorados es el mas critico. apoyo es el siguiente.
-
-
-En el grafico de al lado - 
-Estado por tipo de movil. Es decir, que moviles tiene y en que estado estan, ejemplo data:
-UTIM, Autito, interface, etc y cada estado son siempre dos, activos y no activos.
-Opcion de grafico de barras estaqueables por estado. la cantidad de tipos de moviles es dinamica, entre 4 y 8 en teoria.
-
-
-El siguiente cuadro deabjo de servicios es la idea de
-una especie de grilla donde las filas son los estados de servicios:
-Activos, demorados, apoyos y atenciones multiples.
-Y las columnas son por color:
-Grilla modelo en excel.
-
-Activos	25 32 10 56
-
-
 
 Pensar esquema para cambio de "tema" (color de la topbar y algun icono marca) que diga que esta aplicado un filtro global.
-
 
 
 
@@ -115,5 +94,23 @@ Grilla Hist
 # despachados cance x despachador  (ult. 24 hs)
 
 
+DONE:
+
+Acomodada barra de estado, servicios con 3 valores y alto general.
+
+Primer grafico es uno de barras (pensar opciones) con el total por estado de servicio:
+Activos, demorados, apoyos y atenciones multiples. (buscar colores para cada estado, tipo pasteles)
+activos tipo verde. los demas tirando a warning, error. Demorados es el mas critico. apoyo es el siguiente.
+
+En el grafico de al lado - 
+Estado por tipo de movil. Es decir, que moviles tiene y en que estado estan, ejemplo data:
+UTIM, Autito, interface, etc y cada estado son siempre dos, activos y no activos.
+Opcion de grafico de barras estaqueables por estado. la cantidad de tipos de moviles es dinamica, entre 4 y 8 en teoria.
 
 
+
+El siguiente cuadro deabjo de servicios es la idea de
+una especie de grilla donde las filas son los estados de servicios:
+Activos, demorados, apoyos y atenciones multiples.
+Y las columnas son por color:
+Grilla modelo en excel.

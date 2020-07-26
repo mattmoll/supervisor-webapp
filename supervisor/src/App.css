@@ -311,6 +311,10 @@ main{
   height: 100%;
 }
 
+.container-services-table{
+  width: 90%;
+  margin-top: 20px;
+}
 
 /* Media Queries */
 

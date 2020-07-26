@@ -1,19 +1,19 @@
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 
-export function createServicesChart(data){
-  let chart = am4core.create("chartdiv", am4charts.XYChart);
+export function createServicesChart(chartContainer, data){
+  let chart = am4core.create(chartContainer, am4charts.XYChart);
   chart.colors.list = [
     am4core.color("#67DC75"),
     am4core.color("#DC6967"),
     am4core.color("#DC8C67"),
     am4core.color("#DCD267"),
   ]
+  chart.legend = createLegend();
 
-  chart.legend = new am4charts.Legend();
-  chart.legend.position = "top";
-  chart.legend.paddingBottom = 20;
-  chart.legend.labels.template.maxWidth = 95;
+  // Add category field and pass data.
+  data["category"] = "Servicios";
+  chart.data = [data]; 
 
   var xAxis = chart.xAxes.push(new am4charts.CategoryAxis());
   xAxis.dataFields.category = "category";
@@ -30,74 +30,79 @@ export function createServicesChart(data){
     series.dataFields.categoryX = "category";
     series.name = name;
 
-    series.events.on("hidden", arrangeColumns);
-    series.events.on("shown", arrangeColumns);
-
     var bullet = series.bullets.push(new am4charts.LabelBullet());
     bullet.interactionsEnabled = false;
     bullet.dy = 30;
     bullet.label.text = "{valueY}";
-    bullet.label.fill = am4core.color("#ffffff");
 
     return series;
   }
-
-  chart.data = [
-    {
-      category: "Servicios",
-      activos: data.activos,
-      demorados: data.demorados,
-      apoyos: data.apoyos,
-      atencionesMultiples: data.atencionesMultiples,
-    },
-  ];
-
   createSeries("activos", "Activos");
   createSeries("demorados", "Demorados");
   createSeries("apoyos", "Apoyos");
   createSeries("atencionesMultiples", "At. Multiples");
 
-  function arrangeColumns() {
-    var series = chart.series.getIndex(0);
-
-    var w = 1 - xAxis.renderer.cellStartLocation - (1 - xAxis.renderer.cellEndLocation);
-    if (series.dataItems.length > 1) {
-      var x0 = xAxis.getX(series.dataItems.getIndex(0), "categoryX");
-      var x1 = xAxis.getX(series.dataItems.getIndex(1), "categoryX");
-      var delta = ((x1 - x0) / chart.series.length) * w;
-      if (am4core.isNumber(delta)) {
-        var middle = chart.series.length / 2;
-        var newIndex = 0;
-        chart.series.each(function (series) {
-          if (!series.isHidden && !series.isHiding) {
-            series.dummyData = newIndex;
-            newIndex++;
-          } else {
-            series.dummyData = chart.series.indexOf(series);
-          }
-        });
-        var visibleCount = newIndex;
-        var newMiddle = visibleCount / 2;
-
-        chart.series.each(function (series) {
-          var trueIndex = chart.series.indexOf(series);
-          var newIndex = series.dummyData;
-
-          var dx = (newIndex - trueIndex + middle - newMiddle) * delta;
-
-          series.animate(
-            { property: "dx", to: dx },
-            series.interpolationDuration,
-            series.interpolationEasing
-          );
-          series.bulletsContainer.animate(
-            { property: "dx", to: dx },
-            series.interpolationDuration,
-            series.interpolationEasing
-          );
-        });
-      }
-    }
-  }
   return chart;
+}
+
+
+export function createMobilesChart(chartContainer, data){
+  let chart = am4core.create(chartContainer, am4charts.XYChart);
+  chart.colors.list = [
+    am4core.color("#67DC75"),
+    am4core.color("#DC6967"),
+  ]
+  chart.legend = createLegend();
+  chart.data = data;
+
+  // Create axes
+  var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+  categoryAxis.dataFields.category = "type";
+  categoryAxis.renderer.grid.template.location = 0;
+
+  var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+  valueAxis.min = 0;
+
+  // Create series
+  function createSeries(field, name) {
+    // Set up series
+    var series = chart.series.push(new am4charts.ColumnSeries());
+    series.name = name;
+    series.dataFields.valueY = field;
+    series.dataFields.categoryX = "type";
+    series.sequencedInterpolation = true;
+    
+    // Make it stacked
+    series.stacked = true;
+    
+    // Configure columns
+    series.columns.template.width = am4core.percent(60);
+    series.columns.template.tooltipText = "[bold]{name}[/]\n[font-size:14px]{categoryX}: {valueY}";
+    
+    // Add label
+    var labelBullet = series.bullets.push(new am4charts.LabelBullet());
+    labelBullet.label.text = "{valueY}";
+    labelBullet.locationY = 0.5;
+    labelBullet.label.hideOversized = true;
+    
+    return series;
+  }
+
+  createSeries("activos", "Activos");
+  createSeries("inactivos", "Inactivos");
+
+  return chart;
+}
+
+
+
+
+// Internal support methods
+
+function createLegend(){
+  let legend = new am4charts.Legend();
+  legend.position = "top";
+  legend.paddingBottom = 20;
+  legend.labels.template.maxWidth = 95;
+  return legend;
 }
