@@ -316,6 +316,18 @@ main{
   margin-top: 20px;
 }
 
+.half-width{
+  width:50%;
+  height:100%;
+}
+
+.row-container{
+  flex-direction:row;
+}
+th a {
+  display: block;
+}
+
 /* Media Queries */
 
 

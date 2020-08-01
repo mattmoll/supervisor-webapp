@@ -14,24 +14,22 @@ Notas mati:
 revisar integracion con MQTT para react:
 https://dev.to/preciouschicken/a-taste-of-mqtt-in-react-2jc6
 
-
-
 Pensar esquema para cambio de "tema" (color de la topbar y algun icono marca) que diga que esta aplicado un filtro global.
 
 
 
-Grafico de alguna manera para esta info: (no stack)
-Son las primeras cuatro para el receptor y las otras 4 para despachador.
-Son 2 graficos, uno para esta info. 
-Receptor		- #tomados, #cancelados,
-Despachador		- #despachados, #cancelados,
 
-y otro para esta:
-Receptor  prom(colorting), prom(recepcion)
-Despachador #redespach, prom(asig)
-Por un tema de escalas. Los primeros 4 valores son numeros y los siguientes son %.
+Revisar:
+Tabla se rompe al bajar resoluciones. Opciones? 
+Mostrar solo 3 columnas e iniciales en la de nombres?
+Quitar la grilla en modo celu?
 
-Dibujo idea graficos guardado.
+
+Los 2 graficos en un solo div se ven forzados y en resoluciones bajas
+no se rompen, pero no se aprecian.
+Problema con la lectura de data, no es tan claro. No pude hacer el color coding
+en el primer gráfico, pero aunque consiga como hacerlo no creo que resuelva la problematica.
+
 
 
 
@@ -108,9 +106,21 @@ UTIM, Autito, interface, etc y cada estado son siempre dos, activos y no activos
 Opcion de grafico de barras estaqueables por estado. la cantidad de tipos de moviles es dinamica, entre 4 y 8 en teoria.
 
 
-
 El siguiente cuadro deabjo de servicios es la idea de
 una especie de grilla donde las filas son los estados de servicios:
 Activos, demorados, apoyos y atenciones multiples.
 Y las columnas son por color:
 Grilla modelo en excel.
+
+Grafico de alguna manera para esta info: (no stack)
+Son las primeras cuatro para el receptor y las otras 4 para despachador.
+Son 2 graficos, uno para esta info. 
+Receptor		- #tomados, #cancelados,
+Despachador		- #despachados, #cancelados,
+
+y otro para esta:
+Receptor  prom(colorting), prom(recepcion)
+Despachador #redespach, prom(asig)
+Por un tema de escalas. Los primeros 4 valores son numeros y los siguientes son %.
+
+Dibujo idea graficos guardado.

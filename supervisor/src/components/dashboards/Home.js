@@ -1,8 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import SummaryHome from "./SummaryHome";
 import * as am4core from "@amcharts/amcharts4/core";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import {createServicesChart, createMobilesChart}  from "./ChartsHelper";
+import {createServicesChart, createMobilesChart, createEmployeesServicesChart, 
+        createEmployeesServicesAveragesChart}  from "./ChartsHelper";
+import {getStateFromAPI} from "./StateHelper";
 
 am4core.useTheme(am4themes_animated);
 
@@ -17,115 +19,33 @@ export default class Home extends Component {
     "Gris": "#D9D9D9"
   }
   state = {
-    resumen: {
-      servicios: {
-        enCurso: 35,
-        cerrados: 20,
-        cancelados: 12,
-      },
-      moviles: {
-        activos: 20,
-        fueraServicio: 35,
-      },
-      operadores: {
-        receptores: 24,
-        despachadores: 7,
-      },
-      estadoGeneral: {
-        gps: false,
-        interfaces: true,
-        grabadora: true,
-      },
-    },
-    totalesPorEstadoServicio: {
-      activos: 35,
-      demorados: 22,
-      apoyos: 15,
-      atencionesMultiples: 32,
-    },
-    estadosPorTipoDeMovil: [
-      {
-        type: "UTIM",
-        activos: 20,
-        inactivos: 5,
-      }, {
-        type: "Auto",
-        activos: 11,
-        inactivos: 2,
-      }, {
-        type: "interface",
-        activos: 2,
-        inactivos: 15,
-      }
-    ],
-    serviciosPorEstadoYColor:[
-      {
-        descripcion:"Activos",
-        serviciosPorColor: [
-          {color: "Rojos", cantidad: 25},
-          {color: "Amarillos", cantidad: 45},
-          {color: "Verdes", cantidad: 80},
-          {color: "Traslados", cantidad: 12},
-          {color: "Cremita", cantidad: 25},
-          {color: "Gris", cantidad: 45},
-        ]
-      },
-      {
-        descripcion:"Demorados",
-        serviciosPorColor: [
-          {color: "Rojo", cantidad: 10},
-          {color: "Amarillos", cantidad: 5},
-          {color: "Verdes", cantidad: 120},
-          {color: "Traslados", cantidad: 0},
-          {color: "Cremita", cantidad: 2},
-          {color: "Gris", cantidad: 10},
-        ]
-      },
-      {
-        descripcion:"Apoyos",
-        serviciosPorColor: [
-          {color: "Rojos", cantidad: 2},
-          {color: "Amarillos", cantidad: 15},
-          {color: "Verdes", cantidad: 0},
-          {color: "Traslados", cantidad: 0},
-          {color: "Cremita", cantidad: 12},
-          {color: "Gris", cantidad: 4},
-        ]
-      },
-      {
-        descripcion:"At. Multiples",
-        serviciosPorColor: [
-          {color: "Rojo", cantidad: 100},
-          {color: "Amarillos", cantidad: 5},
-          {color: "Verdes", cantidad: 10},
-          {color: "Traslados", cantidad: 40},
-          {color: "Cremita", cantidad: 2},
-          {color: "Gris", cantidad: 10},
-        ]
-      },
-      {
-        descripcion:"Totales",
-        serviciosPorColor: [
-          {color: "Rojo", cantidad: 300},
-          {color: "Amarillos", cantidad: 150},
-          {color: "Verdes", cantidad: 100},
-          {color: "Traslados", cantidad: 140},
-          {color: "Cremita", cantidad: 80},
-          {color: "Gris", cantidad: 90},
-        ]
-      },
-    ]
-  };
+    colorsVisibility : {
+      "Rojos": true,
+      "Amarillos": true,
+      "Verdes" : true,
+      "Traslados": true,
+      "Cremita": true,
+      "Gris": true
+    }
+  }
+  
+  stateAPI = getStateFromAPI();
 
   
   componentDidMount(){
     // TODO: Here goes call to the WebAPI
 
-    let chartServices = createServicesChart("chartServices", this.state.totalesPorEstadoServicio);
+    let chartServices = createServicesChart("chartServices", this.stateAPI.totalesPorEstadoServicio);
     this.charts.push(chartServices);
 
-    let chartMobiles = createMobilesChart("chartMobiles", this.state.estadosPorTipoDeMovil);
+    let chartMobiles = createMobilesChart("chartMobiles", this.stateAPI.estadosPorTipoDeMovil);
     this.charts.push(chartMobiles);
+
+    let chartEmployeesServices = createEmployeesServicesChart("chartEmployeesServices", this.stateAPI.serviciosRecibidosDespachados);
+    this.charts.push(chartEmployeesServices);
+
+    let chartEmployeesServicesAverages = createEmployeesServicesAveragesChart("chartEmployeesServicesAverages", this.stateAPI.PromediosServiciosRecibidosDespachados);
+    this.charts.push(chartEmployeesServicesAverages);
   }
 
   componentWillUnmount() {
@@ -136,10 +56,23 @@ export default class Home extends Component {
     });
   }
 
+  toggleColumn = (color, event) =>{
+    event.preventDefault();
+    let colorsVisibilityUpdt = this.state.colorsVisibility;
+    colorsVisibilityUpdt[color] = !colorsVisibilityUpdt[color];
+    this.setState({ colorsVisibilityUpdt })
+
+  }
+
+  isVisible = (color) =>{
+    return this.state.colorsVisibility[color];
+
+  }
+
   render() {
     return (
       <div>
-        <SummaryHome summary={this.state.resumen}/>
+        <SummaryHome summary={this.stateAPI.resumen}/>
 
         <div id="content-container">
           
@@ -153,29 +86,56 @@ export default class Home extends Component {
 
           <div className="panel content">
             <div className="container-services-table">
-              <table className="table table-sm table-bordered">
+              <table className="table table-bordered">
                 <thead>
                   <tr>
                     <th scope="col" style={{backgroundColor:"#9abcd6"}}>Estado</th>
-                    {this.state.serviciosPorEstadoYColor[0].serviciosPorColor.map((srvXColor, index) => 
-                    (<th key={index} scope="col" style={{backgroundColor:this.colors[srvXColor.color]}}>{srvXColor.color}</th>) )}
+                    {
+                      this.stateAPI.serviciosPorEstadoYColor[0].serviciosPorColor.map((srvXColor, index) => 
+                        this.isVisible(srvXColor.color) &&
+                        (
+                          <th key={index}  scope="col" 
+                              style={{backgroundColor:this.colors[srvXColor.color], cursor:"pointer"}}>
+                              {srvXColor.color} 
+                          </th>
+                        ) )
+                    }
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.serviciosPorEstadoYColor.map((srvXStateColor, index) => (
+                  {this.stateAPI.serviciosPorEstadoYColor.map((srvXStateColor, index) => 
+                  (
                     <tr  key={index}>
                       <th scope="row">{srvXStateColor.descripcion}</th>
-                      {srvXStateColor.serviciosPorColor.map((srvXColor, index) => (<th key={index}>{srvXColor.cantidad}</th>) )}
-                  </tr>
-                  ))
-                  }
+                      {srvXStateColor.serviciosPorColor.map((srvXColor, index) => this.isVisible(srvXColor.color) &&
+                      (<th key={index}>{srvXColor.cantidad}</th>)
+                      )}
+                    </tr>
+                  ))}
                 </tbody>
               </table>
+              <div className="togglers-container">
+              {
+                this.stateAPI.serviciosPorEstadoYColor[0].serviciosPorColor.map((srvXColor, index) => 
+                (
+                  <a className={"btn m-1 " + (this.isVisible(srvXColor.color) ? "btn-info" : "btn-secondary")}
+                  key={index} href="!#" onClick={this.toggleColumn.bind(this, srvXColor.color)}>{srvXColor.color}</a>
+                )
+                )
+              }
+              </div>
             </div>
           </div>
 
           
-          <div className="panel content"></div>
+          <div className="panel content row-container">
+            <div className="half-width">
+            <div id="chartEmployeesServices" className="chart"></div>
+            </div>
+            <div className="half-width">
+            <div id="chartEmployeesServicesAverages" className="chart"></div>
+            </div>
+          </div>
           <div className="panel content"></div>
           <div className="panel content"></div>
           <div className="panel content"></div>
