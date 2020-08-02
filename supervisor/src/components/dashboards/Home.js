@@ -84,6 +84,9 @@ export default class Home extends Component {
             <div id="chartMobiles" className="chart"></div>
           </div>
 
+          <div className="panel content"><div id="chartEmployeesServices" className="chart"></div></div>
+          <div className="panel content"><div id="chartEmployeesServicesAverages" className="chart"></div></div>
+
           <div className="panel content">
             <div className="container-services-table">
               <table className="table table-bordered">
@@ -126,20 +129,6 @@ export default class Home extends Component {
               </div>
             </div>
           </div>
-
-          
-          <div className="panel content row-container">
-            <div className="half-width">
-            <div id="chartEmployeesServices" className="chart"></div>
-            </div>
-            <div className="half-width">
-            <div id="chartEmployeesServicesAverages" className="chart"></div>
-            </div>
-          </div>
-          <div className="panel content"></div>
-          <div className="panel content"></div>
-          <div className="panel content"></div>
-          <div className="panel content"></div>
         </div>
       </div>
     );

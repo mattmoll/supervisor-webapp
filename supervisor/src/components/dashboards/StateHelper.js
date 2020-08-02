@@ -2,7 +2,7 @@ export function getStateFromAPI(){
   return {
     resumen: {
       servicios: {
-        enCurso: 35,
+        enCurso: 3,
         cerrados: 20,
         cancelados: 12,
       },

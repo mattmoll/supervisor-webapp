@@ -17,19 +17,76 @@ https://dev.to/preciouschicken/a-taste-of-mqtt-in-react-2jc6
 Pensar esquema para cambio de "tema" (color de la topbar y algun icono marca) que diga que esta aplicado un filtro global.
 
 
+TODO :
+
+Agregar Titulos:
+Servicios
+Recursos
+Servicios Operadores
+Tiempos Operadores
+
+Probar con titulo comun, sino con el titulo de amcharts
+y sino con relative adentro del div.
+
+Grilla:
+Cuando la resolucion baja de 720px cambiar los titulos a la priemra letra y mostrar solos los 3 primeros.
+
+Agregar En settings:
+- Cambiar password
+- Agregar filtros globales (crear modal bloqueante por ahora).
 
 
-Revisar:
-Tabla se rompe al bajar resoluciones. Opciones? 
-Mostrar solo 3 columnas e iniciales en la de nombres?
-Quitar la grilla en modo celu?
+Borrar la barra de search.
 
 
-Los 2 graficos en un solo div se ven forzados y en resoluciones bajas
-no se rompen, pero no se aprecian.
-Problema con la lectura de data, no es tan claro. No pude hacer el color coding
-en el primer gráfico, pero aunque consiga como hacerlo no creo que resuelva la problematica.
+Menu final:
+Home
+Clientes 
+Zonas
+Historicos
+	Servicios
+	Moviles
+	Operadores (tentativo)
 
+
+--------------------------------------------------------------------------
+
+Data en Clientes:
+
+Resumen pills:
+Grupos, areas y convenios
+
+y cada uno tiene que tener 2 numeros:
+Cerrados: total (nro 1+nro2)
+En tiempo: nro 1
+Fuera tiempo: nro 2
+
+La misma pill de Estado Gral del home.
+
+
+Tres graficos por estos servicios:
+Activos, demorados, cerrados y cancelados.
+
+Titulos de cada grafico:
+Grupos familiares
+
+Areas Protegidas
+
+Convenios
+
+
+Cuarto grafico:
+Stacked bar de activos y demorados, por convenio. 
+Los convenios son dinamicos, me los pasa por la API.
+Pami, Swiss, Guemes y Omint.
+(Igual al que tenemos de moviles en la solapa de home.
+
+------------------------------------------------------------------------
+
+
+
+
+	
 
 
 

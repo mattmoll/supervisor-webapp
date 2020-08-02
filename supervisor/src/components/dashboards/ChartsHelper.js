@@ -183,7 +183,7 @@ export function createEmployeesServicesAveragesChart(chartContainer, data){
     return series;
   }
   createSeries("recepPromedioColoring", "Prom Coloring");
-  createSeries("recepPromedioAsignacion", "Prom Asign");
+  createSeries("recepPromedioAsignacion", "Prom Recep");
   createSeries("despRedespachos", "Redespachos");
   createSeries("despPromedioAsignacion", "Prom Asign");
 
