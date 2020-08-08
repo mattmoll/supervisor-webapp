@@ -4,9 +4,12 @@ import "./App.css";
 import Topbar from "./components/layout/Topbar";
 import Sidebar from "./components/layout/Sidebar";
 import Home from "./components/dashboards/Home";
-import Moviles from "./components/dashboards/Moviles";
-import Historico from "./components/dashboards/Historico";
-import Operadores from "./components/dashboards/Operadores";
+import Clientes from "./components/dashboards/Clientes";
+import Zonas from "./components/dashboards/Zonas";
+import Servicios from "./components/historics/Servicios";
+import Moviles from "./components/historics/Moviles";
+import Operadores from "./components/historics/Operadores";
+
 
 export default class App extends Component {
   state = {
@@ -26,8 +29,11 @@ export default class App extends Component {
             <main>
               <Switch>
                 <Route exact path="/" component={Home}></Route>
+                <Route exact path="/clientes" component={Clientes}></Route>
+                <Route exact path="/zonas" component={Zonas}></Route>
+
+                <Route exact path="/servicios" component={Servicios}></Route>
                 <Route exact path="/moviles" component={Moviles}></Route>
-                <Route exact path="/historico" component={Historico}></Route>
                 <Route exact path="/operadores" component={Operadores}></Route>
               </Switch>
             </main>

@@ -192,6 +192,12 @@ body a{
   padding:0px !important;
 }
 
+.sub-link{
+  padding-left:2.4em;
+}
+.non-link{
+  cursor:default;
+}
 
 .nav-link{
   

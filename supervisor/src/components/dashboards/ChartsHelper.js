@@ -1,15 +1,17 @@
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
+import { addSyntheticLeadingComment } from "typescript";
 
 export function createServicesChart(chartContainer, data){
   let chart = am4core.create(chartContainer, am4charts.XYChart);
+  addTitle("Servicios", chart);
   chart.colors.list = [
     am4core.color("#67DC75"),
     am4core.color("#DC6967"),
     am4core.color("#DC8C67"),
     am4core.color("#DCD267"),
   ]
-  chart.legend = createLegend();
+  addLegend(chart);
 
   // Add category field and pass data.
   data["category"] = "Servicios";
@@ -48,11 +50,12 @@ export function createServicesChart(chartContainer, data){
 
 export function createMobilesChart(chartContainer, data){
   let chart = am4core.create(chartContainer, am4charts.XYChart);
+  addTitle("Recursos", chart);
   chart.colors.list = [
     am4core.color("#67DC75"),
     am4core.color("#DC6967"),
   ]
-  chart.legend = createLegend();
+  addLegend(chart);
   chart.data = data;
 
   // Create axes
@@ -98,11 +101,12 @@ export function createMobilesChart(chartContainer, data){
 
 export function createEmployeesServicesChart(chartContainer, data){
   let chart = am4core.create(chartContainer, am4charts.XYChart);
+  addTitle("Servicios Operadores", chart);
   chart.colors.list = [
     am4core.color("#67DC75"),
     am4core.color("#DC6967"),
   ]
-  chart.legend = createLegend();
+  addLegend(chart);
   chart.data = data;
 
   // Create axes
@@ -148,7 +152,8 @@ export function createEmployeesServicesChart(chartContainer, data){
 
 export function createEmployeesServicesAveragesChart(chartContainer, data){
   let chart = am4core.create(chartContainer, am4charts.XYChart);
-  chart.legend = createLegend();
+  addTitle("Tiempos Operadores", chart);
+  addLegend(chart);
   chart.colors.list = [
     am4core.color("#67B7DC"),
     am4core.color("#67B7DC"),
@@ -194,10 +199,19 @@ export function createEmployeesServicesAveragesChart(chartContainer, data){
 
 // Internal support methods
 
-function createLegend(){
+function addLegend(chart){
   let legend = new am4charts.Legend();
   legend.position = "top";
   legend.paddingBottom = 20;
   legend.labels.template.maxWidth = 95;
-  return legend;
+  chart.legend = legend;
+}
+
+function addTitle(titleText, chart){
+  let title = chart.titles.create();
+  title.text = titleText;
+  title.fontSize = 25;
+  title.fontWeight = 700;
+  title.marginBottom = 10;
+  chart.titles.push(title);
 }

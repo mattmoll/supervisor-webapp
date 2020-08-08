@@ -21,7 +21,6 @@ export default class Topbar extends Component {
           <span id="trademark-title">Supervisor</span>
         </div>
         <div id="action-bar">
-          <input id="search-input" type="text" placeholder="Search..."></input>
 
           <div id="user-button" onClick={this.onShowUserPanelClicked}>
             <span>MM</span>

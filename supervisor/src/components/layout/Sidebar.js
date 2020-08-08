@@ -83,26 +83,14 @@ class Sidebar extends Component {
             <h2 id="nav-title">Navegación</h2>
           </header>
 
-          <a href="/" className="nav-link">
-            <i className="fas fa-home"></i>{" "}
-            <span className="nav-text"> Home</span>
-          </a>
-          <a href="/moviles" className="nav-link">
-            <i className="fas fa-ambulance"></i>{" "}
-            <span className="nav-text">Móviles</span>
-          </a>
-          <a href="/historico" className="nav-link">
-            <i className="fas fa-archive"></i>{" "}
-            <span className="nav-text">Historico</span>
-          </a>
-          <a href="/operadores" className="nav-link">
-            <i className="fas fa-users"></i>{" "}
-            <span className="nav-text">Operadores</span>
-          </a>
-          <a href="!#" className="nav-link">
-            <i className="fas fa-sign-out-alt"></i>{" "}
-            <span className="nav-text">Log Out</span>
-          </a>
+          <a href="/" className="nav-link"><i className="fas fa-home"></i>{" "}<span className="nav-text"> Home</span></a>
+          <a href="/moviles" className="nav-link"><i className="fas fa-briefcase"></i>{" "}<span className="nav-text">Clientes</span></a>
+          {/* Otras opciones para icono clientes, no me convencio del todo el acutal:  fas fa-user-tie      fas fa-building */}
+          <a href="!#" className="nav-link non-link"><i className="fas fa-archive"></i>{" "}<span className="nav-text">Historicos</span></a>
+          <a href="/moviles" className="nav-link sub-link"><i className="fas fa-notes-medical"></i>{" "}<span className="nav-text">Servicios</span></a>
+          <a href="/moviles" className="nav-link sub-link"><i className="fas fa-ambulance"></i>{" "}<span className="nav-text">Móviles</span></a>
+          <a href="/operadores" className="nav-link sub-link"><i className="fas fa-users"></i>{" "}<span className="nav-text">Operadores</span></a>
+          <a href="!#" className="nav-link"><i className="fas fa-sign-out-alt"></i>{" "}<span className="nav-text">Log Out</span></a>
           <a
             href="!#"
             id="expand-link"
