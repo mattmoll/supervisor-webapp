@@ -117,3 +117,45 @@ export function getStateFromAPI(){
     },
   };
 }
+
+export function getStateClientesFromAPI(){
+  return {
+    resumen: {
+      grupos: {
+        enTiempo: 20,
+        fueraTiempo: 12,
+      },
+      areas: {
+        enTiempo: 10,
+        fueraTiempo: 5,
+      },
+      convenios: {
+        enTiempo: 8,
+        fueraTiempo: 0,
+      },
+      estadoGeneral: {
+        gps: false,
+        interfaces: true,
+        grabadora: true,
+      },
+    },
+    gruposFamiliares: {
+      activos: 35,
+      demorados: 22,
+      cerrados: 15,
+      cancelados: 32,
+    },
+    areasProtegidas: {
+      activos: 5,
+      demorados: 12,
+      cerrados: 23,
+      cancelados: 3,
+    },
+    convenios: {
+      activos: 40,
+      demorados: 4,
+      cerrados: 120,
+      cancelados: 30,
+    },
+  };
+}

@@ -19,14 +19,9 @@ Pensar esquema para cambio de "tema" (color de la topbar y algun icono marca) qu
 
 TODO :
 
-Agregar Titulos:
-Servicios
-Recursos
-Servicios Operadores
-Tiempos Operadores
+Revisar con papa opciones para marcar que el cerrados es un total, el margin y el border quedan mal a mi gusto.
 
-Probar con titulo comun, sino con el titulo de amcharts
-y sino con relative adentro del div.
+
 
 Grilla:
 Cuando la resolucion baja de 720px cambiar los titulos a la priemra letra y mostrar solos los 3 primeros.
@@ -36,17 +31,7 @@ Agregar En settings:
 - Agregar filtros globales (crear modal bloqueante por ahora).
 
 
-Borrar la barra de search.
-
-
-Menu final:
-Home
-Clientes 
-Zonas
-Historicos
-	Servicios
-	Moviles
-	Operadores (tentativo)
+subitem
 
 
 --------------------------------------------------------------------------
@@ -151,33 +136,23 @@ Grilla Hist
 
 DONE:
 
-Acomodada barra de estado, servicios con 3 valores y alto general.
+Agregar Titulos:
+Servicios
+Recursos
+Servicios Operadores
+Tiempos Operadores
 
-Primer grafico es uno de barras (pensar opciones) con el total por estado de servicio:
-Activos, demorados, apoyos y atenciones multiples. (buscar colores para cada estado, tipo pasteles)
-activos tipo verde. los demas tirando a warning, error. Demorados es el mas critico. apoyo es el siguiente.
+Probar con titulo comun, sino con el titulo de amcharts
+y sino con relative adentro del div.
 
-En el grafico de al lado - 
-Estado por tipo de movil. Es decir, que moviles tiene y en que estado estan, ejemplo data:
-UTIM, Autito, interface, etc y cada estado son siempre dos, activos y no activos.
-Opcion de grafico de barras estaqueables por estado. la cantidad de tipos de moviles es dinamica, entre 4 y 8 en teoria.
+Borrar la barra de search.
 
 
-El siguiente cuadro deabjo de servicios es la idea de
-una especie de grilla donde las filas son los estados de servicios:
-Activos, demorados, apoyos y atenciones multiples.
-Y las columnas son por color:
-Grilla modelo en excel.
-
-Grafico de alguna manera para esta info: (no stack)
-Son las primeras cuatro para el receptor y las otras 4 para despachador.
-Son 2 graficos, uno para esta info. 
-Receptor		- #tomados, #cancelados,
-Despachador		- #despachados, #cancelados,
-
-y otro para esta:
-Receptor  prom(colorting), prom(recepcion)
-Despachador #redespach, prom(asig)
-Por un tema de escalas. Los primeros 4 valores son numeros y los siguientes son %.
-
-Dibujo idea graficos guardado.
+Menu final:
+Home
+Clientes 
+Zonas
+Historicos
+	Servicios
+	Moviles
+	Operadores (tentativo)

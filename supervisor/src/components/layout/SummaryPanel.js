@@ -11,7 +11,7 @@ export default class SummaryPanel extends Component {
         </div>
         <div className="info-panel">
           {items.map((item) => (
-            <div className="info-item" key={item.key}>
+            <div className={"info-item " + (item.isTotal ? "total" : "")} key={item.key}>
               <span>
                 {item.key}:{" "}
                 <strong className="info-value">

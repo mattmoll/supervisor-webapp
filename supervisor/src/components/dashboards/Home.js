@@ -1,9 +1,8 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import SummaryHome from "./SummaryHome";
 import * as am4core from "@amcharts/amcharts4/core";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import {createServicesChart, createMobilesChart, createEmployeesServicesChart, 
-        createEmployeesServicesAveragesChart}  from "./ChartsHelper";
+import * as chartsHome from "../charts/ChartsHome";
 import {getStateFromAPI} from "./StateHelper";
 
 am4core.useTheme(am4themes_animated);
@@ -35,16 +34,16 @@ export default class Home extends Component {
   componentDidMount(){
     // TODO: Here goes call to the WebAPI
 
-    let chartServices = createServicesChart("chartServices", this.stateAPI.totalesPorEstadoServicio);
+    let chartServices = chartsHome.createServicesChart("chartServices", this.stateAPI.totalesPorEstadoServicio);
     this.charts.push(chartServices);
 
-    let chartMobiles = createMobilesChart("chartMobiles", this.stateAPI.estadosPorTipoDeMovil);
+    let chartMobiles = chartsHome.createMobilesChart("chartMobiles", this.stateAPI.estadosPorTipoDeMovil);
     this.charts.push(chartMobiles);
 
-    let chartEmployeesServices = createEmployeesServicesChart("chartEmployeesServices", this.stateAPI.serviciosRecibidosDespachados);
+    let chartEmployeesServices = chartsHome.createEmployeesServicesChart("chartEmployeesServices", this.stateAPI.serviciosRecibidosDespachados);
     this.charts.push(chartEmployeesServices);
 
-    let chartEmployeesServicesAverages = createEmployeesServicesAveragesChart("chartEmployeesServicesAverages", this.stateAPI.PromediosServiciosRecibidosDespachados);
+    let chartEmployeesServicesAverages = chartsHome.createEmployeesServicesAveragesChart("chartEmployeesServicesAverages", this.stateAPI.PromediosServiciosRecibidosDespachados);
     this.charts.push(chartEmployeesServicesAverages);
   }
 
@@ -84,8 +83,13 @@ export default class Home extends Component {
             <div id="chartMobiles" className="chart"></div>
           </div>
 
-          <div className="panel content"><div id="chartEmployeesServices" className="chart"></div></div>
-          <div className="panel content"><div id="chartEmployeesServicesAverages" className="chart"></div></div>
+          <div className="panel content">
+            <div id="chartEmployeesServices" className="chart"></div>
+          </div>
+          
+          <div className="panel content">
+            <div id="chartEmployeesServicesAverages" className="chart"></div>
+          </div>
 
           <div className="panel content">
             <div className="container-services-table">

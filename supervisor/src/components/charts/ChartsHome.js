@@ -1,61 +1,24 @@
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
-import { addSyntheticLeadingComment } from "typescript";
+import * as chartHelper from "./ChartsHelper";
 
 export function createServicesChart(chartContainer, data){
-  let chart = am4core.create(chartContainer, am4charts.XYChart);
-  addTitle("Servicios", chart);
-  chart.colors.list = [
-    am4core.color("#67DC75"),
-    am4core.color("#DC6967"),
-    am4core.color("#DC8C67"),
-    am4core.color("#DCD267"),
-  ]
-  addLegend(chart);
-
-  // Add category field and pass data.
-  data["category"] = "Servicios";
-  chart.data = [data]; 
-
-  var xAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-  xAxis.dataFields.category = "category";
-  xAxis.renderer.cellStartLocation = 0.1;
-  xAxis.renderer.cellEndLocation = 0.9;
-  xAxis.renderer.grid.template.location = 0;
-
-  var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
-  yAxis.min = 0;
-
-  function createSeries(value, name) {
-    var series = chart.series.push(new am4charts.ColumnSeries());
-    series.dataFields.valueY = value;
-    series.dataFields.categoryX = "category";
-    series.name = name;
-
-    var bullet = series.bullets.push(new am4charts.LabelBullet());
-    bullet.interactionsEnabled = false;
-    bullet.dy = 30;
-    bullet.label.text = "{valueY}";
-
-    return series;
-  }
-  createSeries("activos", "Activos");
-  createSeries("demorados", "Demorados");
-  createSeries("apoyos", "Apoyos");
-  createSeries("atencionesMultiples", "At. Multiples");
-
-  return chart;
+  let series = [{code:"activos", title:"Activos"},
+                {code:"demorados", title:"Demorados"},
+                {code:"apoyos", title:"Apoyos"},
+                {code:"atencionesMultiples", title:"At. Multiples"}, ]
+  chartHelper.createStandardBarChart(chartContainer, data, "Servicios", series)
 }
 
 
 export function createMobilesChart(chartContainer, data){
   let chart = am4core.create(chartContainer, am4charts.XYChart);
-  addTitle("Recursos", chart);
+  chartHelper.addTitle("Recursos", chart);
   chart.colors.list = [
     am4core.color("#67DC75"),
     am4core.color("#DC6967"),
   ]
-  addLegend(chart);
+  chartHelper.addLegend(chart);
   chart.data = data;
 
   // Create axes
@@ -80,7 +43,7 @@ export function createMobilesChart(chartContainer, data){
     
     // Configure columns
     series.columns.template.width = am4core.percent(60);
-    series.columns.template.tooltipText = "[bold]{name}[/]\n[font-size:14px]{categoryX}: {valueY}";
+    chartHelper.addStandardTooltip(series);
     
     // Add label
     var labelBullet = series.bullets.push(new am4charts.LabelBullet());
@@ -101,12 +64,12 @@ export function createMobilesChart(chartContainer, data){
 
 export function createEmployeesServicesChart(chartContainer, data){
   let chart = am4core.create(chartContainer, am4charts.XYChart);
-  addTitle("Servicios Operadores", chart);
+  chartHelper.addTitle("Servicios Operadores", chart);
   chart.colors.list = [
     am4core.color("#67DC75"),
     am4core.color("#DC6967"),
   ]
-  addLegend(chart);
+  chartHelper.addLegend(chart);
   chart.data = data;
 
   // Create axes
@@ -132,7 +95,7 @@ export function createEmployeesServicesChart(chartContainer, data){
     
     // Configure columns
     series.columns.template.width = am4core.percent(60);
-    series.columns.template.tooltipText = "[bold]{name}[/]\n[font-size:14px]{categoryY}: {valueX}";
+    chartHelper.addStandardTooltip(series);
     
     // Add label
     var labelBullet = series.bullets.push(new am4charts.LabelBullet());
@@ -152,8 +115,8 @@ export function createEmployeesServicesChart(chartContainer, data){
 
 export function createEmployeesServicesAveragesChart(chartContainer, data){
   let chart = am4core.create(chartContainer, am4charts.XYChart);
-  addTitle("Tiempos Operadores", chart);
-  addLegend(chart);
+  chartHelper.addTitle("Tiempos Operadores", chart);
+  chartHelper.addLegend(chart);
   chart.colors.list = [
     am4core.color("#67B7DC"),
     am4core.color("#67B7DC"),
@@ -179,6 +142,7 @@ export function createEmployeesServicesAveragesChart(chartContainer, data){
     series.dataFields.valueY = value;
     series.dataFields.categoryX = "category";
     series.name = name;
+    chartHelper.addStandardTooltip(series);
 
     var bullet = series.bullets.push(new am4charts.LabelBullet());
     bullet.interactionsEnabled = false;
@@ -195,23 +159,3 @@ export function createEmployeesServicesAveragesChart(chartContainer, data){
   return chart;
 }
 
-
-
-// Internal support methods
-
-function addLegend(chart){
-  let legend = new am4charts.Legend();
-  legend.position = "top";
-  legend.paddingBottom = 20;
-  legend.labels.template.maxWidth = 95;
-  chart.legend = legend;
-}
-
-function addTitle(titleText, chart){
-  let title = chart.titles.create();
-  title.text = titleText;
-  title.fontSize = 25;
-  title.fontWeight = 700;
-  title.marginBottom = 10;
-  chart.titles.push(title);
-}
