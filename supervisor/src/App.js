@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Topbar from "./components/layout/Topbar";
 import Sidebar from "./components/layout/Sidebar";
+import FiltersModal from "./components/layout/FiltersModal";
+import ChangePassModal from "./components/layout/ChangePassModal";
 import Home from "./components/dashboards/Home";
 import Clientes from "./components/dashboards/Clientes";
 import Zonas from "./components/dashboards/Zonas";
@@ -23,6 +25,8 @@ export default class App extends Component {
     return (
       <Router>
         <div className="App">
+          <FiltersModal></FiltersModal>
+          <ChangePassModal></ChangePassModal>
           <Topbar onToggleSidebarClicked={this.toggleSidebar}></Topbar>
           <div id="full-container">
             <Sidebar compressedSidebar={this.state.compressedSidebar}></Sidebar>

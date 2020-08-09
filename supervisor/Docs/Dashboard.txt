@@ -20,44 +20,15 @@ Pensar esquema para cambio de "tema" (color de la topbar y algun icono marca) qu
 TODO :
 
 Revisar con papa opciones para marcar que el cerrados es un total, el margin y el border quedan mal a mi gusto.
+subitem  total clases for example.
+
+Revisar menu final, no anduvo bien y complicaba mucho la version de submenues, me parece que usar colapsables no tiene sentido
+Mas si vamos a sacar el menu de operadores, me parece mejor dejar todo junto ahi y el usuario verá cuales son "historicos".
 
 
 
 Grilla:
 Cuando la resolucion baja de 720px cambiar los titulos a la priemra letra y mostrar solos los 3 primeros.
-
-Agregar En settings:
-- Cambiar password
-- Agregar filtros globales (crear modal bloqueante por ahora).
-
-
-subitem
-
-
---------------------------------------------------------------------------
-
-Data en Clientes:
-
-Resumen pills:
-Grupos, areas y convenios
-
-y cada uno tiene que tener 2 numeros:
-Cerrados: total (nro 1+nro2)
-En tiempo: nro 1
-Fuera tiempo: nro 2
-
-La misma pill de Estado Gral del home.
-
-
-Tres graficos por estos servicios:
-Activos, demorados, cerrados y cancelados.
-
-Titulos de cada grafico:
-Grupos familiares
-
-Areas Protegidas
-
-Convenios
 
 
 Cuarto grafico:
@@ -156,3 +127,32 @@ Historicos
 	Servicios
 	Moviles
 	Operadores (tentativo)
+
+Agregar En settings:
+- Cambiar password
+- Agregar filtros globales (crear modal bloqueante por ahora).
+
+Data en Clientes:
+
+Resumen pills:
+Grupos, areas y convenios
+
+y cada uno tiene que tener 2 numeros:
+Cerrados: total (nro 1+nro2)
+En tiempo: nro 1
+Fuera tiempo: nro 2
+
+La misma pill de Estado Gral del home.
+
+
+
+Tres graficos por estos servicios:
+Activos, demorados, cerrados y cancelados.
+
+Titulos de cada grafico:
+Grupos familiares
+
+Areas Protegidas
+
+Convenios
+

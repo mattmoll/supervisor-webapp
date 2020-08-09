@@ -79,7 +79,7 @@ body a{
   position:absolute;
   right:40px;
   top:var(--topbar-height);
-  width:200px;
+  width:220px;
   display: flex;
   flex-direction: column;
   background-color:#FFFFFF;
