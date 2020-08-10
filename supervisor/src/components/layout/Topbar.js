@@ -7,7 +7,7 @@ export default class Topbar extends Component {
     panelVisible: false,
   };
 
-  onShowUserPanelClicked = () => {
+  onToggleUserPanelClicked = () => {
     this.setState({ panelVisible: !this.state.panelVisible });
   };
   render() {
@@ -22,11 +22,11 @@ export default class Topbar extends Component {
         </div>
         <div id="action-bar">
 
-          <div id="user-button" onClick={this.onShowUserPanelClicked}>
+          <div id="user-button" onClick={this.onToggleUserPanelClicked}>
             <span>MM</span>
           </div>
         </div>
-        {this.state.panelVisible ? <UserPanel></UserPanel> : null}
+        {this.state.panelVisible ? <UserPanel toggleVisibility={this.onToggleUserPanelClicked}></UserPanel> : null}
       </header>
     );
   }

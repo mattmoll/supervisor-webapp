@@ -1,18 +1,37 @@
 import React, { Component } from "react";
-import FiltersModal from "./FiltersModal"
 
 export default class UserPanel extends Component {
   state = {
     username: "Matias Moll",
+    toggleVisibility: null,
   };
+
+  constructor(props) {
+    super(props);
+    this.state = { ...this.state, toggleVisibility: props.toggleVisibility };
+    this.myRef = React.createRef();
+  }
 
   toggleTheme = (e) => {
     console.log("TODO: Toggled Theme");
   };
 
+  componentDidMount() {
+    document.addEventListener('click', this.handleClickOutside, true);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleClickOutside, true);
+  }
+  handleClickOutside = event => {
+    const node = this.myRef.current;
+    if (!node || !node.contains(event.target)) {
+        this.state.toggleVisibility();
+    }
+  }
+
   render() {
     return (
-      <div id="user-panel">
+      <div id="user-panel" ref={this.myRef}>
         <h4 className="mt-2 ml-3 mb-0">Configuración</h4>
         <hr />
         <div>
@@ -49,10 +68,10 @@ export default class UserPanel extends Component {
             </div>
           </div>
           <div className="settings-item">
-            <i className="fas fa-sign-out-alt mr-2"></i> LogOut:
+            <i className="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión:
             <div className="setting-value ml-2">
               <button type="button" className="btn btn-outline-dark btn-sm">
-                Exit
+                Salir
               </button>
             </div>
           </div>
