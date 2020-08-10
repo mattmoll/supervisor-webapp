@@ -3,12 +3,12 @@ import React, { Component } from "react";
 export default class UserPanel extends Component {
   state = {
     username: "Matias Moll",
-    toggleVisibility: null,
+    hidePanel: null,
   };
 
   constructor(props) {
     super(props);
-    this.state = { ...this.state, toggleVisibility: props.toggleVisibility };
+    this.state = { ...this.state, hidePanel: props.toggleVisibility };
     this.myRef = React.createRef();
   }
 
@@ -25,7 +25,7 @@ export default class UserPanel extends Component {
   handleClickOutside = event => {
     const node = this.myRef.current;
     if (!node || !node.contains(event.target)) {
-        this.state.toggleVisibility();
+        this.state.hidePanel();
     }
   }
 
