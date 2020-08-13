@@ -20,3 +20,9 @@ function createClientChart(chartContainer, data, titleText){
   chartHelper.createStandardBarChart(chartContainer, data, titleText, series)
 }
 
+export function createServicesPerCovenantChart(chartContainer, data){
+  let series = [{code:"activos", title:"Activos"},
+                {code:"demorados", title:"Demorados"},]
+  chartHelper.createStackedBarChart(chartContainer, data, "Servicios por Covenio", series)
+}
+

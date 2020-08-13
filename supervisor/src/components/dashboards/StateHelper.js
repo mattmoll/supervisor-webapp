@@ -157,5 +157,20 @@ export function getStateClientesFromAPI(){
       cerrados: 120,
       cancelados: 30,
     },
+    serviciosPorConvenio : [
+      {
+        type: "Pami",
+        activos: 20,
+        demorados: 5,
+      }, {
+        type: "Swiss",
+        activos: 7,
+        demorados: 2,
+      }, {
+        type: "Omint",
+        activos: 2,
+        demorados: 5,
+      }
+    ]
   };
 }

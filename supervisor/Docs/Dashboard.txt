@@ -19,6 +19,8 @@ Pensar esquema para cambio de "tema" (color de la topbar y algun icono marca) qu
 
 TODO :
 
+- UI: Make current menu stand out on the sidebar.
+
 Revisar con papa opciones para marcar que el cerrados es un total, el margin y el border quedan mal a mi gusto.
 subitem  total clases for example.
 
@@ -26,16 +28,17 @@ Revisar menu final, no anduvo bien y complicaba mucho la version de submenues, m
 Mas si vamos a sacar el menu de operadores, me parece mejor dejar todo junto ahi y el usuario verá cuales son "historicos".
 
 
+Pendiente:
 
 Grilla:
 Cuando la resolucion baja de 720px cambiar los titulos a la priemra letra y mostrar solos los 3 primeros.
 
+Modals:
+Design and work on change password and filters (need definition for this one).
 
-Cuarto grafico:
-Stacked bar de activos y demorados, por convenio. 
-Los convenios son dinamicos, me los pasa por la API.
-Pami, Swiss, Guemes y Omint.
-(Igual al que tenemos de moviles en la solapa de home.
+
+
+
 
 ------------------------------------------------------------------------
 
@@ -155,4 +158,10 @@ Grupos familiares
 Areas Protegidas
 
 Convenios
+
+Cuarto grafico:
+Stacked bar de activos y demorados, por convenio. 
+Los convenios son dinamicos, me los pasa por la API.
+Pami, Swiss, Guemes y Omint.
+(Igual al que tenemos de moviles en la solapa de home.
 

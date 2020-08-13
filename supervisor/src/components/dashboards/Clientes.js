@@ -11,14 +11,10 @@ export default class Clientes extends Component {
   componentDidMount(){
     // TODO: Here goes call to the WebAPI
 
-    let chartGroups = chartsClientes.createGroupsChart("chartGroups", this.stateAPI.gruposFamiliares);
-    this.charts.push(chartGroups);
-
-    let chartAreas = chartsClientes.createAreasChart("chartAreas", this.stateAPI.areasProtegidas);
-    this.charts.push(chartAreas);
-
-    let chartCovenants = chartsClientes.createCovenantsChart("chartCovenants", this.stateAPI.convenios);
-    this.charts.push(chartCovenants);
+    this.charts.push(chartsClientes.createGroupsChart("chartGroups", this.stateAPI.gruposFamiliares));
+    this.charts.push(chartsClientes.createAreasChart("chartAreas", this.stateAPI.areasProtegidas));
+    this.charts.push(chartsClientes.createCovenantsChart("chartCovenants", this.stateAPI.convenios));
+    this.charts.push(chartsClientes.createServicesPerCovenantChart("chartServicesPerCovenant", this.stateAPI.serviciosPorConvenio));
   }
 
   componentWillUnmount() {
@@ -52,7 +48,7 @@ export default class Clientes extends Component {
           </div>
   
           <div className="panel content">
-            <div id="someChart" className="chart"></div>
+            <div id="chartServicesPerCovenant" className="chart"></div>
           </div>
           
         </div>

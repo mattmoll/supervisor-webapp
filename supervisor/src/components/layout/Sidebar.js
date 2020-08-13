@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 
 class Sidebar extends Component {
+  state = {
+    selectedMenu:""
+  }
   constructor(props) {
     super(props);
-    var media = window.matchMedia("(max-width: 980px)");
+    let media = window.matchMedia("(max-width: 980px)");
     media.addEventListener("change", (e) => {
       if (e.matches) {
         /* the viewport is 980 pixels wide or less (match media above)*/
@@ -75,6 +78,11 @@ class Sidebar extends Component {
     sidebar.classList.remove("small-sidebar");
   };
 
+  activeIfSelected = (menuName) =>{
+    return (this.state.selectedMenu === menuName) ? "active" : ""; 
+  }
+
+
   render() {
     return (
       <div id="sidebar">
@@ -83,12 +91,22 @@ class Sidebar extends Component {
             <h2 id="nav-title">Navegación</h2>
           </header>
 
-          <a href="/" className="nav-link"><i className="fas fa-home"></i>{" "}<span className="nav-text"> Inicio</span></a>
-          <a href="/clientes" className="nav-link"><i className="fas fa-briefcase"></i>{" "}<span className="nav-text">Clientes</span></a>
+          <a href="/" className={"nav-link " + this.activeIfSelected("Inicio")} >
+            <i className="fas fa-home"></i>{" "}<span className="nav-text"> Inicio</span>
+          </a>
+          <a href="/clientes" className={"nav-link " + this.activeIfSelected("Clientes")} >
+            <i className="fas fa-briefcase"></i>{" "}<span className="nav-text">Clientes</span>
+          </a>
           {/* Otras opciones para icono clientes, no me convencio del todo el acutal:  fas fa-user-tie      fas fa-building */}
-          <a href="/servicios" className="nav-link"><i className="fas fa-notes-medical"></i>{" "}<span className="nav-text">Servicios</span></a>
-          <a href="/moviles" className="nav-link"><i className="fas fa-ambulance"></i>{" "}<span className="nav-text">Móviles</span></a>
-          <a href="/operadores" className="nav-link"><i className="fas fa-users"></i>{" "}<span className="nav-text">Operadores</span></a>
+          <a href="/servicios" className={"nav-link " + this.activeIfSelected("Servicios")} >
+            <i className="fas fa-notes-medical"></i>{" "}<span className="nav-text">Servicios</span>
+          </a>
+          <a href="/moviles" className={"nav-link " + this.activeIfSelected("Moviles")} >
+            <i className="fas fa-ambulance"></i>{" "}<span className="nav-text">Móviles</span>
+          </a>
+          <a href="/operadores" className={"nav-link " + this.activeIfSelected("Operadores")} >
+            <i className="fas fa-users"></i>{" "}<span className="nav-text">Operadores</span>
+          </a>
           <a href="!#" className="nav-link"><i className="fas fa-sign-out-alt"></i>{" "}<span className="nav-text">Cerrar Sesión</span></a>
           <a
             href="!#"

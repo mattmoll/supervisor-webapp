@@ -45,6 +45,54 @@ export function createStandardBarChart(chartContainer, data, titleText, series){
   return chart;
 }
 
+export function createStackedBarChart(chartContainer, data, title, series){
+  let chart = am4core.create(chartContainer, am4charts.XYChart);
+  addTitle(title, chart);
+  chart.colors.list = [
+    am4core.color("#67DC75"),
+    am4core.color("#DC6967"),
+  ]
+  addLegend(chart);
+  chart.data = data;
+
+  // Create axes
+  var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+  categoryAxis.dataFields.category = "type";
+  categoryAxis.renderer.grid.template.location = 0;
+
+  var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+  valueAxis.min = 0;
+
+  // Create series
+  function createSeries(field, name) {
+    // Set up series
+    var series = chart.series.push(new am4charts.ColumnSeries());
+    series.name = name;
+    series.dataFields.valueY = field;
+    series.dataFields.categoryX = "type";
+    series.sequencedInterpolation = true;
+    
+    // Make it stacked
+    series.stacked = true;
+    
+    // Configure columns
+    series.columns.template.width = am4core.percent(60);
+    addStandardTooltip(series);
+    
+    // Add label
+    var labelBullet = series.bullets.push(new am4charts.LabelBullet());
+    labelBullet.label.text = "{valueY}";
+    labelBullet.locationY = 0.5;
+    labelBullet.label.hideOversized = true;
+    
+    return series;
+  }
+
+  series.forEach(serie => createSeries(serie.code, serie.title));
+
+  return chart;
+}
+
 
 export function addLegend(chart){
   let legend = new am4charts.Legend();

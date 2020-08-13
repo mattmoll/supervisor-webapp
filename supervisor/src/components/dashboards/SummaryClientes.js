@@ -3,7 +3,6 @@ import SummaryPanel from "../layout/SummaryPanel";
 
 export default class SummaryHome extends Component {
   render() {
-    console.log(this.props);
     const { grupos, areas, convenios, estadoGeneral } = this.props.summary;
     return (
       <div id="summary-container">

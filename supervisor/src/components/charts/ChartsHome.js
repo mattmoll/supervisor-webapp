@@ -12,54 +12,10 @@ export function createServicesChart(chartContainer, data){
 
 
 export function createMobilesChart(chartContainer, data){
-  let chart = am4core.create(chartContainer, am4charts.XYChart);
-  chartHelper.addTitle("Recursos", chart);
-  chart.colors.list = [
-    am4core.color("#67DC75"),
-    am4core.color("#DC6967"),
-  ]
-  chartHelper.addLegend(chart);
-  chart.data = data;
-
-  // Create axes
-  var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-  categoryAxis.dataFields.category = "type";
-  categoryAxis.renderer.grid.template.location = 0;
-
-  var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-  valueAxis.min = 0;
-
-  // Create series
-  function createSeries(field, name) {
-    // Set up series
-    var series = chart.series.push(new am4charts.ColumnSeries());
-    series.name = name;
-    series.dataFields.valueY = field;
-    series.dataFields.categoryX = "type";
-    series.sequencedInterpolation = true;
-    
-    // Make it stacked
-    series.stacked = true;
-    
-    // Configure columns
-    series.columns.template.width = am4core.percent(60);
-    chartHelper.addStandardTooltip(series);
-    
-    // Add label
-    var labelBullet = series.bullets.push(new am4charts.LabelBullet());
-    labelBullet.label.text = "{valueY}";
-    labelBullet.locationY = 0.5;
-    labelBullet.label.hideOversized = true;
-    
-    return series;
-  }
-
-  createSeries("activos", "Activos");
-  createSeries("inactivos", "Inactivos");
-
-  return chart;
+  let series = [{code:"activos", title:"Activos"},
+                {code:"inactivos", title:"Inactivos"},]
+  chartHelper.createStackedBarChart(chartContainer, data, "Recursos", series)
 }
-
 
 
 export function createEmployeesServicesChart(chartContainer, data){
@@ -80,7 +36,6 @@ export function createEmployeesServicesChart(chartContainer, data){
   var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
   valueAxis.min = 0;
   
-
   // Create series
   function createSeries(field, name) {
     // Set up series
