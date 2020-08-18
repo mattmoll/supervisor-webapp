@@ -4,47 +4,21 @@ import * as am4core from "@amcharts/amcharts4/core";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import * as chartsHome from "../charts/ChartsHome";
 import {getStateFromAPI} from "./StateHelper";
+import ServicesTable from "./ServicesTable";
 
 am4core.useTheme(am4themes_animated);
 
 export default class Home extends Component {
-  charts = [];
-  colors = {
-    "Rojos": "#DC6967",
-    "Amarillos": "#DCD267",
-    "Verdes" : "#67DC75",
-    "Traslados": "#4472C4",
-    "Cremita": "#FFE699",
-    "Gris": "#D9D9D9"
-  }
-  state = {
-    colorsVisibility : {
-      "Rojos": true,
-      "Amarillos": true,
-      "Verdes" : true,
-      "Traslados": true,
-      "Cremita": true,
-      "Gris": true
-    }
-  }
-  
+  charts = [];  
   stateAPI = getStateFromAPI();
 
-  
   componentDidMount(){
     // TODO: Here goes call to the WebAPI
 
-    let chartServices = chartsHome.createServicesChart("chartServices", this.stateAPI.totalesPorEstadoServicio);
-    this.charts.push(chartServices);
-
-    let chartMobiles = chartsHome.createMobilesChart("chartMobiles", this.stateAPI.estadosPorTipoDeMovil);
-    this.charts.push(chartMobiles);
-
-    let chartEmployeesServices = chartsHome.createEmployeesServicesChart("chartEmployeesServices", this.stateAPI.serviciosRecibidosDespachados);
-    this.charts.push(chartEmployeesServices);
-
-    let chartEmployeesServicesAverages = chartsHome.createEmployeesServicesAveragesChart("chartEmployeesServicesAverages", this.stateAPI.PromediosServiciosRecibidosDespachados);
-    this.charts.push(chartEmployeesServicesAverages);
+    this.charts.push(chartsHome.createServicesChart("chartServices", this.stateAPI.totalesPorEstadoServicio));
+    this.charts.push(chartsHome.createMobilesChart("chartMobiles", this.stateAPI.estadosPorTipoDeMovil));
+    this.charts.push(chartsHome.createEmployeesServicesChart("chartEmployeesServices", this.stateAPI.serviciosRecibidosDespachados));
+    this.charts.push(chartsHome.createEmployeesServicesAveragesChart("chartEmployeesServicesAverages", this.stateAPI.PromediosServiciosRecibidosDespachados));
   }
 
   componentWillUnmount() {
@@ -53,19 +27,6 @@ export default class Home extends Component {
         chart.dispose();
       }
     });
-  }
-
-  toggleColumn = (color, event) =>{
-    event.preventDefault();
-    let colorsVisibilityUpdt = this.state.colorsVisibility;
-    colorsVisibilityUpdt[color] = !colorsVisibilityUpdt[color];
-    this.setState({ colorsVisibilityUpdt })
-
-  }
-
-  isVisible = (color) =>{
-    return this.state.colorsVisibility[color];
-
   }
 
   render() {
@@ -92,47 +53,9 @@ export default class Home extends Component {
           </div>
 
           <div className="panel content">
-            <div className="container-services-table">
-              <table className="table table-bordered">
-                <thead>
-                  <tr>
-                    <th scope="col" style={{backgroundColor:"#9abcd6"}}>Estado</th>
-                    {
-                      this.stateAPI.serviciosPorEstadoYColor[0].serviciosPorColor.map((srvXColor, index) => 
-                        this.isVisible(srvXColor.color) &&
-                        (
-                          <th key={index}  scope="col" 
-                              style={{backgroundColor:this.colors[srvXColor.color], cursor:"pointer"}}>
-                              {srvXColor.color} 
-                          </th>
-                        ) )
-                    }
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.stateAPI.serviciosPorEstadoYColor.map((srvXStateColor, index) => 
-                  (
-                    <tr  key={index}>
-                      <th scope="row">{srvXStateColor.descripcion}</th>
-                      {srvXStateColor.serviciosPorColor.map((srvXColor, index) => this.isVisible(srvXColor.color) &&
-                      (<th key={index}>{srvXColor.cantidad}</th>)
-                      )}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <div className="togglers-container">
-              {
-                this.stateAPI.serviciosPorEstadoYColor[0].serviciosPorColor.map((srvXColor, index) => 
-                (
-                  <a className={"btn m-1 " + (this.isVisible(srvXColor.color) ? "btn-info" : "btn-secondary")}
-                  key={index} href="!#" onClick={this.toggleColumn.bind(this, srvXColor.color)}>{srvXColor.color}</a>
-                )
-                )
-              }
-              </div>
-            </div>
+            <ServicesTable servicesPerStatusAndColor={this.stateAPI.serviciosPorEstadoYColor}/>
           </div>
+
         </div>
       </div>
     );

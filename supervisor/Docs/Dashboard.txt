@@ -19,7 +19,7 @@ Pensar esquema para cambio de "tema" (color de la topbar y algun icono marca) qu
 
 TODO :
 
-- UI: Make current menu stand out on the sidebar.
+- UI: Make current menu stand out on the sidebar. It´s not easy. Have to save on redux or localStorage the current selected menu.
 
 Revisar con papa opciones para marcar que el cerrados es un total, el margin y el border quedan mal a mi gusto.
 subitem  total clases for example.
@@ -29,9 +29,6 @@ Mas si vamos a sacar el menu de operadores, me parece mejor dejar todo junto ahi
 
 
 Pendiente:
-
-Grilla:
-Cuando la resolucion baja de 720px cambiar los titulos a la priemra letra y mostrar solos los 3 primeros.
 
 Modals:
 Design and work on change password and filters (need definition for this one).
@@ -165,3 +162,6 @@ Los convenios son dinamicos, me los pasa por la API.
 Pami, Swiss, Guemes y Omint.
 (Igual al que tenemos de moviles en la solapa de home.
 
+
+Grilla:
+Cuando la resolucion baja de 720px cambiar los titulos a la priemra letra y mostrar solos los 3 primeros.
