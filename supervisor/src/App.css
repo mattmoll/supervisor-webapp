@@ -40,6 +40,12 @@ body a{
   text-decoration: none;
 }
 
+.flex-column{
+  display:flex;
+  flex-direction:column;
+}
+
+
 /* Topbar*/
 
 #topbar{
@@ -341,9 +347,16 @@ th a {
   display: block;
 }
 
+
+/* Change pass modal */
+#changepass-modal-body{
+  width: 60%;
+  margin: auto;
+}
+
+
+
 /* Media Queries */
-
-
 
 @media (max-width: 790px){
   #main-doc{
@@ -474,4 +487,27 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+
+/* Meter Styles */
+
+meter {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+
+  margin: 0 auto 1em;
+  width: 100%;
+  height: 0.5em;
+
+  /* Applicable only to Firefox */
+  background: none;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+meter::-webkit-meter-bar {
+  background: none;
+  background-color: rgba(0, 0, 0, 0.1);
 }

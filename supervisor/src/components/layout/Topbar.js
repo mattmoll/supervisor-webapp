@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import icon from "../../img/icon.png";
-import UserPanel from "./UserPanel";
+import UserPanel from "../settings/UserPanel";
 
 export default class Topbar extends Component {
   state = {
