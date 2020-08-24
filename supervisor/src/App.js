@@ -10,7 +10,6 @@ import Clientes from "./components/dashboards/Clientes";
 import Zonas from "./components/dashboards/Zonas";
 import Servicios from "./components/historics/Servicios";
 import Moviles from "./components/historics/Moviles";
-import Operadores from "./components/historics/Operadores";
 
 
 export default class App extends Component {
@@ -38,7 +37,6 @@ export default class App extends Component {
 
                 <Route exact path="/servicios" component={Servicios}></Route>
                 <Route exact path="/moviles" component={Moviles}></Route>
-                <Route exact path="/operadores" component={Operadores}></Route>
               </Switch>
             </main>
           </div>

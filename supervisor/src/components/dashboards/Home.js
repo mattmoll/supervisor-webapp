@@ -18,7 +18,7 @@ export default class Home extends Component {
     this.charts.push(chartsHome.createServicesChart("chartServices", this.stateAPI.totalesPorEstadoServicio));
     this.charts.push(chartsHome.createMobilesChart("chartMobiles", this.stateAPI.estadosPorTipoDeMovil));
     this.charts.push(chartsHome.createEmployeesServicesChart("chartEmployeesServices", this.stateAPI.serviciosRecibidosDespachados));
-    this.charts.push(chartsHome.createEmployeesServicesAveragesChart("chartEmployeesServicesAverages", this.stateAPI.PromediosServiciosRecibidosDespachados));
+    this.charts.push(chartsHome.createEmployeesServicesAveragesChart("chartEmployeesServicesAverages", this.stateAPI.promediosServiciosRecibidosDespachados));
   }
 
   componentWillUnmount() {

@@ -99,13 +99,10 @@ class Sidebar extends Component {
           </a>
           {/* Otras opciones para icono clientes, no me convencio del todo el acutal:  fas fa-user-tie      fas fa-building */}
           <a href="/servicios" className={"nav-link " + this.activeIfSelected("Servicios")} >
-            <i className="fas fa-notes-medical"></i>{" "}<span className="nav-text">Servicios</span>
+            <i className="fas fa-laptop-medical"></i>{" "}<span className="nav-text">Servicios</span>
           </a>
           <a href="/moviles" className={"nav-link " + this.activeIfSelected("Moviles")} >
-            <i className="fas fa-ambulance"></i>{" "}<span className="nav-text">Móviles</span>
-          </a>
-          <a href="/operadores" className={"nav-link " + this.activeIfSelected("Operadores")} >
-            <i className="fas fa-users"></i>{" "}<span className="nav-text">Operadores</span>
+            <i className="fas fa-ambulance"></i>{" "}<span className="nav-text">Operativos</span>
           </a>
           <a href="!#" className="nav-link"><i className="fas fa-sign-out-alt"></i>{" "}<span className="nav-text">Cerrar Sesión</span></a>
           <a

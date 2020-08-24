@@ -7,8 +7,8 @@ export function createStandardBarChart(chartContainer, data, titleText, series){
   chart.colors.list = [
     am4core.color("#67DC75"),
     am4core.color("#DC6967"),
+    am4core.color("#67DCC5"),
     am4core.color("#DC8C67"),
-    am4core.color("#DCD267"),
   ]
   addLegend(chart);
 

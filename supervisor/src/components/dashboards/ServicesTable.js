@@ -7,8 +7,8 @@ export default class ServicesTable extends Component {
       "Amarillos": true,
       "Verdes" : true,
       "Traslados": true,
-      "Cremita": true,
-      "Gris": true
+      "Eventos": true,
+      "Otros": true
     },
     windowWidth: 1200
   }
@@ -18,8 +18,8 @@ export default class ServicesTable extends Component {
     "Amarillos": "#DCD267",
     "Verdes" : "#67DC75",
     "Traslados": "#4472C4",
-    "Cremita": "#FFE699",
-    "Gris": "#D9D9D9"
+    "Eventos": "#FFE699",
+    "Otros": "#D9D9D9",
   }
 
   componentDidMount(){
