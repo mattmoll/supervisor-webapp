@@ -93,6 +93,65 @@ export function createStackedBarChart(chartContainer, data, title, series){
   return chart;
 }
 
+export function createLinesChartWithScrollAndZoom(chartContainer, data, titleText, series){
+  let chart = am4core.create(chartContainer, am4charts.XYChart);
+  addTitle(titleText, chart);
+  chart.colors.list = [
+    am4core.color("#67DC75"),
+    am4core.color("#DC6967"),
+    am4core.color("#67DCC5"),
+    am4core.color("#DC8C67"),
+  ]
+  addLegend(chart);
+
+  let firstDate = new Date();
+  let secondDate = new Date(firstDate);
+  secondDate.setDate(secondDate.getDate() + 1);
+  // Add category field and pass data.
+  chart.data = [
+    {
+      date: firstDate,
+      cantidadPorHora: 7
+    },
+    {
+      date: secondDate,
+      cantidadPorHora: 10
+    },
+  ]; 
+
+  var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+  dateAxis.renderer.minGridDistance = 50;
+
+  var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+  yAxis.min = 0;
+
+  // Add scrollbar
+  chart.scrollbarX = new am4charts.XYChartScrollbar();
+  chart.scrollbarX.series.push(series);
+
+  /*
+  // Add cursor
+  chart.cursor = new am4charts.XYCursor();
+  chart.cursor.xAxis = dateAxis;
+  chart.cursor.snapToSeries = series;
+  */
+
+  function createSeries(value, name) {
+    var series = chart.series.push(new am4charts.LineSeries());
+    series.dataFields.valueY = "cantidadPorHora";
+    series.dataFields.dateX = "date";
+    series.strokeWidth = 2;
+    series.minBulletDistance = 10;
+    //addStandardTooltip(series);
+
+    return series;
+  }
+
+  series.forEach(serie => createSeries(serie.code, serie.title));
+
+  return chart;
+}
+
 
 export function addLegend(chart){
   let legend = new am4charts.Legend();
