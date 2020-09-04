@@ -183,9 +183,9 @@ export function getStateServiciosFromAPI(){
         7,8,9,10,11,12, 13
       ],
       serviciosPorEstado: [
-        {color: "En Tiempo", cantidadPorHora: [14,  32,   56,   43,     0,    12,   9,    26,   70] },
-        {color: "Demorados", cantidadPorHora: [23,  34,   12,   56,   234,    5,   65,   20,    10]},
-        {color: "Cancelados", cantidadPorHora: [7,  8,    9,    10,    11,   12,   3,    41,    12]},
+        {color: "En Tiempo", cantidadPorHora: [14,  32,   56,   43,     0,    12,   9,    26,   70, 23,  34,   12,   56,   24,    5,   65,   20,    10, 65,   20,    10] },
+        {color: "Demorados", cantidadPorHora: [23,  34,   12,   56,     24,    5,   65,   20,    10, 14,  32,   56,   43,     0,    12,   9,    26,   70, 32,   56,   43,]},
+        {color: "Cancelados", cantidadPorHora: [7,  8,    9,    10,    11,   12,   3,    41,    12, 7,  8,    9,    10,    11,   12,   3,    41,    12, 65,   20,    10]},
       ]
     },
     cerradosPorColor: {

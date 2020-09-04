@@ -129,20 +129,23 @@ export function createLinesChart(chartContainer, data, titleText){
   }
 
   // Create value axis
-  var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+  chart.yAxes.push(new am4charts.ValueAxis());
 
 
-  function createSeries(name, dates, cantidadPorHora) {
+  function createSeries(name, dates, cantidadPorHora, dateAxis) {
+    var series = chart.series.push(new am4charts.LineSeries());
+    series.dataFields.valueY = "value";
+    series.dataFields.categoryX = "date";
+    series.name = name;
+    series.tooltipText = "{valueY}";
+    series.tooltip.pointerOrientation = "vertical";
+    series.tooltip.background.cornerRadius = 20;
+    series.tooltip.background.fillOpacity = 0.5;
+    series.tooltip.label.padding(12,12,12,12)
 
-    // Create series
-    var series1 = chart.series.push(new am4charts.LineSeries());
-    series1.dataFields.valueY = "value";
-    series1.dataFields.categoryX = "date";
-    series1.name = name;
-
-    series1.strokeWidth = 3;
-    series1.tensionX = 0.8;
-    series1.bullets.push(new am4charts.CircleBullet());
+    series.strokeWidth = 3;
+    series.tensionX = 0.8;
+    series.bullets.push(new am4charts.CircleBullet());
     let data = [];
     for(let i = 0; i <= cantidadPorHora.length; i++){
       data.push({
@@ -151,78 +154,21 @@ export function createLinesChart(chartContainer, data, titleText){
       })
     }
 
-    series1.data = data;
 
-    /*
-    var series = chart.series.push(new am4charts.LineSeries());
-    series.dataFields.valueY = "cantidadPorHora";
-    series.dataFields.dateX = "date";
-    series.name = name;
-    series.strokeWidth = 2;
-    series.minBulletDistance = 10;
-    series.tensionX = 0.8;
-    series.bullets.push(new am4charts.CircleBullet());
-    addStandardTooltip(series);
+    // Add scrollbar
+    chart.scrollbarX = new am4charts.XYChartScrollbar();
+    chart.scrollbarX.series.push(series);
 
-    for(let i = 0 ; i < quantity; i++){
-      series.data.push({
-        date: dates[i],
-        "cantidadPorHora": cantidadPorHora[i]
-      })
-    }
+    // Add cursor
+    chart.cursor = new am4charts.XYCursor();
+    chart.cursor.xAxis = dateAxis;
 
-    return series;
-    */
+    series.data = data;
   }
 
-  data.serviciosPorEstado.forEach(serviciosPorEstado => createSeries(serviciosPorEstado.color, dates, serviciosPorEstado.cantidadPorHora));
-
-  /*
-  // Create series
-  var series1 = chart.series.push(new am4charts.LineSeries());
-  series1.dataFields.valueY = "value";
-  series1.dataFields.categoryX = "date";
-  series1.strokeWidth = 3;
-  series1.tensionX = 0.8;
-  series1.bullets.push(new am4charts.CircleBullet());
-  series1.data = [{
-    "date": dates[0],
-    "value": 90
-  }, {
-    "date": dates[1],
-    "value": 125
-  }, {
-    "date": dates[2],
-    "value": 77
-  }, {
-    "date": dates[3],
-    "value": 113
-  }];
-
-  var series2 = chart.series.push(new am4charts.LineSeries());
-  series2.dataFields.valueY = "value";
-  series2.dataFields.categoryX = "date";
-  series2.strokeWidth = 3;
-  series2.tensionX = 0.8;
-  series2.bullets.push(new am4charts.CircleBullet());
-  series2.data = [{
-    "date": dates[0],
-    "value": 101
-  }, {
-    "date": dates[1],
-    "value": 79
-  }, {
-    "date": dates[2],
-    "value": 90
-  }, {
-    "date": dates[3],
-    "value": 60
-  }, {
-    "date": dates[4],
-    "value": 115
-  }];
-  */
+  data.serviciosPorEstado.forEach(serviciosPorEstado => createSeries(serviciosPorEstado.color, dates, serviciosPorEstado.cantidadPorHora, dateAxis));
 }
+
 
 export function createLinesChartWithScrollAndZoom(chartContainer, data, titleText, series){
   let chart = am4core.create(chartContainer, am4charts.XYChart);
