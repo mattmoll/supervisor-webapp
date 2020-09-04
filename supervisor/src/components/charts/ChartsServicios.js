@@ -1,11 +1,15 @@
 import * as chartHelper from "./ChartsHelper";
 
 export function createClosedServicesChart(chartContainer, data){
+  /*
   let series = [{code:"activos", title:"Activos"},
                 {code:"demorados", title:"Demorados"},
                 {code:"cerrados", title:"Cerrados"},
                 {code:"cancelados", title:"Cancelados"}, ];
   chartHelper.createLinesChartWithScrollAndZoom(chartContainer, data, "Servicios Cerrados", series);
+  */
+
+  chartHelper.createLinesChart(chartContainer, data, "Servicios Cerrados");
 }
 
 export function createClosedPerColorChart(chartContainer, data){

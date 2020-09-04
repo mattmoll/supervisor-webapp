@@ -93,6 +93,137 @@ export function createStackedBarChart(chartContainer, data, title, series){
   return chart;
 }
 
+
+export function createLinesChart(chartContainer, data, titleText){
+  let chart = am4core.create(chartContainer, am4charts.XYChart);
+  addTitle(titleText, chart);
+  chart.colors.list = [
+    am4core.color("#67DC75"),
+    am4core.color("#DC6967"),
+    am4core.color("#67DCC5"),
+    am4core.color("#DC8C67"),
+  ]
+  addLegend(chart);
+
+
+
+  // Create axes
+  var dateAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+  dateAxis.dataFields.category = "date";
+  dateAxis.renderer.minGridDistance = 50;
+  dateAxis.renderer.grid.template.location = 0.5;
+  dateAxis.startLocation = 0.5;
+  dateAxis.endLocation = 0.5;
+
+  const quantity = data.serviciosPorEstado[0].cantidadPorHora.length;
+  let dates = [];
+  for(let i = 0 ; i <= quantity; i++){
+    let dateToAdd = new Date();
+    dateToAdd.setHours(dateToAdd.getHours() + i);
+    dates.push(dateToAdd.getHours());
+    
+    dateAxis.data.push({
+      date: dates[i]
+    })
+    
+  }
+
+  // Create value axis
+  var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+
+  function createSeries(name, dates, cantidadPorHora) {
+
+    // Create series
+    var series1 = chart.series.push(new am4charts.LineSeries());
+    series1.dataFields.valueY = "value";
+    series1.dataFields.categoryX = "date";
+    series1.name = name;
+
+    series1.strokeWidth = 3;
+    series1.tensionX = 0.8;
+    series1.bullets.push(new am4charts.CircleBullet());
+    let data = [];
+    for(let i = 0; i <= cantidadPorHora.length; i++){
+      data.push({
+        "date": dates[i],
+        "value": cantidadPorHora[i]
+      })
+    }
+
+    series1.data = data;
+
+    /*
+    var series = chart.series.push(new am4charts.LineSeries());
+    series.dataFields.valueY = "cantidadPorHora";
+    series.dataFields.dateX = "date";
+    series.name = name;
+    series.strokeWidth = 2;
+    series.minBulletDistance = 10;
+    series.tensionX = 0.8;
+    series.bullets.push(new am4charts.CircleBullet());
+    addStandardTooltip(series);
+
+    for(let i = 0 ; i < quantity; i++){
+      series.data.push({
+        date: dates[i],
+        "cantidadPorHora": cantidadPorHora[i]
+      })
+    }
+
+    return series;
+    */
+  }
+
+  data.serviciosPorEstado.forEach(serviciosPorEstado => createSeries(serviciosPorEstado.color, dates, serviciosPorEstado.cantidadPorHora));
+
+  /*
+  // Create series
+  var series1 = chart.series.push(new am4charts.LineSeries());
+  series1.dataFields.valueY = "value";
+  series1.dataFields.categoryX = "date";
+  series1.strokeWidth = 3;
+  series1.tensionX = 0.8;
+  series1.bullets.push(new am4charts.CircleBullet());
+  series1.data = [{
+    "date": dates[0],
+    "value": 90
+  }, {
+    "date": dates[1],
+    "value": 125
+  }, {
+    "date": dates[2],
+    "value": 77
+  }, {
+    "date": dates[3],
+    "value": 113
+  }];
+
+  var series2 = chart.series.push(new am4charts.LineSeries());
+  series2.dataFields.valueY = "value";
+  series2.dataFields.categoryX = "date";
+  series2.strokeWidth = 3;
+  series2.tensionX = 0.8;
+  series2.bullets.push(new am4charts.CircleBullet());
+  series2.data = [{
+    "date": dates[0],
+    "value": 101
+  }, {
+    "date": dates[1],
+    "value": 79
+  }, {
+    "date": dates[2],
+    "value": 90
+  }, {
+    "date": dates[3],
+    "value": 60
+  }, {
+    "date": dates[4],
+    "value": 115
+  }];
+  */
+}
+
 export function createLinesChartWithScrollAndZoom(chartContainer, data, titleText, series){
   let chart = am4core.create(chartContainer, am4charts.XYChart);
   addTitle(titleText, chart);
@@ -104,21 +235,20 @@ export function createLinesChartWithScrollAndZoom(chartContainer, data, titleTex
   ]
   addLegend(chart);
 
-  let firstDate = new Date();
-  let secondDate = new Date(firstDate);
-  secondDate.setDate(secondDate.getDate() + 1);
-  // Add category field and pass data.
-  chart.data = [
-    {
-      date: firstDate,
-      cantidadPorHora: 7
-    },
-    {
-      date: secondDate,
-      cantidadPorHora: 10
-    },
-  ]; 
+  console.log(data);
 
+  const quantity = data.serviciosPorEstado.length;
+  let dates = [];
+  for(let i = 0 ; i <= quantity; i++){
+    let dateToAdd = new Date();
+    dateToAdd.setHours(dateToAdd.getHours() - i);
+    dates.push(dateToAdd);
+    /*
+    chart.data.push({
+      date: dates[i]
+    })
+    */
+  }
   var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
   dateAxis.renderer.minGridDistance = 50;
 
@@ -136,18 +266,29 @@ export function createLinesChartWithScrollAndZoom(chartContainer, data, titleTex
   chart.cursor.snapToSeries = series;
   */
 
-  function createSeries(value, name) {
+  function createSeries(dates, cantidadPorHora) {
     var series = chart.series.push(new am4charts.LineSeries());
     series.dataFields.valueY = "cantidadPorHora";
     series.dataFields.dateX = "date";
     series.strokeWidth = 2;
     series.minBulletDistance = 10;
+
+    for(let i = 0 ; i < quantity; i++){
+      series.data.push({
+        date: dates[i],
+        "cantidadPorHora": cantidadPorHora[i]
+      })
+    }
     //addStandardTooltip(series);
+
+
+    console.log(cantidadPorHora);
 
     return series;
   }
 
-  series.forEach(serie => createSeries(serie.code, serie.title));
+  data.serviciosPorEstado.forEach(serviciosPorEstado => createSeries(dates, serviciosPorEstado.cantidadPorHora));
+  
 
   return chart;
 }
