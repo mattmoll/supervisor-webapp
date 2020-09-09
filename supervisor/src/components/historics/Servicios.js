@@ -9,9 +9,9 @@ export default class Servicios extends Component {
   componentDidMount(){
     // TODO: Here goes call to the WebAPI
 
-    this.charts.push(chartsServicios.createClosedServicesChart("chartClosedServices", this.stateAPI.serviciosCerrados));
+    this.charts.push(chartsServicios.createClosedServicesChart("chartClosedServices", this.stateAPI.cerradosPorEstado));
     this.charts.push(chartsServicios.createClosedPerColorChart("chartClosedPerColor", this.stateAPI.cerradosPorColor));
-    this.charts.push(chartsServicios.createDelayedPerHourChart("chartDelayedPerHour", this.stateAPI.demoradosPorHora));
+    this.charts.push(chartsServicios.createDelayedPerStandardChart("chartDelayedPerHour", this.stateAPI.demoradosPorEstandar));
     this.charts.push(chartsServicios.createResponseTimesPerColorChart("chartResponseTimesPerColor", this.stateAPI.tiempoRtaPorColor));
   }
 

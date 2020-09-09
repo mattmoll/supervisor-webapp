@@ -105,8 +105,6 @@ export function createLinesChart(chartContainer, data, titleText){
   ]
   addLegend(chart);
 
-
-
   // Create axes
   var dateAxis = chart.xAxes.push(new am4charts.CategoryAxis());
   dateAxis.dataFields.category = "date";
@@ -115,7 +113,7 @@ export function createLinesChart(chartContainer, data, titleText){
   dateAxis.startLocation = 0.5;
   dateAxis.endLocation = 0.5;
 
-  const quantity = data.serviciosPorEstado[0].cantidadPorHora.length;
+  const quantity = data[0].cantidadPorHora.length;
   let dates = [];
   for(let i = 0 ; i <= quantity; i++){
     let dateToAdd = new Date();
@@ -131,21 +129,25 @@ export function createLinesChart(chartContainer, data, titleText){
   // Create value axis
   chart.yAxes.push(new am4charts.ValueAxis());
 
+  let showTooltip = data.length < 5;
+
 
   function createSeries(name, dates, cantidadPorHora, dateAxis) {
     var series = chart.series.push(new am4charts.LineSeries());
     series.dataFields.valueY = "value";
     series.dataFields.categoryX = "date";
     series.name = name;
-    series.tooltipText = "{valueY}";
-    series.tooltip.pointerOrientation = "vertical";
-    series.tooltip.background.cornerRadius = 20;
-    series.tooltip.background.fillOpacity = 0.5;
-    series.tooltip.label.padding(12,12,12,12)
+    if(showTooltip){
+      series.tooltipText = "{valueY}";
+      series.tooltip.pointerOrientation = "vertical";
+      series.tooltip.background.cornerRadius = 10;
+      series.tooltip.background.fillOpacity = 0.5;
+      series.tooltip.label.padding(5,5,5,5)
+    }
 
-    series.strokeWidth = 3;
-    series.tensionX = 0.8;
-    series.bullets.push(new am4charts.CircleBullet());
+    series.strokeWidth = 2;
+    series.tensionX = 1;
+    //series.bullets.push(new am4charts.CircleBullet());
     let data = [];
     for(let i = 0; i <= cantidadPorHora.length; i++){
       data.push({
@@ -153,7 +155,6 @@ export function createLinesChart(chartContainer, data, titleText){
         "value": cantidadPorHora[i]
       })
     }
-
 
     // Add scrollbar
     chart.scrollbarX = new am4charts.XYChartScrollbar();
@@ -166,7 +167,7 @@ export function createLinesChart(chartContainer, data, titleText){
     series.data = data;
   }
 
-  data.serviciosPorEstado.forEach(serviciosPorEstado => createSeries(serviciosPorEstado.color, dates, serviciosPorEstado.cantidadPorHora, dateAxis));
+  data.forEach(serviciosPorEstado => createSeries(serviciosPorEstado.color, dates, serviciosPorEstado.cantidadPorHora, dateAxis));
 }
 
 

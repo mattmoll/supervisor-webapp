@@ -178,55 +178,35 @@ export function getStateClientesFromAPI(){
 
 export function getStateServiciosFromAPI(){
   return {
-    serviciosCerrados: {
-      horas: [
-        7,8,9,10,11,12, 13
-      ],
-      serviciosPorEstado: [
-        {color: "En Tiempo", cantidadPorHora: [14,  32,   56,   43,     0,    12,   9,    26,   70, 23,  34,   12,   56,   24,    5,   65,   20,    10, 65,   20,    10] },
-        {color: "Demorados", cantidadPorHora: [23,  34,   12,   56,     24,    5,   65,   20,    10, 14,  32,   56,   43,     0,    12,   9,    26,   70, 32,   56,   43,]},
-        {color: "Cancelados", cantidadPorHora: [7,  8,    9,    10,    11,   12,   3,    41,    12, 7,  8,    9,    10,    11,   12,   3,    41,    12, 65,   20,    10]},
-      ]
-    },
-    cerradosPorColor: {
-      horas: [
-        7,8,9,10,11,12,
-      ],
-      serviciosPorColor: [
-        {color: "Rojos", cantidadPorHora: [14, 32, 56, 43, 0, 12, 9,] },
-        {color: "Amarillos", cantidadPorHora: [23, 34, 12, 56, 234,]},
-        {color: "Celestes", cantidadPorHora: [7,8,9,10,11,12,]},
-        {color: "Verdes", cantidadPorHora: [7,8,9,10,11,12,]},
-        {color: "Traslados", cantidadPorHora: [23, 34, 12, 56, 234,]},
-        {color: "Eventos", cantidadPorHora: [7,8,9,10,11,12,]},
-        {color: "Laboral", cantidadPorHora: [7,8,9,10,11,12,]},
-        {color: "Enfermeria", cantidadPorHora: [23, 34, 12, 56, 234,]},
-      ]
-    },
-    demoradosPorHora: {
-      horas: [
-        7,8,9,10,11,12,
-      ],
-      serviciosPorEstandar: [
-        {color: "Asignacion", cantidadPorHora: [14, 32, 56, 43, 0, 12, 9,] },
-        {color: "Viaje", cantidadPorHora: [23, 34, 12, 56, 234,]},
-        {color: "TRTA", cantidadPorHora: [7,8,9,10,11,12,]},
-      ]
-    },
-    tiempoRtaPorColor: {
-      horas: [
-        7,8,9,10,11,12,
-      ],
-      serviciosPorColor: [
-        {color: "Rojos", cantidadPorHora: [14, 32, 56, 43, 0, 12, 9,] },
-        {color: "Amarillos", cantidadPorHora: [23, 34, 12, 56, 234,]},
-        {color: "Celestes", cantidadPorHora: [7,8,9,10,11,12,]},
-        {color: "Verdes", cantidadPorHora: [7,8,9,10,11,12,]},
-        {color: "Traslados", cantidadPorHora: [23, 34, 12, 56, 234,]},
-        {color: "Eventos", cantidadPorHora: [7,8,9,10,11,12,]},
-        {color: "Laboral", cantidadPorHora: [7,8,9,10,11,12,]},
-        {color: "Enfermeria", cantidadPorHora: [23, 34, 12, 56, 234,]},
-      ]
-    },
+    cerradosPorEstado: [
+      {color: "En Tiempo", cantidadPorHora: [14,  32,   56,   43,     0,    12,   9,    26,   70, 23,  34,   12,   56,   24,    5,   65,   20,    10, 65,   20,    10] },
+      {color: "Demorados", cantidadPorHora: [23,  34,   12,   56,     24,    5,   65,   20,    10, 14,  32,   56,   43,     0,    12,   9,    26,   70, 32,   56,   43,]},
+      {color: "Cancelados", cantidadPorHora: [7,  8,    9,    10,    11,   12,   3,    41,    12, 7,  8,    9,    10,    11,   12,   3,    41,    12, 65,   20,    10]},
+    ],
+    cerradosPorColor: [
+      {color: "Rojos", cantidadPorHora: [14, 32, 56, 43, 0, 12, 9,] },
+      {color: "Amarillos", cantidadPorHora: [23, 34, 12, 56, 24,]},
+      {color: "Celestes", cantidadPorHora: [7,8,9,10,11,12,]},
+      {color: "Verdes", cantidadPorHora: [17,28,9,1,4,8,]},
+      {color: "Traslados", cantidadPorHora: [23, 34, 12, 56, 34,]},
+      {color: "Eventos", cantidadPorHora: [7,8,9,10,11,12,]},
+      {color: "Laboral", cantidadPorHora: [14,5,12,3,31,42,]},
+      {color: "Enfermeria", cantidadPorHora: [8, 10, 22, 5, 4,]},
+    ],
+    demoradosPorEstandar: [
+      {color: "Asignacion", cantidadPorHora: [14, 32, 56, 43, 0, 12, 9,] },
+      {color: "Viaje", cantidadPorHora: [23, 34, 12, 56, 24,]},
+      {color: "TRTA", cantidadPorHora: [7,18,5,12,11,15,]},
+    ],
+    tiempoRtaPorColor: [
+      {color: "Rojos", cantidadPorHora: [14, 32, 56, 43, 0, 12, 9,] },
+      {color: "Amarillos", cantidadPorHora: [23, 34, 12, 56, 23,]},
+      {color: "Celestes", cantidadPorHora: [7,8,9,10,11,12,]},
+      {color: "Verdes", cantidadPorHora: [17,28,9,1,4,8,]},
+      {color: "Traslados", cantidadPorHora: [4, 24, 10, 5, 34,]},
+      {color: "Eventos", cantidadPorHora: [6,12,17,15,1,2,]},
+      {color: "Laboral", cantidadPorHora: [3,9,9,12,20,10,]},
+      {color: "Enfermeria", cantidadPorHora: [44, 14, 10, 6, 4,]},
+    ],
   }
 }
