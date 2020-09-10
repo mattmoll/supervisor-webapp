@@ -28,19 +28,19 @@ export default class Servicios extends Component {
       <div id="content-container">
                   
         <div className="panel content">
-          <div id="chartClosedServices" className="chart"></div>
+          <div id="chartClosedServices" className="chart pr-3"></div>
         </div>
 
         <div className="panel content">
-          <div id="chartClosedPerColor" className="chart"></div>
+          <div id="chartClosedPerColor" className="chart pr-3"></div>
         </div>
 
         <div className="panel content">
-          <div id="chartDelayedPerHour" className="chart"></div>
+          <div id="chartDelayedPerHour" className="chart pr-3"></div>
         </div>
 
         <div className="panel content">
-          <div id="chartResponseTimesPerColor" className="chart"></div>
+          <div id="chartResponseTimesPerColor" className="chart pr-3"></div>
         </div>
       
     </div>

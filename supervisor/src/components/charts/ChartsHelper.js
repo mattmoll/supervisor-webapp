@@ -115,12 +115,12 @@ export function createLinesChart(chartContainer, data, titleText){
 
   const quantity = data[0].cantidadPorHora.length;
   let dates = [];
-  for(let i = 0 ; i <= quantity; i++){
+  for(let i = 0 ; i < quantity; i++){
     let dateToAdd = new Date();
-    dateToAdd.setHours(dateToAdd.getHours() + i);
-    dates.push(dateToAdd.getHours());
+    dateToAdd.setHours(dateToAdd.getHours() - i);
+    dates.push(dateToAdd.getDate() + ' ' + dateToAdd.getHours());
     
-    dateAxis.data.push({
+    dateAxis.data.unshift({
       date: dates[i]
     })
     
@@ -146,7 +146,7 @@ export function createLinesChart(chartContainer, data, titleText){
     }
 
     series.strokeWidth = 2;
-    series.tensionX = 1;
+    series.tensionX = 0.8;
     //series.bullets.push(new am4charts.CircleBullet());
     let data = [];
     for(let i = 0; i <= cantidadPorHora.length; i++){
