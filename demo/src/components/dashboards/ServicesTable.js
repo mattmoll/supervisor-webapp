@@ -3,23 +3,23 @@ import React, { Component } from 'react'
 export default class ServicesTable extends Component {
   state = {
     colorsVisibility : {
-      "Rojos": true,
-      "Amarillos": true,
-      "Verdes" : true,
-      "Traslados": true,
-      "Eventos": true,
-      "Otros": true
+      "Red": true,
+      "Yellow": true,
+      "Green" : true,
+      "Transfers": true,
+      "Events": true,
+      "Others": true
     },
     windowWidth: 1200
   }
 
   colors = {
-    "Rojos": "#DC6967",
-    "Amarillos": "#DCD267",
-    "Verdes" : "#67DC75",
-    "Traslados": "#4472C4",
-    "Eventos": "#FFE699",
-    "Otros": "#D9D9D9",
+    "Red": "#DC6967",
+    "Yellow": "#DCD267",
+    "Green" : "#67DC75",
+    "Transfers": "#4472C4",
+    "Events": "#FFE699",
+    "Others": "#D9D9D9",
   }
 
   componentDidMount(){
@@ -58,7 +58,7 @@ export default class ServicesTable extends Component {
 
   getServicesPerColor = (servicesPerStatusAndColor) => {
     if (this.showSummary()){
-      return servicesPerStatusAndColor.serviciosPorColor.filter(servicesPerColor => ["Rojos", "Amarillos", "Verdes"].includes(servicesPerColor.color));
+      return servicesPerStatusAndColor.serviciosPorColor.filter(servicesPerColor => ["Red", "Yellow", "Green"].includes(servicesPerColor.color));
     }else{
       return servicesPerStatusAndColor.serviciosPorColor;
     }
@@ -72,7 +72,7 @@ export default class ServicesTable extends Component {
         <table className="table table-bordered">
           <thead>
             <tr>
-              <th scope="col" style={{backgroundColor:"#9abcd6"}}>Estado</th>
+              <th scope="col" style={{backgroundColor:"#9abcd6"}}>Status</th>
               {
                 this.getServicesPerColor(servicesPerStatusAndColor[0]).map((srvXColor, index) => 
                   this.isVisible(srvXColor.color) &&

@@ -6,18 +6,18 @@ export default function ChangePassModal() {
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">Cambiar Contraseña</h5>
+            <h5 className="modal-title" id="exampleModalLabel">Change Password</h5>
             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div id="changepass-modal-body" className="modal-body flex-column">
             <div className="mb-2 flex-column">
-              <label htmlFor="password">Contraseña Actual</label>
+              <label htmlFor="password">Current Password</label>
               <input type="password" name="password" id="password"/>
             </div>
             <div className="mb-2 flex-column">
-              <label htmlFor="newPassword">Nueva Contraseña</label>
+              <label htmlFor="newPassword">New Password</label>
               <input type="password" name="newPassword" id="newPassword"/>
             </div>
             <div className="mb-2 flex-column">
@@ -25,7 +25,7 @@ export default function ChangePassModal() {
               <p id="password-strength-text"></p>
             </div>
             <div className="mb-2 flex-column">
-              <label htmlFor="confirmNewPassword">Confirmar Nueva Contraseña</label>
+              <label htmlFor="confirmNewPassword">Confirm New Password</label>
               <input type="password" name="confirmNewPassword" id="confirmNewPassword"/>
             </div>
             <br/>

@@ -16,7 +16,7 @@ export default class SummaryHome extends Component {
             items={[
               { key: "In Progress", value: servicios.enCurso },
               { key: "Closed", value: servicios.cerrados },
-              { key: "Cancelled", value: servicios.cancelados },
+              { key: "Canceled", value: servicios.cancelados },
             ]}
           />
           <SummaryPanel
