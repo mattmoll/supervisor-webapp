@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "2f5b6e03-aec9-424f-8e94-0d93bac9a701",
+		"name": "SuWebApi Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"user\":\"AYUDA\", \"key\":\"AYUDA\"}"
+				},
+				"url": {
+					"raw": "http://192.168.222.4:7881/SuWebApi/Login",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"222",
+						"4"
+					],
+					"port": "7881",
+					"path": [
+						"SuWebApi",
+						"Login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetState",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "DrkqtG1QcEesHf5FQu6Jkg==",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://192.168.222.4:7881/SuWebApi/State",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"222",
+						"4"
+					],
+					"port": "7881",
+					"path": [
+						"SuWebApi",
+						"State"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetStateClient",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "DrkqtG1QcEesHf5FQu6Jkg==",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://192.168.222.4:7881/SuWebApi/StateClient",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"222",
+						"4"
+					],
+					"port": "7881",
+					"path": [
+						"SuWebApi",
+						"StateClient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetStateService",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "DrkqtG1QcEesHf5FQu6Jkg==",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://192.168.222.4:7881/SuWebApi/StateService",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"222",
+						"4"
+					],
+					"port": "7881",
+					"path": [
+						"SuWebApi",
+						"StateService"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
