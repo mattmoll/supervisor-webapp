@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import SummaryClientes from "./SummaryClientes";
-import {getStateClientesFromAPI} from "./StateHelper";
-import * as chartsClientes from "../charts/ChartsClientes";
+import {getStateClientesFromAPI} from "../../utils/StateHelper";
+import * as chartsClientes from "./ChartsClientes";
 
 export default class Clientes extends Component {
 

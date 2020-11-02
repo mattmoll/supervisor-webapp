@@ -1,4 +1,4 @@
-import * as chartHelper from "./ChartsHelper";
+import * as chartHelper from "../../utils/ChartsHelper";
 
 export function createClosedServicesChart(chartContainer, data){
   chartHelper.createLinesChart(chartContainer, data, "Cerrados Por Estado");

@@ -147,7 +147,6 @@ export function createLinesChart(chartContainer, data, titleText){
 
     series.strokeWidth = 2;
     series.tensionX = 0.8;
-    //series.bullets.push(new am4charts.CircleBullet());
     let data = [];
     for(let i = 0; i <= cantidadPorHora.length; i++){
       data.push({
@@ -190,11 +189,6 @@ export function createLinesChartWithScrollAndZoom(chartContainer, data, titleTex
     let dateToAdd = new Date();
     dateToAdd.setHours(dateToAdd.getHours() - i);
     dates.push(dateToAdd);
-    /*
-    chart.data.push({
-      date: dates[i]
-    })
-    */
   }
   var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
   dateAxis.renderer.minGridDistance = 50;
@@ -205,13 +199,6 @@ export function createLinesChartWithScrollAndZoom(chartContainer, data, titleTex
   // Add scrollbar
   chart.scrollbarX = new am4charts.XYChartScrollbar();
   chart.scrollbarX.series.push(series);
-
-  /*
-  // Add cursor
-  chart.cursor = new am4charts.XYCursor();
-  chart.cursor.xAxis = dateAxis;
-  chart.cursor.snapToSeries = series;
-  */
 
   function createSeries(dates, cantidadPorHora) {
     var series = chart.series.push(new am4charts.LineSeries());
@@ -226,8 +213,6 @@ export function createLinesChartWithScrollAndZoom(chartContainer, data, titleTex
         "cantidadPorHora": cantidadPorHora[i]
       })
     }
-    //addStandardTooltip(series);
-
 
     console.log(cantidadPorHora);
 

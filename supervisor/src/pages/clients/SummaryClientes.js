@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SummaryPanel from "../layout/SummaryPanel";
+import SummaryPanel from "../../layout/SummaryPanel";
 
 export default class SummaryHome extends Component {
   render() {

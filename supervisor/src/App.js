@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import Topbar from "./components/layout/Topbar";
-import Sidebar from "./components/layout/Sidebar";
-import FiltersModal from "./components/settings/FiltersModal";
-import ChangePassModal from "./components/settings/ChangePassModal";
-import Home from "./components/dashboards/Home";
-import Clientes from "./components/dashboards/Clientes";
-import Zonas from "./components/dashboards/Zonas";
-import Servicios from "./components/historics/Servicios";
-import Moviles from "./components/historics/Moviles";
+import Topbar from "./layout/Topbar";
+import Sidebar from "./layout/Sidebar";
+import FiltersModal from "./settings/FiltersModal";
+import ChangePassModal from "./settings/ChangePassModal";
+import Home from "./pages/home/Home";
+import Clientes from "./pages/clients/Clientes";
+import Servicios from "./pages/services/Servicios";
+import Moviles from "./pages/mobiles/Moviles";
 
 
 export default class App extends Component {
@@ -33,8 +32,6 @@ export default class App extends Component {
               <Switch>
                 <Route exact path="/" component={Home}></Route>
                 <Route exact path="/clientes" component={Clientes}></Route>
-                <Route exact path="/zonas" component={Zonas}></Route>
-
                 <Route exact path="/servicios" component={Servicios}></Route>
                 <Route exact path="/moviles" component={Moviles}></Route>
               </Switch>

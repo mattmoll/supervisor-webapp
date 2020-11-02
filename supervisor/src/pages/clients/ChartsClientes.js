@@ -1,4 +1,4 @@
-import * as chartHelper from "./ChartsHelper";
+import * as chartHelper from "../../utils/ChartsHelper";
 
 export function createGroupsChart(chartContainer, data){
   createClientChart(chartContainer, data, "Grupos Familiares");

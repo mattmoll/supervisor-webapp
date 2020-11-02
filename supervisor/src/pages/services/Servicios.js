@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { getStateServiciosFromAPI } from '../dashboards/StateHelper';
-import * as chartsServicios from "../charts/ChartsServicios";
+import { getStateServiciosFromAPI } from '../../utils/StateHelper';
+import * as chartsServicios from "./ChartsServicios";
 
 export default class Servicios extends Component {
   charts = [];

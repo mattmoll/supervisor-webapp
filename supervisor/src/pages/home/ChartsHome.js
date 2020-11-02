@@ -1,6 +1,6 @@
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
-import * as chartHelper from "./ChartsHelper";
+import * as chartHelper from "../../utils/ChartsHelper";
 
 export function createServicesChart(chartContainer, data){
   let series = [{code:"activos", title:"Activos"},

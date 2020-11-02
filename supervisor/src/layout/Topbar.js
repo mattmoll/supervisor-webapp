@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import icon from "../../img/icon.png";
+import icon from "../img/icon.png";
 import UserPanel from "../settings/UserPanel";
 
 export default class Topbar extends Component {
