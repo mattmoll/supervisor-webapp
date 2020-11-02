@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import SummaryClientes from "./SummaryClientes";
 import {getStateClientesFromAPI} from "../../utils/StateHelper";
 import * as chartsClientes from "./ChartsClientes";
+import axios from "axios";
 
 export default class Clientes extends Component {
 
@@ -10,7 +11,7 @@ export default class Clientes extends Component {
 
   componentDidMount(){
     // TODO: Here goes call to the WebAPI
-
+    this.getStateClient();
     this.charts.push(chartsClientes.createGroupsChart("chartGroups", this.stateAPI.gruposFamiliares));
     this.charts.push(chartsClientes.createAreasChart("chartAreas", this.stateAPI.areasProtegidas));
     this.charts.push(chartsClientes.createCovenantsChart("chartCovenants", this.stateAPI.convenios));
@@ -23,6 +24,16 @@ export default class Clientes extends Component {
         chart.dispose();
       }
     });
+  }
+
+  getStateClient = async () => {
+    const state = await axios.get("http://192.168.222.120:7881/SuWebApi/StateClient", {
+      headers: {
+        'token': '+QJTB21vM0C4RYQgNTcxow=='
+      }
+    });
+    console.log(state);
+    return state;
   }
 
   render() {

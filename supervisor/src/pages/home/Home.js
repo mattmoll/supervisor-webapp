@@ -14,22 +14,24 @@ export default function Home() {
   const [charts, setCharts] = React.useState([]);  
   const [stateHome, setStateHome] = React.useState(getStateFromAPI());
 
-  var myHeaders = new Headers();
-  myHeaders.append("token", "JMsrKCcujE+C8JDpIwVppQ==");
+  // var myHeaders = new Headers();
+  // myHeaders.append("token", "+QJTB21vM0C4RYQgNTcxow==");
   
-  var requestOptions = {
-    method: 'GET',
-    headers: myHeaders,
-    redirect: 'follow'
-  };
+  // var requestOptions = {
+  //   method: 'GET',
+  //   headers: myHeaders,
+  //   redirect: 'follow'
+  // };
   
-  fetch("http://192.168.222.4:7881/SuWebApi/State", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
+  // fetch("http://192.168.222.120:7881/SuWebApi/State", requestOptions)
+  //   .then(response => response.text())
+  //   .then(result => console.log(result))
+  //   .catch(error => console.log('error', error));
+
 
   React.useEffect(() => {
 
+    getState();
     setCharts([
       chartsHome.createServicesChart("chartServices", stateHome.totalesPorEstadoServicio),
       chartsHome.createMobilesChart("chartMobiles", stateHome.estadosPorTipoDeMovil),
@@ -45,15 +47,15 @@ export default function Home() {
 
   }, []);
 
-  // const getState = async () => {
-  //   const state = await axios.get("http://192.168.222.4:7881/SuWebApi/State", {
-  //     headers: {
-  //       'token': '+WPm0zAH7EGHCDgYAWy8cA=='
-  //     }
-  //   });
-  //   console.log(state);
-  //   return state;
-  // }
+  const getState = async () => {
+    const state = await axios.get("http://192.168.222.120:7881/SuWebApi/State", {
+      headers: {
+        'token': '+QJTB21vM0C4RYQgNTcxow=='
+      }
+    });
+    console.log(state);
+    return state;
+  }
   
   if(stateHome === null){
     return <p>Loading Home...</p>;
