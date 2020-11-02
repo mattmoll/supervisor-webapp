@@ -58,6 +58,9 @@ export default function ServicesTable({servicesPerStatusAndColor}) {
     }
   }
 
+  if (servicesPerStatusAndColor === null){
+    return <h2>Loading Services table...</h2>;
+  }
   return (
     <div className="container-services-table">
       <table className="table table-bordered">

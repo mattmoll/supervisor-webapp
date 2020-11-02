@@ -2,6 +2,8 @@ import React from 'react'
 import SummaryPanel from "../../layout/SummaryPanel";
 
 export default function SummaryHome({summary}) {
+  if(summary === null) return <p>Loading Summary...</p>;
+
   const {servicios, moviles, operadores, estadoGeneral} = summary;
   return (
     <div id="summary-container">

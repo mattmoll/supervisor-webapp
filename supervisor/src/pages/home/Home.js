@@ -12,10 +12,24 @@ am4core.useTheme(am4themes_animated);
 
 export default function Home() {
   const [charts, setCharts] = React.useState([]);  
+  const [stateHome, setStateHome] = React.useState(getStateFromAPI());
 
-  const stateHome = getStateFromAPI();  
+  var myHeaders = new Headers();
+  myHeaders.append("token", "JMsrKCcujE+C8JDpIwVppQ==");
+  
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+  
+  fetch("http://192.168.222.4:7881/SuWebApi/State", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
 
   React.useEffect(() => {
+
     setCharts([
       chartsHome.createServicesChart("chartServices", stateHome.totalesPorEstadoServicio),
       chartsHome.createMobilesChart("chartMobiles", stateHome.estadosPorTipoDeMovil),
@@ -34,13 +48,17 @@ export default function Home() {
   // const getState = async () => {
   //   const state = await axios.get("http://192.168.222.4:7881/SuWebApi/State", {
   //     headers: {
-  //       'token': 'ImpPBLph3UCyYR9zONDDUQ=='
+  //       'token': '+WPm0zAH7EGHCDgYAWy8cA=='
   //     }
   //   });
   //   console.log(state);
   //   return state;
   // }
- 
+  
+  if(stateHome === null){
+    return <p>Loading Home...</p>;
+  }
+
   return (
     <div>
       <SummaryHome summary={stateHome.resumen}/>
