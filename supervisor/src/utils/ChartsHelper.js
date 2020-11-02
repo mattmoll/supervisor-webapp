@@ -181,8 +181,6 @@ export function createLinesChartWithScrollAndZoom(chartContainer, data, titleTex
   ]
   addLegend(chart);
 
-  console.log(data);
-
   const quantity = data.serviciosPorEstado.length;
   let dates = [];
   for(let i = 0 ; i <= quantity; i++){
@@ -213,8 +211,6 @@ export function createLinesChartWithScrollAndZoom(chartContainer, data, titleTex
         "cantidadPorHora": cantidadPorHora[i]
       })
     }
-
-    console.log(cantidadPorHora);
 
     return series;
   }

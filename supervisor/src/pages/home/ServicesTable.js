@@ -1,113 +1,104 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class ServicesTable extends Component {
-  state = {
-    colorsVisibility : {
-      "Rojos": true,
-      "Amarillos": true,
-      "Verdes" : true,
-      "Traslados": true,
-      "Eventos": true,
-      "Otros": true
-    },
-    windowWidth: 1200
-  }
+export default function ServicesTable({servicesPerStatusAndColor}) {
+  const [colorsVisibility, setColorsVisibility] = React.useState({
+    "Rojos": true,
+    "Amarillos": true,
+    "Verdes" : true,
+    "Traslados": true,
+    "Eventos": true,
+    "Otros": true
+  });
+  const [windowWidth, setWindowWidth] = React.useState(1200);
 
-  colors = {
+  const [colors, setColors] = React.useState({
     "Rojos": "#DC6967",
     "Amarillos": "#DCD267",
     "Verdes" : "#67DC75",
     "Traslados": "#4472C4",
     "Eventos": "#FFE699",
     "Otros": "#D9D9D9",
-  }
+  })
 
-  componentDidMount(){
-    window.addEventListener("resize", this.handleResize);
-  }
+  React.useEffect(() => {
+    window.addEventListener("resize", handleResize);
+  }, []);
 
-  handleResize = e => {
-    const windowWidth = window.innerWidth;
-    this.setState(prevState => {
-      return {
-        ...prevState,
-        windowWidth: windowWidth
-      };
-    });
+  const handleResize = e => {
+    setWindowWidth(window.innerWidth);
   };
 
 
-  toggleColumn = (color, event) =>{
+  const toggleColumn = (event, color) =>{
     event.preventDefault();
-    let colorsVisibilityUpdt = this.state.colorsVisibility;
-    colorsVisibilityUpdt[color] = !colorsVisibilityUpdt[color];
-    this.setState({ ...this.state, colorsVisibilityUpdt })
+    let colorsVisibilityUpdt = colorsVisibility;
+    let newColorsVisibility = {...colorsVisibilityUpdt};
+    newColorsVisibility[color] = !colorsVisibilityUpdt[color];
+    setColorsVisibility(newColorsVisibility);
   }
 
-  isVisible = (color) =>{
-    return this.state.colorsVisibility[color];
+  const isVisible = (color) =>{
+    return colorsVisibility[color];
   }
 
-  showFullColorName = () => {
-    return this.state.windowWidth > 790;
+  const showFullColorName = () => {
+    return windowWidth > 790;
   }
 
-  showSummary = () => {
-    return this.state.windowWidth <= 580;
+  const showSummary = () => {
+    return windowWidth <= 580;
   }
 
-  getServicesPerColor = (servicesPerStatusAndColor) => {
-    if (this.showSummary()){
-      return servicesPerStatusAndColor.serviciosPorColor.filter(servicesPerColor => ["Rojos", "Amarillos", "Verdes"].includes(servicesPerColor.color));
-    }else{
+  const getServicesPerColor = (servicesPerStatusAndColor) => {
+    if (showSummary()){
+      return servicesPerStatusAndColor.serviciosPorColor.filter(servicesPerColor => 
+                                      ["Rojos", "Amarillos", "Verdes"].includes(servicesPerColor.color));
+    } else {
       return servicesPerStatusAndColor.serviciosPorColor;
     }
   }
 
-
-  render() {
-    const {servicesPerStatusAndColor} = this.props;
-    return (
-      <div className="container-services-table">
-        <table className="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col" style={{backgroundColor:"#9abcd6"}}>Estado</th>
-              {
-                this.getServicesPerColor(servicesPerStatusAndColor[0]).map((srvXColor, index) => 
-                  this.isVisible(srvXColor.color) &&
-                  (
-                    <th key={index}  scope="col" 
-                        style={{backgroundColor:this.colors[srvXColor.color], cursor:"pointer"}}>
-                        {(this.showFullColorName()) ? srvXColor.color : srvXColor.color[0]} 
-                    </th>
-                  ) )
-              }
-            </tr>
-          </thead>
-          <tbody>
-            {servicesPerStatusAndColor.map((srvXStateColor, index) => 
-            (
-              <tr  key={index}>
-                <th scope="row">{srvXStateColor.descripcion}</th>
-                {this.getServicesPerColor(srvXStateColor).map((srvXColor, index) => this.isVisible(srvXColor.color) &&
-                (<th key={index}>{srvXColor.cantidad}</th>)
-                )}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className="togglers-container">
-        {
-          this.getServicesPerColor(servicesPerStatusAndColor[0]).map((srvXColor, index) => 
+  return (
+    <div className="container-services-table">
+      <table className="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" style={{backgroundColor:"#9abcd6"}}>Estado</th>
+            {
+              getServicesPerColor(servicesPerStatusAndColor[0]).map((srvXColor, index) => 
+                isVisible(srvXColor.color) &&
+                (
+                  <th key={index}  scope="col" 
+                      style={{backgroundColor:colors[srvXColor.color], cursor:"pointer"}}>
+                      {(showFullColorName()) ? srvXColor.color : srvXColor.color[0]} 
+                  </th>
+                ) )
+            }
+          </tr>
+        </thead>
+        <tbody>
+          {servicesPerStatusAndColor.map((srvXStateColor, index) => 
           (
-            <a className={"button-service-home btn m-1 " + (this.isVisible(srvXColor.color) ? "btn-info" : "btn-secondary")}
-            key={index} href="!#" onClick={this.toggleColumn.bind(this, srvXColor.color)}>{srvXColor.color}</a>
-          )
-          )
-        }
-        </div>
+            <tr  key={index}>
+              <th scope="row">{srvXStateColor.descripcion}</th>
+              {getServicesPerColor(srvXStateColor).map((srvXColor, index) => isVisible(srvXColor.color) &&
+              (<th key={index}>{srvXColor.cantidad}</th>)
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className="togglers-container">
+      {
+        getServicesPerColor(servicesPerStatusAndColor[0]).map((srvXColor, index) => 
+        (
+          <a className={"button-service-home btn m-1 " + (isVisible(srvXColor.color) ? "btn-info" : "btn-secondary")}
+          key={index} href="!#" onClick={(event) => toggleColumn(event, srvXColor.color)}>{srvXColor.color}</a>
+        )
+        )
+      }
       </div>
-    )
-  }
+    </div>
+  )
+  
 }

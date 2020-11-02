@@ -12,14 +12,10 @@ am4core.useTheme(am4themes_animated);
 
 export default function Home() {
   const [charts, setCharts] = React.useState([]);  
-  const [stateHome, setStateHome] = React.useState(getStateFromAPI());
+
+  const stateHome = getStateFromAPI();  
 
   React.useEffect(() => {
-
-    const state = getState();
-    setStateHome(state);
-    console.log(state);
-
     setCharts([
       chartsHome.createServicesChart("chartServices", stateHome.totalesPorEstadoServicio),
       chartsHome.createMobilesChart("chartMobiles", stateHome.estadosPorTipoDeMovil),
@@ -35,19 +31,19 @@ export default function Home() {
 
   }, []);
 
-  const getState = async () => {
-    const state = await axios.get("http://192.168.222.4:7881/SuWebApi/State", {
-      headers: {
-        'token': 'ImpPBLph3UCyYR9zONDDUQ=='
-      }
-    });
-    console.log(state);
-    return state;
-  }
+  // const getState = async () => {
+  //   const state = await axios.get("http://192.168.222.4:7881/SuWebApi/State", {
+  //     headers: {
+  //       'token': 'ImpPBLph3UCyYR9zONDDUQ=='
+  //     }
+  //   });
+  //   console.log(state);
+  //   return state;
+  // }
  
   return (
     <div>
-      {stateHome && <SummaryHome summary={stateHome.resumen}/> }
+      <SummaryHome summary={stateHome.resumen}/>
 
       <div id="content-container">
         
@@ -68,7 +64,7 @@ export default function Home() {
         </div>
 
         <div className="panel content">
-          { stateHome &&<ServicesTable servicesPerStatusAndColor={stateHome.serviciosPorEstadoYColor}/> }
+          <ServicesTable servicesPerStatusAndColor={stateHome.serviciosPorEstadoYColor}/>
         </div>
 
       </div>
