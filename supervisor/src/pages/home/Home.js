@@ -1,63 +1,78 @@
-import React, { Component } from "react";
-import SummaryHome from "./SummaryHome";
+import React from "react";
 import * as am4core from "@amcharts/amcharts4/core";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import axios from "axios";
+
+import SummaryHome from "./SummaryHome";
 import * as chartsHome from "./ChartsHome";
 import {getStateFromAPI} from "../../utils/StateHelper";
 import ServicesTable from "./ServicesTable";
 
 am4core.useTheme(am4themes_animated);
 
-export default class Home extends Component {
-  charts = [];  
-  stateAPI = getStateFromAPI();
+export default function Home() {
+  const [charts, setCharts] = React.useState([]);  
+  const [stateHome, setStateHome] = React.useState(getStateFromAPI());
 
-  componentDidMount(){
-    // TODO: Here goes call to the WebAPI
+  React.useEffect(() => {
 
-    this.charts.push(chartsHome.createServicesChart("chartServices", this.stateAPI.totalesPorEstadoServicio));
-    this.charts.push(chartsHome.createMobilesChart("chartMobiles", this.stateAPI.estadosPorTipoDeMovil));
-    this.charts.push(chartsHome.createEmployeesServicesChart("chartEmployeesServices", this.stateAPI.serviciosRecibidosDespachados));
-    this.charts.push(chartsHome.createEmployeesServicesAveragesChart("chartEmployeesServicesAverages", this.stateAPI.promediosServiciosRecibidosDespachados));
-  }
+    const state = getState();
+    setStateHome(state);
+    console.log(state);
 
-  componentWillUnmount() {
-    this.charts.forEach(chart => {
-      if(chart){
-        chart.dispose();
+    setCharts([
+      chartsHome.createServicesChart("chartServices", stateHome.totalesPorEstadoServicio),
+      chartsHome.createMobilesChart("chartMobiles", stateHome.estadosPorTipoDeMovil),
+      chartsHome.createEmployeesServicesChart("chartEmployeesServices", stateHome.serviciosRecibidosDespachados),
+      chartsHome.createEmployeesServicesAveragesChart("chartEmployeesServicesAverages", stateHome.promediosServiciosRecibidosDespachados),
+    ]);
+  
+    return () => {
+      charts.forEach(chart => {
+        if(chart) chart.dispose();
+      });
+    };
+
+  }, []);
+
+  const getState = async () => {
+    const state = await axios.get("http://192.168.222.4:7881/SuWebApi/State", {
+      headers: {
+        'token': 'ImpPBLph3UCyYR9zONDDUQ=='
       }
     });
+    console.log(state);
+    return state;
   }
+ 
+  return (
+    <div>
+      {stateHome && <SummaryHome summary={stateHome.resumen}/> }
 
-  render() {
-    return (
-      <div>
-        <SummaryHome summary={this.stateAPI.resumen}/>
-
-        <div id="content-container">
-          
-          <div className="panel content">
-            <div id="chartServices" className="chart"></div>
-          </div>
-
-          <div className="panel content">
-            <div id="chartMobiles" className="chart"></div>
-          </div>
-
-          <div className="panel content">
-            <div id="chartEmployeesServices" className="chart"></div>
-          </div>
-          
-          <div className="panel content">
-            <div id="chartEmployeesServicesAverages" className="chart"></div>
-          </div>
-
-          <div className="panel content">
-            <ServicesTable servicesPerStatusAndColor={this.stateAPI.serviciosPorEstadoYColor}/>
-          </div>
-
+      <div id="content-container">
+        
+        <div className="panel content">
+          <div id="chartServices" className="chart"></div>
         </div>
+
+        <div className="panel content">
+          <div id="chartMobiles" className="chart"></div>
+        </div>
+
+        <div className="panel content">
+          <div id="chartEmployeesServices" className="chart"></div>
+        </div>
+        
+        <div className="panel content">
+          <div id="chartEmployeesServicesAverages" className="chart"></div>
+        </div>
+
+        <div className="panel content">
+          { stateHome &&<ServicesTable servicesPerStatusAndColor={stateHome.serviciosPorEstadoYColor}/> }
+        </div>
+
       </div>
-    );
-  }
+    </div>
+  );
+  
 }

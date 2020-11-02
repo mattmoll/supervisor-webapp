@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Topbar from "./layout/Topbar";
@@ -10,35 +10,35 @@ import Clientes from "./pages/clients/Clientes";
 import Servicios from "./pages/services/Servicios";
 import Moviles from "./pages/mobiles/Moviles";
 
+export default function App() {
+  const [user, setUser] = React.useState();
+  const [compressedSidebar, setCompressedSidebar] = React.useState(false);
 
-export default class App extends Component {
-  state = {
-    compressedSidebar: false,
-  };
-  toggleSidebar = (e) => {
+  const toggleSidebar = (e) => {
     e.preventDefault();
-    this.setState({ compressedSidebar: !this.state.compressedSidebar });
+    setCompressedSidebar(!compressedSidebar);
   };
-  render() {
-    return (
-      <Router>
-        <div className="App">
-          <FiltersModal></FiltersModal>
-          <ChangePassModal></ChangePassModal>
-          <Topbar onToggleSidebarClicked={this.toggleSidebar}></Topbar>
-          <div id="full-container">
-            <Sidebar compressedSidebar={this.state.compressedSidebar}></Sidebar>
-            <main>
-              <Switch>
-                <Route exact path="/" component={Home}></Route>
-                <Route exact path="/clientes" component={Clientes}></Route>
-                <Route exact path="/servicios" component={Servicios}></Route>
-                <Route exact path="/moviles" component={Moviles}></Route>
-              </Switch>
-            </main>
-          </div>
+
+  return (
+    <Router>
+
+      <div className="App">
+        <FiltersModal></FiltersModal>
+        <ChangePassModal></ChangePassModal>
+        <Topbar onToggleSidebarClicked={toggleSidebar}></Topbar>
+        <div id="full-container">
+          <Sidebar compressedSidebar={compressedSidebar}></Sidebar>
+          <main>
+            <Switch>
+              <Route exact path="/" component={Home}></Route>
+              <Route exact path="/clientes" component={Clientes}></Route>
+              <Route exact path="/servicios" component={Servicios}></Route>
+              <Route exact path="/moviles" component={Moviles}></Route>
+            </Switch>
+          </main>
         </div>
-      </Router>
-    );
-  }
+      </div>
+    </Router>
+  );
+  
 }
