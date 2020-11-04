@@ -1,49 +1,49 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { getStateServiciosFromAPI } from '../../utils/StateHelper';
 import * as chartsServicios from "./ChartsServicios";
 
-export default class Servicios extends Component {
-  charts = [];
-  stateAPI = getStateServiciosFromAPI();
+export default function Servicios() {
+  const [charts, setCharts] = React.useState([]);  
+  const [stateServices, setStateServices] = React.useState(getStateServiciosFromAPI());
 
-  componentDidMount(){
-    // TODO: Here goes call to the WebAPI
+  React.useEffect(() => {
+    getStateServiciosFromAPI();
+    setCharts([
+      chartsServicios.createClosedServicesChart("chartClosedServices", stateServices.cerradosPorEstado),
+      chartsServicios.createClosedPerColorChart("chartClosedPerColor", stateServices.cerradosPorColor),
+      chartsServicios.createDelayedPerStandardChart("chartDelayedPerHour", stateServices.demoradosPorEstandar),
+      chartsServicios.createResponseTimesPerColorChart("chartResponseTimesPerColor", stateServices.tiempoRtaPorColor),
+    ]);
+  
+    return () => {
+      charts.forEach(chart => {
+        if(chart) chart.dispose();
+      });
+    };
 
-    this.charts.push(chartsServicios.createClosedServicesChart("chartClosedServices", this.stateAPI.cerradosPorEstado));
-    this.charts.push(chartsServicios.createClosedPerColorChart("chartClosedPerColor", this.stateAPI.cerradosPorColor));
-    this.charts.push(chartsServicios.createDelayedPerStandardChart("chartDelayedPerHour", this.stateAPI.demoradosPorEstandar));
-    this.charts.push(chartsServicios.createResponseTimesPerColorChart("chartResponseTimesPerColor", this.stateAPI.tiempoRtaPorColor));
-  }
+  }, []);
 
-  componentWillUnmount() {
-    this.charts.forEach(chart => {
-      if(chart){
-        chart.dispose();
-      }
-    });
-  }
 
-  render() {
-    return (
-      <div id="content-container">
-                  
-        <div className="panel content">
-          <div id="chartClosedServices" className="chart pr-3"></div>
-        </div>
+  return (
+    <div id="content-container">
+                
+      <div className="panel content">
+        <div id="chartClosedServices" className="chart pr-3"></div>
+      </div>
 
-        <div className="panel content">
-          <div id="chartClosedPerColor" className="chart pr-3"></div>
-        </div>
+      <div className="panel content">
+        <div id="chartClosedPerColor" className="chart pr-3"></div>
+      </div>
 
-        <div className="panel content">
-          <div id="chartDelayedPerHour" className="chart pr-3"></div>
-        </div>
+      <div className="panel content">
+        <div id="chartDelayedPerHour" className="chart pr-3"></div>
+      </div>
 
-        <div className="panel content">
-          <div id="chartResponseTimesPerColor" className="chart pr-3"></div>
-        </div>
-      
-    </div>
-    )
-  }
+      <div className="panel content">
+        <div id="chartResponseTimesPerColor" className="chart pr-3"></div>
+      </div>
+    
+  </div>
+  )
+  
 }

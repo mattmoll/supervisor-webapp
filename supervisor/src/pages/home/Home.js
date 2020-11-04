@@ -14,23 +14,7 @@ export default function Home() {
   const [charts, setCharts] = React.useState([]);  
   const [stateHome, setStateHome] = React.useState(getStateFromAPI());
 
-  // var myHeaders = new Headers();
-  // myHeaders.append("token", "+QJTB21vM0C4RYQgNTcxow==");
-  
-  // var requestOptions = {
-  //   method: 'GET',
-  //   headers: myHeaders,
-  //   redirect: 'follow'
-  // };
-  
-  // fetch("http://192.168.222.120:7881/SuWebApi/State", requestOptions)
-  //   .then(response => response.text())
-  //   .then(result => console.log(result))
-  //   .catch(error => console.log('error', error));
-
-
   React.useEffect(() => {
-
     getState();
     setCharts([
       chartsHome.createServicesChart("chartServices", stateHome.totalesPorEstadoServicio),
@@ -53,7 +37,6 @@ export default function Home() {
         'token': '+QJTB21vM0C4RYQgNTcxow=='
       }
     });
-    console.log(state);
     return state;
   }
   
