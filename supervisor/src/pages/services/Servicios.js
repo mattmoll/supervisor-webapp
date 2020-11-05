@@ -1,4 +1,6 @@
 import React from 'react'
+import axios from "axios";
+
 import { getStateServiciosFromAPI } from '../../utils/StateHelper';
 import * as chartsServicios from "./ChartsServicios";
 
@@ -22,6 +24,15 @@ export default function Servicios() {
     };
 
   }, []);
+
+  const getState = async () => {
+    const state = await axios.get("http://192.168.222.120:7881/SuWebApi/GetStateService", {
+      headers: {
+        'token': '+QJTB21vM0C4RYQgNTcxow=='
+      }
+    });
+    return state;
+  }
 
 
   return (

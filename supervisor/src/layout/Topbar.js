@@ -1,33 +1,30 @@
-import React, { Component } from "react";
+import React from "react";
 import icon from "../img/icon.png";
 import UserPanel from "../settings/UserPanel";
 
-export default class Topbar extends Component {
-  state = {
-    panelVisible: false,
+export default function Topbar({onToggleSidebarClicked}) {
+  const [panelVisible, setPanelVisible] = React.useState(false);
+
+  const onToggleUserPanelClicked = () => {
+    setPanelVisible(!panelVisible);
   };
 
-  onToggleUserPanelClicked = () => {
-    this.setState({ panelVisible: !this.state.panelVisible });
-  };
-  render() {
-    return (
-      <header id="topbar">
-        <a href="!#" id="menu-btn" onClick={this.props.onToggleSidebarClicked}>
-          <i className="fa fa-bars" aria-hidden="true"></i>
-        </a>
-        <div id="trademark">
-          <img id="app-icon" src={icon} alt="Supervisor Icon" />
-          <span id="trademark-title">Supervisor</span>
-        </div>
-        <div id="action-bar">
+  return (
+    <header id="topbar">
+      <a href="!#" id="menu-btn" onClick={onToggleSidebarClicked}>
+        <i className="fa fa-bars" aria-hidden="true"></i>
+      </a>
+      <div id="trademark">
+        <img id="app-icon" src={icon} alt="Supervisor Icon" />
+        <span id="trademark-title">Supervisor</span>
+      </div>
+      <div id="action-bar">
 
-          <div id="user-button" onClick={this.onToggleUserPanelClicked}>
-            <span>MM</span>
-          </div>
+        <div id="user-button" onClick={onToggleUserPanelClicked}>
+          <span>MM</span>
         </div>
-        {this.state.panelVisible ? <UserPanel toggleVisibility={this.onToggleUserPanelClicked}></UserPanel> : null}
-      </header>
-    );
-  }
+      </div>
+      {panelVisible ? <UserPanel toggleVisibility={onToggleUserPanelClicked}></UserPanel> : null}
+    </header>
+  );
 }

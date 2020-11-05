@@ -1,6 +1,4 @@
 import React from "react";
-import * as am4core from "@amcharts/amcharts4/core";
-import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import axios from "axios";
 
 import SummaryHome from "./SummaryHome";
@@ -8,7 +6,7 @@ import * as chartsHome from "./ChartsHome";
 import {getStateFromAPI} from "../../utils/StateHelper";
 import ServicesTable from "./ServicesTable";
 
-am4core.useTheme(am4themes_animated);
+chartsHome.initializeChartsLibrary();
 
 export default function Home() {
   const [charts, setCharts] = React.useState([]);  
@@ -16,6 +14,7 @@ export default function Home() {
 
   React.useEffect(() => {
     getState();
+    
     setCharts([
       chartsHome.createServicesChart("chartServices", stateHome.totalesPorEstadoServicio),
       chartsHome.createMobilesChart("chartMobiles", stateHome.estadosPorTipoDeMovil),
