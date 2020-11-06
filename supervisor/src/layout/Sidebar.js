@@ -1,7 +1,13 @@
 import React from "react";
 
 export default function Sidebar({compressedSidebar, toggleSidebar}) {
-  const [selectedMenu, setSelectedMenu] = React.useState("");
+  const [selectedMenu, setSelectedMenu] = React.useState(() => window.localStorage.getItem('Supervisor-SelectedMenu') || "")
+
+  React.useEffect(() =>{
+      window.localStorage.setItem('Supervisor-SelectedMenu', selectedMenu)
+    },
+    [selectedMenu]
+  );
 
   let media = window.matchMedia("(max-width: 980px)");
   media.addEventListener("change", (e) => {
@@ -11,7 +17,7 @@ export default function Sidebar({compressedSidebar, toggleSidebar}) {
   });
   
   const selectMenu = (menu) => {
-
+    setSelectedMenu(menu);
   }
 
   const smallSidebarIfCompressed = () =>{
@@ -35,19 +41,19 @@ export default function Sidebar({compressedSidebar, toggleSidebar}) {
           {!compressedSidebar && <h2 id="nav-title">Navegación</h2>}
         </header>
 
-        <a href="/" className={"nav-link " + activeIfSelected("Inicio")} onClick={selectMenu("Inicio")} >
+        <a href="/" className={"nav-link " + activeIfSelected("Inicio")} onClick={() => selectMenu("Inicio")}>
           <i className="fas fa-home"></i>{" "}
           {showTitleIfNotCompressed("Inicio")}
         </a>
-        <a href="/clientes" className={"nav-link " + activeIfSelected("Clientes")} onClick={selectMenu("Clientes")}>
+        <a href="/clientes" className={"nav-link " + activeIfSelected("Clientes")} onClick={() => selectMenu("Clientes")}>
           <i className="fas fa-briefcase"></i>{" "} 
           {showTitleIfNotCompressed("Clientes")}
         </a>
-        <a href="/servicios" className={"nav-link " + activeIfSelected("Servicios")} >
+        <a href="/servicios" className={"nav-link " + activeIfSelected("Servicios")} onClick={() => selectMenu("Servicios")}>
           <i className="fas fa-laptop-medical"></i>{" "} 
           {showTitleIfNotCompressed("Servicios")}
         </a>
-        <a href="/moviles" className={"nav-link " + activeIfSelected("Moviles")} >
+        <a href="/moviles" className={"nav-link " + activeIfSelected("Moviles")} onClick={() => selectMenu("Moviles")}>
           <i className="fas fa-ambulance"></i>{" "} 
           {showTitleIfNotCompressed("Operativos")}
         </a>
@@ -80,5 +86,4 @@ export default function Sidebar({compressedSidebar, toggleSidebar}) {
       </nav>
     </div>
   );
-
 }

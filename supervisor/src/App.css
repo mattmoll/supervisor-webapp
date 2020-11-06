@@ -193,6 +193,12 @@ body a{
   font-size: 17px;
 }
 
+#navbar .active {
+  border-left-color: #c2ddff;
+  background-color:#20313d;
+  color: white;
+}
+
 .small-sidebar{
   width:60px !important;
   padding:0px !important;
