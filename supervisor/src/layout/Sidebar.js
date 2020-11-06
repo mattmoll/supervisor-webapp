@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Sidebar({compressedSidebar, toggleSidebar}) {
+export default function Sidebar({isSidebarCompressed, toggleSidebar}) {
   const [selectedMenu, setSelectedMenu] = React.useState(() => window.localStorage.getItem('Supervisor-SelectedMenu') || "")
 
   React.useEffect(() =>{
@@ -13,7 +13,6 @@ export default function Sidebar({compressedSidebar, toggleSidebar}) {
   media.addEventListener("change", (e) => {
     /* The viewport is 980px wide or less (match media above)*/
     toggleSidebar(e);
-
   });
   
   const selectMenu = (menu) => {
@@ -21,7 +20,7 @@ export default function Sidebar({compressedSidebar, toggleSidebar}) {
   }
 
   const smallSidebarIfCompressed = () =>{
-    return (compressedSidebar) ? "small-sidebar" : ""; 
+    return (isSidebarCompressed) ? "small-sidebar" : ""; 
   }
 
   const activeIfSelected = (menuName) =>{
@@ -30,7 +29,7 @@ export default function Sidebar({compressedSidebar, toggleSidebar}) {
 
   const showTitleIfNotCompressed = (navTitle) => {
     return(
-      !compressedSidebar && <span className="nav-text"> {navTitle}</span> 
+      !isSidebarCompressed && <span className="nav-text"> {navTitle}</span> 
     );
   }
 
@@ -38,7 +37,7 @@ export default function Sidebar({compressedSidebar, toggleSidebar}) {
     <div id="sidebar" className={smallSidebarIfCompressed()}>
       <nav id="navbar">
         <header>
-          {!compressedSidebar && <h2 id="nav-title">Navegación</h2>}
+          {!isSidebarCompressed && <h2 id="nav-title">Navegación</h2>}
         </header>
 
         <a href="/" className={"nav-link " + activeIfSelected("Inicio")} onClick={() => selectMenu("Inicio")}>
@@ -61,7 +60,7 @@ export default function Sidebar({compressedSidebar, toggleSidebar}) {
           <i className="fas fa-sign-out-alt"></i>{" "} 
           {showTitleIfNotCompressed("Cerrar Sesión")}
         </a>
-        { compressedSidebar ? (
+        { isSidebarCompressed ? (
           <a
             href="!#"
             id="expand-link"

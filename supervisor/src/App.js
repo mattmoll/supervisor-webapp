@@ -12,11 +12,17 @@ import Moviles from "./pages/mobiles/Moviles";
 
 export default function App() {
   const [user, setUser] = React.useState();
-  const [compressedSidebar, setCompressedSidebar] = React.useState(false);
+  const [isSidebarCompressed, setIsSidebarCompressed] = React.useState(() => window.localStorage.getItem('Supervisor-IsSidebarCompressed') || false)
+
+  React.useEffect(() =>{
+      window.localStorage.setItem('Supervisor-IsSidebarCompressed', isSidebarCompressed)
+    },
+    [isSidebarCompressed]
+  );
 
   const toggleSidebar = (e) => {
     e.preventDefault();
-    setCompressedSidebar(!compressedSidebar);
+    setIsSidebarCompressed(!isSidebarCompressed);
   };
 
   return (
@@ -27,7 +33,7 @@ export default function App() {
         <ChangePassModal></ChangePassModal>
         <Topbar toggleSidebar={toggleSidebar}></Topbar>
         <div id="full-container">
-          <Sidebar compressedSidebar={compressedSidebar} toggleSidebar={toggleSidebar} ></Sidebar>
+          <Sidebar isSidebarCompressed={isSidebarCompressed} toggleSidebar={toggleSidebar} ></Sidebar>
           <main>
             <Switch>
               <Route exact path="/" component={Home}></Route>
