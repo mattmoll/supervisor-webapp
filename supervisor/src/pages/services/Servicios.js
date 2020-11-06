@@ -9,7 +9,7 @@ export default function Servicios() {
   const [stateServices, setStateServices] = React.useState(getStateServiciosFromAPI());
 
   React.useEffect(() => {
-    getStateServiciosFromAPI();
+    getStateService();
     setCharts([
       chartsServicios.createClosedServicesChart("chartClosedServices", stateServices.cerradosPorEstado),
       chartsServicios.createClosedPerColorChart("chartClosedPerColor", stateServices.cerradosPorColor),
@@ -25,7 +25,7 @@ export default function Servicios() {
 
   }, []);
 
-  const getState = async () => {
+  const getStateService = async () => {
     const state = await axios.get("http://192.168.222.120:7881/SuWebApi/GetStateService", {
       headers: {
         'token': '+QJTB21vM0C4RYQgNTcxow=='

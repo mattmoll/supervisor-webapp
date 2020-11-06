@@ -8,7 +8,6 @@ export default function Clientes() {
   const [charts, setCharts] = React.useState([]);  
   const [stateClients, setStateClients] = React.useState(getStateClientesFromAPI());
 
-  
   React.useEffect(() => {
     getStateClient();
     setCharts([

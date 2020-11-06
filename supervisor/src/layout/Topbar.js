@@ -2,7 +2,7 @@ import React from "react";
 import icon from "../img/icon.png";
 import UserPanel from "../settings/UserPanel";
 
-export default function Topbar({onToggleSidebarClicked}) {
+export default function Topbar({toggleSidebar}) {
   const [panelVisible, setPanelVisible] = React.useState(false);
 
   const onToggleUserPanelClicked = () => {
@@ -11,7 +11,7 @@ export default function Topbar({onToggleSidebarClicked}) {
 
   return (
     <header id="topbar">
-      <a href="!#" id="menu-btn" onClick={onToggleSidebarClicked}>
+      <a href="!#" id="menu-btn" onClick={toggleSidebar}>
         <i className="fa fa-bars" aria-hidden="true"></i>
       </a>
       <div id="trademark">

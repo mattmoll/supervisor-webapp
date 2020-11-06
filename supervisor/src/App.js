@@ -25,9 +25,9 @@ export default function App() {
       <div className="App">
         <FiltersModal></FiltersModal>
         <ChangePassModal></ChangePassModal>
-        <Topbar onToggleSidebarClicked={toggleSidebar}></Topbar>
+        <Topbar toggleSidebar={toggleSidebar}></Topbar>
         <div id="full-container">
-          <Sidebar compressedSidebar={compressedSidebar}></Sidebar>
+          <Sidebar compressedSidebar={compressedSidebar} toggleSidebar={toggleSidebar} ></Sidebar>
           <main>
             <Switch>
               <Route exact path="/" component={Home}></Route>

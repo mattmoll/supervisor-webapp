@@ -1,114 +1,82 @@
 import React from "react";
 
-export default function Sidebar({compressedSidebar}) {
+export default function Sidebar({compressedSidebar, toggleSidebar}) {
   const [selectedMenu, setSelectedMenu] = React.useState("");
 
   let media = window.matchMedia("(max-width: 980px)");
   media.addEventListener("change", (e) => {
-    /* the viewport is 980px wide or less (match media above), else it is more than 980px wide*/
-    if (e.matches) compressSidebar();
-    else expandSidebar();
+    /* The viewport is 980px wide or less (match media above)*/
+    toggleSidebar(e);
+
   });
   
-  React.useEffect(() => {
-    if (compressedSidebar) compressSidebar();
-    else expandSidebar();
-  }, [compressedSidebar]);
+  const selectMenu = (menu) => {
 
-  const onCompressClicked = (e) => {
-    e.preventDefault();
-    compressSidebar();
-  };
+  }
 
-  const onExpandClicked = (e) => {
-    e.preventDefault();
-    expandSidebar();
-  };
-
-  const compressSidebar = () => {
-    var navTitle = document.getElementById("nav-title");
-    navTitle.classList.add("not-display");
-
-    var navTexts = document.getElementsByClassName("nav-text");
-    for (const navText of navTexts) {
-      navText.classList.add("not-display");
-    }
-
-    var navButtons = document.getElementsByClassName("nav-button");
-    for (const navButton of navButtons) {
-      navButton.classList.add("not-display");
-    }
-
-    var expLink = document.getElementById("expand-link");
-    expLink.classList.remove("not-display");
-
-    var sidebar = document.getElementById("sidebar");
-    sidebar.classList.add("small-sidebar");
-  };
-
-  const expandSidebar = () => {
-    var navTitle = document.getElementById("nav-title");
-    navTitle.classList.remove("not-display");
-
-    var navTexts = document.getElementsByClassName("nav-text");
-    for (const navText of navTexts) {
-      navText.classList.remove("not-display");
-    }
-
-    var navButtons = document.getElementsByClassName("nav-button");
-    for (const navButton of navButtons) {
-      navButton.classList.remove("not-display");
-    }
-
-    var expLink = document.getElementById("expand-link");
-    expLink.classList.add("not-display");
-
-    var sidebar = document.getElementById("sidebar");
-    sidebar.classList.remove("small-sidebar");
-  };
+  const smallSidebarIfCompressed = () =>{
+    return (compressedSidebar) ? "small-sidebar" : ""; 
+  }
 
   const activeIfSelected = (menuName) =>{
     return (selectedMenu === menuName) ? "active" : ""; 
   }
 
+  const showTitleIfNotCompressed = (navTitle) => {
+    return(
+      !compressedSidebar && <span className="nav-text"> {navTitle}</span> 
+    );
+  }
+
   return (
-    <div id="sidebar">
+    <div id="sidebar" className={smallSidebarIfCompressed()}>
       <nav id="navbar">
         <header>
-          <h2 id="nav-title">Navegación</h2>
+          {!compressedSidebar && <h2 id="nav-title">Navegación</h2>}
         </header>
 
-        <a href="/" className={"nav-link " + activeIfSelected("Inicio")} >
-          <i className="fas fa-home"></i>{" "}<span className="nav-text"> Inicio</span>
+        <a href="/" className={"nav-link " + activeIfSelected("Inicio")} onClick={selectMenu("Inicio")} >
+          <i className="fas fa-home"></i>{" "}
+          {showTitleIfNotCompressed("Inicio")}
         </a>
-        <a href="/clientes" className={"nav-link " + activeIfSelected("Clientes")} >
-          <i className="fas fa-briefcase"></i>{" "}<span className="nav-text">Clientes</span>
+        <a href="/clientes" className={"nav-link " + activeIfSelected("Clientes")} onClick={selectMenu("Clientes")}>
+          <i className="fas fa-briefcase"></i>{" "} 
+          {showTitleIfNotCompressed("Clientes")}
         </a>
         <a href="/servicios" className={"nav-link " + activeIfSelected("Servicios")} >
-          <i className="fas fa-laptop-medical"></i>{" "}<span className="nav-text">Servicios</span>
+          <i className="fas fa-laptop-medical"></i>{" "} 
+          {showTitleIfNotCompressed("Servicios")}
         </a>
         <a href="/moviles" className={"nav-link " + activeIfSelected("Moviles")} >
-          <i className="fas fa-ambulance"></i>{" "}<span className="nav-text">Operativos</span>
+          <i className="fas fa-ambulance"></i>{" "} 
+          {showTitleIfNotCompressed("Operativos")}
         </a>
-        <a href="!#" className="nav-link"><i className="fas fa-sign-out-alt"></i>{" "}<span className="nav-text">Cerrar Sesión</span></a>
-        <a
-          href="!#"
-          id="expand-link"
-          className="nav-link not-display"
-          onClick={onExpandClicked}
-        >
-          <i className="fas fa-expand"></i>
+        <a href="!#" className="nav-link">
+          <i className="fas fa-sign-out-alt"></i>{" "} 
+          {showTitleIfNotCompressed("Cerrar Sesión")}
         </a>
-        <div id="container-nav-buttons">
+        { compressedSidebar ? (
           <a
             href="!#"
-            id="compress-button"
-            className="nav-button"
-            onClick={onCompressClicked}
+            id="expand-link"
+            className="nav-link"
+            onClick={toggleSidebar}
           >
-            <i className="fas fa-compress fa-2x"></i>
+            <i className="fas fa-expand"></i>
           </a>
-        </div>
+        ) : (
+          <div id="container-nav-buttons">
+            <a
+              href="!#"
+              id="compress-button"
+              className="nav-button"
+              onClick={toggleSidebar}
+            >
+              <i className="fas fa-compress fa-2x"></i>
+            </a>
+          </div>
+        )
+        }
       </nav>
     </div>
   );
