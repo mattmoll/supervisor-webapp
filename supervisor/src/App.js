@@ -9,6 +9,7 @@ import Home from "./pages/home/Home";
 import Clientes from "./pages/clients/Clientes";
 import Servicios from "./pages/services/Servicios";
 import Moviles from "./pages/mobiles/Moviles";
+import Login from "./pages/login/Login"
 
 export default function App() {
   const [user, setUser] = React.useState();
@@ -28,22 +29,26 @@ export default function App() {
   return (
     <Router>
 
-      <div className="App">
-        <FiltersModal></FiltersModal>
-        <ChangePassModal></ChangePassModal>
-        <Topbar toggleSidebar={toggleSidebar}></Topbar>
-        <div id="full-container">
-          <Sidebar isSidebarCompressed={isSidebarCompressed} toggleSidebar={toggleSidebar} ></Sidebar>
-          <main>
-            <Switch>
-              <Route exact path="/" component={Home}></Route>
-              <Route exact path="/clientes" component={Clientes}></Route>
-              <Route exact path="/servicios" component={Servicios}></Route>
-              <Route exact path="/moviles" component={Moviles}></Route>
-            </Switch>
-          </main>
+      { user ? 
+        <Login/> : 
+
+        <div className="App">
+          <FiltersModal></FiltersModal>
+          <ChangePassModal></ChangePassModal>
+          <Topbar toggleSidebar={toggleSidebar}></Topbar>
+          <div id="full-container">
+            <Sidebar isSidebarCompressed={isSidebarCompressed} toggleSidebar={toggleSidebar} ></Sidebar>
+            <main>
+              <Switch>
+                <Route exact path="/" component={Home}></Route>
+                <Route exact path="/clientes" component={Clientes}></Route>
+                <Route exact path="/servicios" component={Servicios}></Route>
+                <Route exact path="/moviles" component={Moviles}></Route>
+              </Switch>
+            </main>
+          </div>
         </div>
-      </div>
+      }
     </Router>
   );
   
