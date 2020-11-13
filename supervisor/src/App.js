@@ -28,10 +28,9 @@ export default function App() {
 
   return (
     <Router>
-
-      { user ? 
+      { 
+        !user ? 
         <Login/> : 
-
         <div className="App">
           <FiltersModal></FiltersModal>
           <ChangePassModal></ChangePassModal>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import icon from "../img/icon.png";
+import icon from "../assets/icon.png";
 import UserPanel from "../settings/UserPanel";
 import useVisible from "../hooks/useVisible";
 
