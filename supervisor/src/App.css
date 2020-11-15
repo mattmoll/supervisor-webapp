@@ -51,6 +51,26 @@ body a{
 
 /* Login */
 
+#container-login{
+  height:100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #011224;
+}
+
+#content-login{
+  padding-top: 50px;
+  height: 680px;
+  flex: 0 1 auto;
+}
+
+#bottom-background{
+  background-image: url('assets/background3.jpg');
+  flex: 1 1 auto;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 #welcome-text-container{
   color:white;
   width: 40%;
@@ -73,28 +93,6 @@ body a{
   flex-direction: column;
   width: 70%;
   margin: 60px auto;
-}
-
-#container-login{
-  height:100%;
-}
-
-#content-login{
-  padding-top: 50px;
-  height: 680px;
-  background-color: #011224;
-}
-
-#bottom-background{
-  background-image: url('assets/background.jpg');
-  top: 500px;
-  width: 100%;
-  height: 50%;
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 /* Topbar*/
