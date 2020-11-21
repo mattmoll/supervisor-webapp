@@ -5,7 +5,7 @@ export default function Login() {
     <div id="container-login">
       <div id="content-login">
         <div id="welcome-text-container">
-          <h1>Bienvenido!</h1>
+          <h1>¡Bienvenido!</h1>
           <h3>Ingresa tus credenciales para entrar al panel supervisor.</h3>
         </div>
         <main id="container-login-form">
@@ -23,7 +23,6 @@ export default function Login() {
 
             <input class="mt-5 btn btn-dark" type="button" value="Ingresar"/>
           </form>
-
         </main>
       </div>
       <div id="bottom-background"></div>
