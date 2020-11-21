@@ -1,13 +1,9 @@
 import React from "react";
 
-export default function UserPanel() {
-  const [username, setUsername] = React.useState("Matt Moll");
-  
-
+export default function UserPanel({username, logOut}) {
   const toggleTheme = (e) => {
     console.log("TODO: Toggled Theme");
   };
-
 
   return (
     <div id="user-panel">
@@ -49,7 +45,7 @@ export default function UserPanel() {
         <div className="settings-item">
           <i className="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión:
           <div className="setting-value ml-2">
-            <button type="button" className="btn btn-outline-dark btn-sm">
+            <button type="button" className="btn btn-outline-dark btn-sm" onClick={logOut}>
               Salir
             </button>
           </div>

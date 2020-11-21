@@ -4,7 +4,7 @@ import icon from "../assets/icon.png";
 import UserPanel from "../settings/UserPanel";
 import useVisible from "../hooks/useVisible";
 
-export default function Topbar({toggleSidebar}) {
+export default function Topbar({toggleSidebar, username, logOut}) {
   const { ref, isVisible, setIsVisible } = useVisible(false);
 
   const onToggleUserPanelClicked = () => {
@@ -28,7 +28,7 @@ export default function Topbar({toggleSidebar}) {
           <span>MM</span>
         </div>
       </div>
-      {isVisible && <div ref={ref}> <UserPanel></UserPanel> </div>}
+      {isVisible && <div ref={ref}> <UserPanel username={username} logOut={logOut}></UserPanel> </div>}
     </header>
   );
 }

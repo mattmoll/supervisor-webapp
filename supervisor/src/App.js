@@ -26,6 +26,10 @@ export default function App() {
     setIsSidebarCompressed(!isSidebarCompressed);
   };
 
+  const logOut = () => {
+    setUser(null);
+  }
+
   return (
     <Router>
       { 
@@ -34,7 +38,7 @@ export default function App() {
         <div className="App">
           <FiltersModal></FiltersModal>
           <ChangePassModal></ChangePassModal>
-          <Topbar toggleSidebar={toggleSidebar}></Topbar>
+          <Topbar toggleSidebar={toggleSidebar} username={user} logOut={logOut}></Topbar>
           <div id="full-container">
             <Sidebar isSidebarCompressed={isSidebarCompressed} toggleSidebar={toggleSidebar} ></Sidebar>
             <main>
