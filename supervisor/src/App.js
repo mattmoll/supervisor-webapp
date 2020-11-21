@@ -30,7 +30,7 @@ export default function App() {
     <Router>
       { 
         !user ? 
-        <Login/> : 
+        <Login setUser={setUser}/> : 
         <div className="App">
           <FiltersModal></FiltersModal>
           <ChangePassModal></ChangePassModal>
