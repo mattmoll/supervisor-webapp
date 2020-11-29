@@ -1,10 +1,20 @@
 import React from 'react'
+import axios from "axios";
 
-export default function Login({ setUser }) {
+export default function Login({ loginSuccesful }) {
   const [state , setState] = React.useState({
     user : "",
     password : ""
   })
+
+  const loginUser = async () => {
+    const result = await axios.post("http://192.168.222.120:7881/SuWebApi/Login", {
+      user: state.user,
+      key: state.password
+    });
+    console.log(result);
+    return result;
+  }
   
   const handleChange = (e) => {
       const {id , value} = e.target   
@@ -17,7 +27,9 @@ export default function Login({ setUser }) {
   const handleLoginClick = (e) => {
     e.preventDefault();
 
-    setUser(state.user);
+    let result = loginUser();
+    
+    loginSuccesful(state.user, result);
   }
 
   return (
