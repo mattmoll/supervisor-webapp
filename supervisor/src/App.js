@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import {UserContext} from "./UserContext";
+import {AppContext} from "./AppContext";
 import "./App.css";
 import Topbar from "./layout/Topbar";
 import Sidebar from "./layout/Sidebar";
@@ -37,10 +37,10 @@ export default function App() {
     setToken(token);
   }
 
-  
+  const apiUrl = "http://192.168.222.4:7881/SuWebApi";
 
   return (
-    <UserContext.Provider value={{user, token}}>
+    <AppContext.Provider value={{user, token, apiUrl}}>
       <Router>
         { 
           !user ? 
@@ -63,7 +63,7 @@ export default function App() {
           </div>
         }
       </Router>
-    </UserContext.Provider>
+    </AppContext.Provider>
   );
   
 }

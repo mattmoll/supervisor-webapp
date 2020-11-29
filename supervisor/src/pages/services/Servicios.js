@@ -1,12 +1,14 @@
 import React from 'react'
 import axios from "axios";
 
+import {AppContext} from '../../AppContext';
 import { getStateServiciosFromAPI } from '../../utils/StateHelper';
 import * as chartsServicios from "./ChartsServicios";
 
 export default function Servicios() {
   const [charts, setCharts] = React.useState([]);  
   const [stateServices, setStateServices] = React.useState(getStateServiciosFromAPI());
+  const {apiUrl} = React.useContext(AppContext);
 
   React.useEffect(() => {
     getStateService();
@@ -26,9 +28,9 @@ export default function Servicios() {
   }, []);
 
   const getStateService = async () => {
-    const state = await axios.get("http://192.168.222.120:7881/SuWebApi/GetStateService", {
+    const state = await axios.get(apiUrl + "/GetStateService", {
       headers: {
-        'token': '+QJTB21vM0C4RYQgNTcxow=='
+        'token': 'f0b6W6plGE6kYvyyV/180g=='
       }
     });
     return state;

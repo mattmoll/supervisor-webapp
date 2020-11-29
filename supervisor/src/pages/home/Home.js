@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 
+import { AppContext } from '../../AppContext';
 import SummaryHome from "./SummaryHome";
 import * as chartsHome from "./ChartsHome";
 import {getStateFromAPI} from "../../utils/StateHelper";
@@ -12,28 +13,38 @@ export default function Home() {
   const [charts, setCharts] = React.useState([]);  
   const [stateHome, setStateHome] = React.useState(getStateFromAPI());
 
+  const {apiUrl} = React.useContext(AppContext);
+
   React.useEffect(() => {
-    getState();
-    
-    setCharts([
-      chartsHome.createServicesChart("chartServices", stateHome.totalesPorEstadoServicio),
-      chartsHome.createMobilesChart("chartMobiles", stateHome.estadosPorTipoDeMovil),
-      chartsHome.createEmployeesServicesChart("chartEmployeesServices", stateHome.serviciosRecibidosDespachados),
-      chartsHome.createEmployeesServicesAveragesChart("chartEmployeesServicesAverages", stateHome.promediosServiciosRecibidosDespachados),
-    ]);
-  
+    loadCharts();
+
     return () => {
       charts.forEach(chart => {
         if(chart) chart.dispose();
       });
     };
 
-  }, []);
+  }, [stateHome]);
+
+  const loadCharts = async () => {
+    const state = await getState();
+    setStateHome(state);
+    console.log(stateHome)
+    
+    setCharts([
+      chartsHome.createServicesChart("chartServices", state.totalesPorEstadoServicio),
+      chartsHome.createMobilesChart("chartMobiles", state.estadosPorTipoDeMovil),
+      chartsHome.createEmployeesServicesChart("chartEmployeesServices", state.serviciosRecibidosDespachados),
+      chartsHome.createEmployeesServicesAveragesChart("chartEmployeesServicesAverages", state.promediosServiciosRecibidosDespachados),
+    ]);
+    
+  }
 
   const getState = async () => {
-    const state = await axios.get("http://192.168.222.120:7881/SuWebApi/State", {
+    console.log(apiUrl);
+    const state = await axios.get(apiUrl + "/State", {
       headers: {
-        'token': '+QJTB21vM0C4RYQgNTcxow=='
+        'token': 'Df9TohkInU6aocvs0YSQVQ=='
       }
     });
     return state;

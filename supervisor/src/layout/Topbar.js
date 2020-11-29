@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import {UserContext} from "../UserContext";
+import {AppContext} from "../AppContext";
 import icon from "../assets/icon.png";
 import UserPanel from "../settings/UserPanel";
 import useVisible from "../hooks/useVisible";
@@ -8,7 +8,7 @@ import useVisible from "../hooks/useVisible";
 export default function Topbar({toggleSidebar, logOut}) {
   const { ref, isVisible, setIsVisible } = useVisible(false);
   
-  const {user} = useContext(UserContext);
+  const {user} = useContext(AppContext);
 
   const onToggleUserPanelClicked = () => {
     // Clicking on the button with the popup opened doesn't close it

@@ -1,17 +1,28 @@
 import React from 'react'
 import axios from "axios";
+import { AppContext } from '../../AppContext';
 
 export default function Login({ loginSuccesful }) {
   const [state , setState] = React.useState({
     user : "",
     password : ""
   })
+  
+  const {apiUrl} = React.useContext(AppContext);
 
   const loginUser = async () => {
-    const result = await axios.post("http://192.168.222.120:7881/SuWebApi/Login", {
-      user: state.user,
-      key: state.password
-    });
+
+    let data = '{"user":"AYUDA", "key":"AYUDA"}';
+    let config = {
+      headers: { 
+        'Content-Type': 'text/plain'
+      }
+    };
+    const finalUrl = apiUrl + "/Login";
+    console.log(finalUrl);
+    console.log(config);
+    const result = await axios.post(finalUrl, data, config);
+
     console.log(result);
     return result;
   }
@@ -24,12 +35,13 @@ export default function Login({ loginSuccesful }) {
       }))
   }
 
-  const handleLoginClick = (e) => {
+  const handleLoginClick = async (e) => {
     e.preventDefault();
 
-    let result = loginUser();
+    let result = await loginUser();
+    console.log(result);
     
-    loginSuccesful(state.user, result);
+    loginSuccesful(state.user, {});
   }
 
   return (
@@ -41,24 +53,24 @@ export default function Login({ loginSuccesful }) {
         </div>
         <main id="container-login-form">
           <form id="login-form">
-            <label for="user">Usuario</label>
-            <input  class="mb-4" type="text" name="user" id="user" 
+            <label htmlFor="user">Usuario</label>
+            <input  className="mb-4" type="text" name="user" id="user" 
                     value={state.user}
                     onChange={handleChange}
             />
 
-            <label for="password">Contraseña</label>
-            <input class="mb-4" type="password" name="password" id="password"
+            <label htmlFor="password">Contraseña</label>
+            <input className="mb-4" type="password" name="password" id="password"
                     value={state.password}
                     onChange={handleChange}
             />
 
             <div>
               <input type="checkbox" name="remember" id="remember"/> 
-              <label class="ml-2" for="remember">Recordarme</label>
+              <label className="ml-2" htmlFor="remember">Recordarme</label>
             </div>
 
-            <input class="mt-5 btn btn-dark" type="button" value="Ingresar" onClick={handleLoginClick}/>
+            <input className="mt-5 btn btn-dark" type="button" value="Ingresar" onClick={handleLoginClick}/>
           </form>
         </main>
       </div>

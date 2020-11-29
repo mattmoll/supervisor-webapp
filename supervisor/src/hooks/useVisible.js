@@ -5,7 +5,6 @@ function useVisible(initialIsVisible) {
   const ref = useRef(null);
  
   const handleClickOutside = (event) => {
-    console.log("outside");
     if (ref.current && !ref.current.contains(event.target)) {
       setIsVisible(false);
     }

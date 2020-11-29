@@ -12,6 +12,8 @@ export function createStandardBarChart(chartContainer, data, titleText, series){
   ]
   addLegend(chart);
 
+  console.log(data);
+  console.log(titleText);
   // Add category field and pass data.
   data["category"] = "Servicios";
   chart.data = [data]; 
