@@ -11,20 +11,15 @@ export default function Login({ loginSuccesful }) {
   const {apiUrl} = React.useContext(AppContext);
 
   const loginUser = async () => {
-
-    let data = '{"user":"AYUDA", "key":"AYUDA"}';
+    let data = `{"user":"${state.user}", "key":"${state.password}"}`;
     let config = {
       headers: { 
         'Content-Type': 'text/plain'
       }
     };
-    const finalUrl = apiUrl + "/Login";
-    console.log(finalUrl);
-    console.log(config);
-    const result = await axios.post(finalUrl, data, config);
 
-    console.log(result);
-    return result;
+    const finalUrl = apiUrl + "/Login";
+    return await axios.post(finalUrl, data, config);
   }
   
   const handleChange = (e) => {
@@ -40,8 +35,7 @@ export default function Login({ loginSuccesful }) {
 
     let result = await loginUser();
     console.log(result);
-    
-    loginSuccesful(state.user, {});
+    loginSuccesful(state.user, result.data.token);
   }
 
   return (

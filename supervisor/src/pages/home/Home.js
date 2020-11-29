@@ -11,7 +11,7 @@ chartsHome.initializeChartsLibrary();
 
 export default function Home() {
   const [charts, setCharts] = React.useState([]);  
-  const [stateHome, setStateHome] = React.useState(getStateFromAPI());
+  const [stateHome, setStateHome] = React.useState({});
 
   const {apiUrl} = React.useContext(AppContext);
 
@@ -24,7 +24,7 @@ export default function Home() {
       });
     };
 
-  }, [stateHome]);
+  }, []);
 
   const loadCharts = async () => {
     const state = await getState();
@@ -44,7 +44,7 @@ export default function Home() {
     console.log(apiUrl);
     const state = await axios.get(apiUrl + "/State", {
       headers: {
-        'token': 'Df9TohkInU6aocvs0YSQVQ=='
+        'token': 'lj21Defz3US0ya7wGCI2Ig=='
       }
     });
     return state;

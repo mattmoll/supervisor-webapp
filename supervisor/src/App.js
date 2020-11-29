@@ -13,14 +13,16 @@ import Moviles from "./pages/vehicles/Moviles";
 import Login from "./pages/login/Login"
 
 export default function App() {
-  const [user, setUser] = React.useState();
-  const [isSidebarCompressed, setIsSidebarCompressed] = React.useState(() => window.localStorage.getItem('Supervisor-IsSidebarCompressed') || false)
-  const [token, setToken] = React.useState();
+  const [user, setUser] = React.useState(() => window.localStorage.getItem("Supervisor-User") || "");
+  const [isSidebarCompressed, setIsSidebarCompressed] = React.useState(() => window.localStorage.getItem("Supervisor-IsSidebarCompressed") || false)
+  const [token, setToken] = React.useState(() => window.localStorage.getItem("Supervisor-Token") || "");
 
   React.useEffect(() =>{
-      window.localStorage.setItem('Supervisor-IsSidebarCompressed', isSidebarCompressed)
+      window.localStorage.setItem("Supervisor-IsSidebarCompressed", isSidebarCompressed)
+      window.localStorage.setItem("Supervisor-User", user)
+      window.localStorage.setItem("Supervisor-Token", token)
     },
-    [isSidebarCompressed]
+    [isSidebarCompressed, user, token]
   );
 
   const toggleSidebar = (e) => {
@@ -40,7 +42,7 @@ export default function App() {
   const apiUrl = "http://192.168.222.4:7881/SuWebApi";
 
   return (
-    <AppContext.Provider value={{user, token, apiUrl}}>
+    <AppContext.Provider value={{user, token, setUser, apiUrl}}>
       <Router>
         { 
           !user ? 
