@@ -11,12 +11,12 @@ chartsHome.initializeChartsLibrary();
 
 export default function Home() {
   const [charts, setCharts] = React.useState([]);  
-  const [stateHome, setStateHome] = React.useState({});
+  const [stateHome, setStateHome] = React.useState();
 
-  const {apiUrl} = React.useContext(AppContext);
+  const {apiUrl, token} = React.useContext(AppContext);
 
   React.useEffect(() => {
-    loadCharts();
+    loadState();
 
     return () => {
       charts.forEach(chart => {
@@ -26,31 +26,30 @@ export default function Home() {
 
   }, []);
 
-  const loadCharts = async () => {
-    const state = await getState();
-    setStateHome(state);
-    console.log(stateHome)
-    
-    setCharts([
-      chartsHome.createServicesChart("chartServices", state.totalesPorEstadoServicio),
-      chartsHome.createMobilesChart("chartMobiles", state.estadosPorTipoDeMovil),
-      chartsHome.createEmployeesServicesChart("chartEmployeesServices", state.serviciosRecibidosDespachados),
-      chartsHome.createEmployeesServicesAveragesChart("chartEmployeesServicesAverages", state.promediosServiciosRecibidosDespachados),
-    ]);
-    
+  const loadState = async () => {
+    await axios.get(apiUrl + "/State", {
+      headers: {
+        'token': token
+      }
+    }).then(result => {
+      const stateHomeFromAPI = result.data;
+      setStateHome(stateHomeFromAPI);
+      console.log(stateHomeFromAPI);
+      console.log(stateHome);
+      loadCharts(stateHomeFromAPI);
+    })
   }
 
-  const getState = async () => {
-    console.log(apiUrl);
-    const state = await axios.get(apiUrl + "/State", {
-      headers: {
-        'token': 'lj21Defz3US0ya7wGCI2Ig=='
-      }
-    });
-    return state;
+  const loadCharts = (stateForCharts) => {
+    setCharts([
+      chartsHome.createServicesChart("chartServices", stateForCharts.totalesPorEstadoServicio),
+      chartsHome.createMobilesChart("chartMobiles", stateForCharts.estadosPorTipoDeMovil),
+      chartsHome.createEmployeesServicesChart("chartEmployeesServices", stateForCharts.serviciosRecibidosDespachados),
+      chartsHome.createEmployeesServicesAveragesChart("chartEmployeesServicesAverages", stateForCharts.promediosServiciosRecibidosDespachados),
+    ]);
   }
   
-  if(stateHome === null){
+  if(stateHome == null){
     return <p>Loading Home...</p>;
   }
 

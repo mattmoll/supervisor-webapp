@@ -40,7 +40,6 @@ export default function Clientes() {
         'token': 'bf0b6W6plGE6kYvyyV/180g=='
       }
     });
-    console.log(state);
     return state;
   }
 

@@ -34,7 +34,6 @@ export default function Login({ loginSuccesful }) {
     e.preventDefault();
 
     let result = await loginUser();
-    console.log(result);
     loginSuccesful(state.user, result.data.token);
   }
 
