@@ -20,7 +20,7 @@ export default function Servicios() {
   }, []);
 
   const loadState = async () => {
-    await axios.get(apiUrl + "/GetStateService", {
+    await axios.get(apiUrl + "/StateService", {
       headers: {
         'token': token
       }

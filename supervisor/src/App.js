@@ -14,7 +14,7 @@ import Login from "./pages/login/Login"
 
 export default function App() {
   const [user, setUser] = React.useState(() => window.localStorage.getItem("Supervisor-User") || "");
-  const [isSidebarCompressed, setIsSidebarCompressed] = React.useState(() => window.localStorage.getItem("Supervisor-IsSidebarCompressed") || false)
+  const [isSidebarCompressed, setIsSidebarCompressed] = React.useState(() => window.localStorage.getItem("Supervisor-IsSidebarCompressed") == "true" || false)
   const [token, setToken] = React.useState(() => window.localStorage.getItem("Supervisor-Token") || "");
 
   React.useEffect(() =>{
@@ -53,7 +53,7 @@ export default function App() {
             <ChangePassModal></ChangePassModal>
             <Topbar toggleSidebar={toggleSidebar} logOut={logOut}></Topbar>
             <div id="full-container">
-              <Sidebar isSidebarCompressed={isSidebarCompressed} toggleSidebar={toggleSidebar} ></Sidebar>
+              <Sidebar isSidebarCompressed={isSidebarCompressed} toggleSidebar={toggleSidebar} logOut={logOut}></Sidebar>
               <main>
                 <Switch>
                   <Route exact path="/" component={Home}></Route>
