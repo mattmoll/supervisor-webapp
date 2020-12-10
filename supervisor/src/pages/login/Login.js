@@ -3,15 +3,19 @@ import axios from "axios";
 import { AppContext } from '../../AppContext';
 
 export default function Login({ loginSuccesful }) {
-  const [state , setState] = React.useState({
+  const [loginCredentials , setLoginCredentials] = React.useState({
     user : "",
     password : ""
   })
+
+  const [loginError, setLoginError] = React.useState(false);
   
   const {apiUrl} = React.useContext(AppContext);
 
+  const ERROR_CODE = 18;
+
   const loginUser = async () => {
-    let data = `{"user":"${state.user}", "key":"${state.password}"}`;
+    let data = `{"user":"${loginCredentials.user}", "key":"${loginCredentials.password}"}`;
     let config = {
       headers: { 
         'Content-Type': 'text/plain'
@@ -23,19 +27,28 @@ export default function Login({ loginSuccesful }) {
   }
   
   const handleChange = (e) => {
-      const {id , value} = e.target   
-      setState(prevState => ({
-          ...prevState,
-          [id] : value
-      }))
+    const {id , value} = e.target   
+    setLoginCredentials(prevState => ({
+        ...prevState,
+        [id] : value
+    }))
   }
+
 
   const handleLoginClick = async (e) => {
     e.preventDefault();
 
     let result = await loginUser();
-    loginSuccesful(state.user, result.data.token);
+
+    if(result.data.code === ERROR_CODE) {
+      setLoginError(true);
+      setLoginCredentials({...loginCredentials, password:""});
+      return;
+    }
+
+    loginSuccesful(loginCredentials.user, result.data.token);
   }
+
 
   return (
     <div id="container-login">
@@ -48,21 +61,23 @@ export default function Login({ loginSuccesful }) {
           <form id="login-form">
             <label htmlFor="user">Usuario</label>
             <input  className="mb-4" type="text" name="user" id="user" 
-                    value={state.user}
+                    value={loginCredentials.user}
                     onChange={handleChange}
             />
 
             <label htmlFor="password">Contraseña</label>
             <input className="mb-4" type="password" name="password" id="password"
-                    value={state.password}
+                    value={loginCredentials.password}
                     onChange={handleChange}
             />
 
-            <div>
-              <input type="checkbox" name="remember" id="remember"/> 
-              <label className="ml-2" htmlFor="remember">Recordarme</label>
-            </div>
-
+            {
+              loginError ? 
+              <div className="error-message mt-3">
+                El usuario y la contraseña ingresados no coinciden. Intentelo nuevamente.
+              </div>
+              : null
+            }
             <input className="mt-5 btn btn-dark" type="button" value="Ingresar" onClick={handleLoginClick}/>
           </form>
         </main>

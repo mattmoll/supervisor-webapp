@@ -25,6 +25,7 @@ export function createMobilesChart(chartContainer, data){
 
 
 export function createEmployeesServicesChart(chartContainer, data){
+  if(data == null) return;
   let chart = am4core.create(chartContainer, am4charts.XYChart);
   chartHelper.addTitle("Servicios Operadores", chart);
   chart.colors.list = [
@@ -75,6 +76,7 @@ export function createEmployeesServicesChart(chartContainer, data){
 
 
 export function createEmployeesServicesAveragesChart(chartContainer, data){
+  if(data == null) return;
   let chart = am4core.create(chartContainer, am4charts.XYChart);
   chartHelper.addTitle("Tiempos Operadores", chart);
   chartHelper.addLegend(chart);

@@ -31,12 +31,13 @@ export default function App() {
   };
 
   const logOut = () => {
-    setUser(null);
+    setToken("");
+    setUser("");
   }
 
   const onLoginSuccesful = (user, token) => {
-    setUser(user);
     setToken(token);
+    setUser(user);
   }
 
   const apiUrl = "http://192.168.222.4:7881/SuWebApi";

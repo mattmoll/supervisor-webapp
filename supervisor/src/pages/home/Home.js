@@ -4,7 +4,6 @@ import axios from "axios";
 import { AppContext } from '../../AppContext';
 import SummaryHome from "./SummaryHome";
 import * as chartsHome from "./ChartsHome";
-import {getStateFromAPI} from "../../utils/StateHelper";
 import ServicesTable from "./ServicesTable";
 
 chartsHome.initializeChartsLibrary();
@@ -23,7 +22,6 @@ export default function Home() {
         if(chart) chart.dispose();
       });
     };
-
   }, []);
 
   const loadState = async () => {
@@ -34,8 +32,6 @@ export default function Home() {
     }).then(result => {
       const stateHomeFromAPI = result.data;
       setStateHome(stateHomeFromAPI);
-      console.log(stateHomeFromAPI);
-      console.log(stateHome);
       loadCharts(stateHomeFromAPI);
     })
   }
@@ -48,6 +44,7 @@ export default function Home() {
       chartsHome.createEmployeesServicesAveragesChart("chartEmployeesServicesAverages", stateForCharts.promediosServiciosRecibidosDespachados),
     ]);
   }
+  
   
   if(stateHome == null){
     return <p>Loading Home...</p>;
