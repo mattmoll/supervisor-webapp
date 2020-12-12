@@ -117,7 +117,7 @@ export function createEmployeesServicesAveragesChart(chartContainer, data){
   createSeries("recepPromedioColoring", "Prom Coloring");
   createSeries("recepPromedioAsignacion", "Prom Recep");
   createSeries("despRedespachos", "Redespachos");
-  createSeries("despPromedioAsignacion", "Prom Asign");
+  createSeries("despPromedioAsignacion", "Prom Asign %");
 
   return chart;
 }

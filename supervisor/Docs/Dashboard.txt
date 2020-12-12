@@ -11,69 +11,33 @@ Filtros generales:
 
 ///////////////////////////////////////////////////////
 Notas mati:
-revisar integracion con MQTT para react:
-https://dev.to/preciouschicken/a-taste-of-mqtt-in-react-2jc6
+
 
 Pensar esquema para cambio de "tema" (color de la topbar y algun icono marca) que diga que esta aplicado un filtro global.
+
+Agregar Spinning Wheel para todos los metodos asyncronicos. Especialmente el login que no muestra nada mientras carga.
+
+Borrar la modal y el menu de cambio de password.
+
+Grisar el menu de filtros globales que no lo vamos a usar por ahora.
+
+En todos los llamados a las APIs revisar el result.Code si es token invalido redirecciono al login.
+
+
 
 
 TODO :
 
-- Definicion Servicios:
+Version 2.0:
+revisar integracion con MQTT para react:
+https://dev.to/preciouschicken/a-taste-of-mqtt-in-react-2jc6
+Esto lo vamos a usar para alertas del cedi, ejemplo un rojo que no se resuelve hace 10 minutos.
 
-Poner un switch arriba a la izq o derecha que sea cambio modalidad horaria.
-Este switch tiene que cambiar todos los gráficos 
-
-4 graficos: de lineas, con data points por cada hora, durante 24 horas (eje x)
-https://www.amcharts.com/demos/line-chart-with-scroll-and-zoom/
-
-maximo de 8 lineas. dos graficos son fijos, 2 son variables.
-
-Eje X es cada 6 horas mostrar el valor.
-
-Para todos los graficos de esta pantalla vamos a usar un array de 8 colores max, donde apliquen menos se usan los primeros:
-Rojo,
-Amarillo,
-Celeste,
-Verde,
-Azul,
-3 colores que quedan elegirlos de los que ya use similares.
+Agregar ventana de filtros globales.
+Cuando alguien agrega un filtro hay que agregar algun icono y/o cambiar el color de la topbar para que quede claro que estan en modo filtrado.
 
 
 
-1er grafico: 
-ServiciosCerrados, ya tengo la definicion de la api en StateHelper. 
-Recibo las horas si me sirve. Validar que recibo 50.
-Sino me pasa la primera y lo calculo.
-Despues recibo dos arrays con valores para realizados y cancelados.
-Tengo que armar una tercera que es la suma de ambos arrays.
-Probar este como grafico stacked area 
-https://www.amcharts.com/demos/stacked-area/
-
-
-
-2do grafico:
-CerradosPorColor
-Esta definida la APi en el mismo lugar, es por arrays maximo 8, que matchean con los colores globales de servicios.
-
-
-Estan todos los graficos con las apis definidas. Son todos similares, usamos array maximo 8 que matchean por orden con un array de colores deifnido arriba.
-
-
-
-
-
-- UI: Make current menu stand out on the sidebar. It´s not easy. Have to save on redux or localStorage the current selected menu.
-
-- Ver de alinear los iconos todos iguales, centrados dentro de un container. Si logro alinearlos, poner building para clientes
-
-
-
-
-Pendiente:
-
-Modals:
-Design and work on change password and filters (need definition for this one).
 
 
 

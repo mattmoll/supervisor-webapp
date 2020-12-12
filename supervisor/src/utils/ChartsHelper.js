@@ -118,10 +118,11 @@ export function createLinesChart(chartContainer, data, titleText){
 
   const quantity = data[0].cantidadPorHora.length;
   let dates = [];
+  
   for(let i = 0 ; i < quantity; i++){
     let dateToAdd = new Date();
     dateToAdd.setHours(dateToAdd.getHours() - i);
-    dates.push(dateToAdd.getDate() + ' ' + dateToAdd.getHours());
+    dates.push(dateToAdd.getHours());
     
     dateAxis.data.unshift({
       date: dates[i]
