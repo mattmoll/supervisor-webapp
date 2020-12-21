@@ -23,7 +23,6 @@ export default function Home() {
         if(chart) chart.dispose();
       });
     };
-
   }, []);
 
   const loadState = async () => {
@@ -34,8 +33,6 @@ export default function Home() {
     }).then(result => {
       const stateHomeFromAPI = result.data;
       setStateHome(stateHomeFromAPI);
-      console.log(stateHomeFromAPI);
-      console.log(stateHome);
       loadCharts(stateHomeFromAPI);
     })
   }
@@ -48,6 +45,7 @@ export default function Home() {
       chartsHome.createEmployeesServicesAveragesChart("chartEmployeesServicesAverages", stateForCharts.promediosServiciosRecibidosDespachados),
     ]);
   }
+  
   
   if(stateHome == null){
     return <p>Loading Home...</p>;
