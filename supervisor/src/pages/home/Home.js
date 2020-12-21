@@ -4,7 +4,6 @@ import axios from "axios";
 import { AppContext } from '../../AppContext';
 import SummaryHome from "./SummaryHome";
 import * as chartsHome from "./ChartsHome";
-import {getStateFromAPI} from "../../utils/StateHelper";
 import ServicesTable from "./ServicesTable";
 
 chartsHome.initializeChartsLibrary();
