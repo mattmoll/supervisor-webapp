@@ -2,7 +2,7 @@ import React from 'react'
 import axios from "axios";
 import { AppContext } from '../../AppContext';
 
-export default function Login({ loginSuccesful }) {
+export default function Login({ loginSuccesful, sessionExpired }) {
   const [loginCredentials , setLoginCredentials] = React.useState({
     user : "",
     password : ""
@@ -75,6 +75,14 @@ export default function Login({ loginSuccesful }) {
               loginError ? 
               <div className="error-message mt-3">
                 El usuario y la contraseña ingresados no coinciden. Intentelo nuevamente.
+              </div>
+              : null
+            }
+
+            {
+              sessionExpired ? 
+              <div className="error-message mt-3">
+                La sesión expiró. Ingrese nuevamente.
               </div>
               : null
             }

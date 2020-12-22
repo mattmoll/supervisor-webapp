@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import {AppContext} from "../AppContext";
 
-export default function UserPanel({username, logOut}) {
+export default function UserPanel() {
+
+  const {sessionInfo, logOut} = useContext(AppContext);
+
   const toggleTheme = (e) => {
     console.log("TODO: Toggled Theme");
   };
@@ -12,15 +16,7 @@ export default function UserPanel({username, logOut}) {
       <div>
         <div className="settings-item">
           <i className="fas fa-user mr-2"></i> Usuario:
-          <div className="setting-value ml-2">{username}</div>
-        </div>
-        <div className="settings-item">
-          <i className="fas fa-key mr-2"></i> Contraseña:
-          <div className="setting-value ml-2">
-            <button type="button" className="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#changePassModal">
-              Cambiar
-            </button>
-          </div>
+          <div className="setting-value ml-2">{sessionInfo.username}</div>
         </div>
         <div className="settings-item">
           <i className="fas fa-filter mr-2"></i> Filtros:

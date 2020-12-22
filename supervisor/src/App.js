@@ -5,7 +5,6 @@ import "./App.css";
 import Topbar from "./layout/Topbar";
 import Sidebar from "./layout/Sidebar";
 import FiltersModal from "./settings/FiltersModal";
-import ChangePassModal from "./settings/ChangePassModal";
 import Home from "./pages/home/Home";
 import Clientes from "./pages/clients/Clientes";
 import Servicios from "./pages/services/Servicios";
@@ -13,16 +12,19 @@ import Moviles from "./pages/vehicles/Moviles";
 import Login from "./pages/login/Login"
 
 export default function App() {
-  const [user, setUser] = React.useState(() => window.localStorage.getItem("Supervisor-User") || "");
+  const [sessionInfo, setSessionInfo] = React.useState( () => { return {
+    user: window.localStorage.getItem("Supervisor-User") || "",
+    token: window.localStorage.getItem("Supervisor-Token")  || ""
+  }}); 
   const [isSidebarCompressed, setIsSidebarCompressed] = React.useState(() => window.localStorage.getItem("Supervisor-IsSidebarCompressed") == "true" || false)
-  const [token, setToken] = React.useState(() => window.localStorage.getItem("Supervisor-Token") || "");
+  const [sessionExpired, setSessionExpired] = React.useState(false);
 
   React.useEffect(() =>{
       window.localStorage.setItem("Supervisor-IsSidebarCompressed", isSidebarCompressed)
-      window.localStorage.setItem("Supervisor-User", user)
-      window.localStorage.setItem("Supervisor-Token", token)
+      window.localStorage.setItem("Supervisor-User", sessionInfo.user)
+      window.localStorage.setItem("Supervisor-Token", sessionInfo.token)
     },
-    [isSidebarCompressed, user, token]
+    [isSidebarCompressed, sessionInfo]
   );
 
   const toggleSidebar = (e) => {
@@ -31,29 +33,29 @@ export default function App() {
   };
 
   const logOut = () => {
-    setToken("");
-    setUser("");
+    setSessionInfo({
+      user: "",
+      token: ""
+    })
   }
 
   const onLoginSuccesful = (user, token) => {
-    setToken(token);
-    setUser(user);
+    setSessionInfo({ user, token });
   }
 
   const apiUrl = "http://192.168.222.4:7881/SuWebApi";
 
   return (
-    <AppContext.Provider value={{user, token, setUser, apiUrl}}>
+    <AppContext.Provider value={{sessionInfo, logOut, setSessionExpired, apiUrl}}>
       <Router>
         { 
-          !user ? 
-          <Login loginSuccesful={onLoginSuccesful}/> : 
+          !sessionInfo.user ? 
+          <Login loginSuccesful={onLoginSuccesful} sessionExpired={sessionExpired}/> : 
           <div className="App">
             <FiltersModal></FiltersModal>
-            <ChangePassModal></ChangePassModal>
-            <Topbar toggleSidebar={toggleSidebar} logOut={logOut}></Topbar>
+            <Topbar toggleSidebar={toggleSidebar}></Topbar>
             <div id="full-container">
-              <Sidebar isSidebarCompressed={isSidebarCompressed} toggleSidebar={toggleSidebar} logOut={logOut}></Sidebar>
+              <Sidebar isSidebarCompressed={isSidebarCompressed} toggleSidebar={toggleSidebar}></Sidebar>
               <main>
                 <Switch>
                   <Route exact path="/" component={Home}></Route>

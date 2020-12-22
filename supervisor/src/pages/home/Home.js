@@ -1,10 +1,10 @@
 import React from "react";
-import axios from "axios";
 
-import { AppContext } from '../../AppContext';
 import SummaryHome from "./SummaryHome";
 import * as chartsHome from "./ChartsHome";
 import ServicesTable from "./ServicesTable";
+import useApi from "../../utils/APIHelper";
+
 
 chartsHome.initializeChartsLibrary();
 
@@ -12,10 +12,10 @@ export default function Home() {
   const [charts, setCharts] = React.useState([]);  
   const [stateHome, setStateHome] = React.useState();
 
-  const {apiUrl, token} = React.useContext(AppContext);
+  const stateAPI = useApi("/State")
 
   React.useEffect(() => {
-    loadState();
+    stateAPI.makeRequest(onStateRetrieved);
 
     return () => {
       charts.forEach(chart => {
@@ -24,16 +24,9 @@ export default function Home() {
     };
   }, []);
 
-  const loadState = async () => {
-    await axios.get(apiUrl + "/State", {
-      headers: {
-        'token': token
-      }
-    }).then(result => {
-      const stateHomeFromAPI = result.data;
-      setStateHome(stateHomeFromAPI);
-      loadCharts(stateHomeFromAPI);
-    })
+  const onStateRetrieved = (stateFromAPI) => {
+    setStateHome(stateFromAPI);
+    loadCharts(stateFromAPI);
   }
 
   const loadCharts = (stateForCharts) => {

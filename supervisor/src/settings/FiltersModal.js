@@ -12,11 +12,11 @@ export default function FiltersModal() {
             </button>
           </div>
           <div className="modal-body">
-            ...
+            Muy pronto...
           </div>
           <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" className="btn btn-primary">Save changes</button>
+            <button type="button" className="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" className="btn btn-primary">Guardar</button>
           </div>
         </div>
       </div>

@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import {AppContext} from "../AppContext";
 
-export default function Sidebar({isSidebarCompressed, toggleSidebar, logOut}) {
+export default function Sidebar({isSidebarCompressed, toggleSidebar}) {
   const [selectedMenu, setSelectedMenu] = React.useState(() => window.localStorage.getItem('Supervisor-SelectedMenu') || "")
+
+  const { logOut } = useContext(AppContext);
 
   React.useEffect(() =>{
       window.localStorage.setItem('Supervisor-SelectedMenu', selectedMenu)

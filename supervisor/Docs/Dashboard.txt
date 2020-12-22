@@ -17,13 +17,16 @@ Pensar esquema para cambio de "tema" (color de la topbar y algun icono marca) qu
 
 Agregar Spinning Wheel para todos los metodos asyncronicos. Especialmente el login que no muestra nada mientras carga.
 
+
+
+
+Done from last meeting:
+
 Borrar la modal y el menu de cambio de password.
 
 Grisar el menu de filtros globales que no lo vamos a usar por ahora.
 
 En todos los llamados a las APIs revisar el result.Code si es token invalido redirecciono al login.
-
-
 
 
 TODO :

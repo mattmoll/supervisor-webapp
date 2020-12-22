@@ -1,16 +1,16 @@
 import React from 'react'
-import axios from "axios";
 
-import {AppContext} from '../../AppContext';
 import * as chartsServicios from "./ChartsServicios";
+import useApi from "../../utils/APIHelper";
 
 export default function Servicios() {
   const [charts, setCharts] = React.useState([]);  
   const [stateServices, setStateServices] = React.useState({});
-  const {apiUrl, token} = React.useContext(AppContext);
+
+  const servicesAPI = useApi("/StateService")
 
   React.useEffect(() => {
-    loadState();
+    servicesAPI.makeRequest(onStateRetrieved);
 
     return () => {
       charts.forEach(chart => {
@@ -19,20 +19,9 @@ export default function Servicios() {
     };
   }, []);
 
-  const loadState = async () => {
-    await axios.get(apiUrl + "/StateService", {
-      headers: {
-        'token': token
-      }
-    }).then(result => {
-      const stateServicesFromAPI = result.data;
-      console.log("Test");
-      console.log(stateServicesFromAPI);
-      if(stateServicesFromAPI != null){
-        setStateServices(stateServicesFromAPI);
-        loadCharts(stateServicesFromAPI);
-      }
-    })
+  const onStateRetrieved = (stateServicesFromAPI) => {
+    setStateServices(stateServicesFromAPI);
+    loadCharts(stateServicesFromAPI);
   }
 
   const loadCharts = async (stateForCharts) => {
