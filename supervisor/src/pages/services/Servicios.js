@@ -2,40 +2,51 @@ import React from 'react'
 import axios from "axios";
 
 import {AppContext} from '../../AppContext';
-import { getStateServiciosFromAPI } from '../../utils/StateHelper';
 import * as chartsServicios from "./ChartsServicios";
 
 export default function Servicios() {
   const [charts, setCharts] = React.useState([]);  
-  const [stateServices, setStateServices] = React.useState(getStateServiciosFromAPI());
-  const {apiUrl} = React.useContext(AppContext);
+  const [stateServices, setStateServices] = React.useState({});
+  const {apiUrl, token} = React.useContext(AppContext);
 
   React.useEffect(() => {
-    getStateService();
-    setCharts([
-      chartsServicios.createClosedServicesChart("chartClosedServices", stateServices.cerradosPorEstado),
-      chartsServicios.createClosedPerColorChart("chartClosedPerColor", stateServices.cerradosPorColor),
-      chartsServicios.createDelayedPerStandardChart("chartDelayedPerHour", stateServices.demoradosPorEstandar),
-      chartsServicios.createResponseTimesPerColorChart("chartResponseTimesPerColor", stateServices.tiempoRtaPorColor),
-    ]);
-  
+    loadState();
+
     return () => {
       charts.forEach(chart => {
         if(chart) chart.dispose();
       });
     };
-
   }, []);
 
-  const getStateService = async () => {
-    const state = await axios.get(apiUrl + "/GetStateService", {
+  const loadState = async () => {
+    await axios.get(apiUrl + "/StateService", {
       headers: {
-        'token': 'f0b6W6plGE6kYvyyV/180g=='
+        'token': token
       }
-    });
-    return state;
+    }).then(result => {
+      const stateServicesFromAPI = result.data;
+      console.log("Test");
+      console.log(stateServicesFromAPI);
+      if(stateServicesFromAPI != null){
+        setStateServices(stateServicesFromAPI);
+        loadCharts(stateServicesFromAPI);
+      }
+    })
   }
 
+  const loadCharts = async (stateForCharts) => {
+    setCharts([
+      chartsServicios.createClosedServicesChart("chartClosedServices", stateForCharts.cerradosPorEstado),
+      chartsServicios.createClosedPerColorChart("chartClosedPerColor", stateForCharts.cerradosPorColor),
+      chartsServicios.createDelayedPerStandardChart("chartDelayedPerHour", stateForCharts.demoradosPorEstandar),
+      chartsServicios.createResponseTimesPerColorChart("chartResponseTimesPerColor", stateForCharts.tiempoRtaPorColor),
+    ]);
+  }
+
+  if(stateServices == null){
+    return <p>Loading Clients...</p>;
+  }
 
   return (
     <div id="content-container">

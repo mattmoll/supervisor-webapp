@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Sidebar({isSidebarCompressed, toggleSidebar}) {
+export default function Sidebar({isSidebarCompressed, toggleSidebar, logOut}) {
   const [selectedMenu, setSelectedMenu] = React.useState(() => window.localStorage.getItem('Supervisor-SelectedMenu') || "")
 
   React.useEffect(() =>{
@@ -56,7 +56,7 @@ export default function Sidebar({isSidebarCompressed, toggleSidebar}) {
           <i className="fas fa-ambulance"></i>{" "} 
           {showTitleIfNotCompressed("Operativos")}
         </a>
-        <a href="!#" className="nav-link">
+        <a href="/" className="nav-link" onClick={logOut}>
           <i className="fas fa-sign-out-alt"></i>{" "} 
           {showTitleIfNotCompressed("Cerrar Sesión")}
         </a>

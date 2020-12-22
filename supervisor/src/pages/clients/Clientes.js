@@ -1,7 +1,6 @@
 import React from 'react'
 import SummaryClientes from "./SummaryClientes";
 import {AppContext} from '../../AppContext';
-import {getStateClientesFromAPI} from "../../utils/StateHelper";
 import * as chartsClientes from "./ChartsClientes";
 import axios from "axios";
 
@@ -9,38 +8,41 @@ export default function Clientes() {
   const [charts, setCharts] = React.useState([]);  
   const [stateClients, setStateClients] = React.useState({});
 
-  const {apiUrl} = React.useContext(AppContext);
+  const {apiUrl, token} = React.useContext(AppContext);
 
   React.useEffect(() => {
-    loadCharts();
+    loadState();
   
     return () => {
       charts.forEach(chart => {
         if(chart) chart.dispose();
       });
     };
-
   }, []);
 
-  const loadCharts = async () => {
-    setStateClients(await getStateClient());
-    if (stateClients){
-      setCharts([
-        chartsClientes.createGroupsChart("chartGroups", stateClients.gruposFamiliares),
-        chartsClientes.createAreasChart("chartAreas", stateClients.areasProtegidas),
-        chartsClientes.createCovenantsChart("chartCovenants", stateClients.convenios),
-        chartsClientes.createServicesPerCovenantChart("chartServicesPerCovenant", stateClients.serviciosPorConvenio),
-      ]);
-    }
+  const loadState = async () => {
+    await axios.get(apiUrl + "/StateClient", {
+      headers: {
+        'token': token
+      }
+    }).then(result => {
+      const stateClientsFromAPI = result.data;
+      setStateClients(stateClientsFromAPI);
+      loadCharts(stateClientsFromAPI);
+    })
   }
 
-  const getStateClient = async () => {
-    const state = await axios.get(apiUrl + "/StateClient", {
-      headers: {
-        'token': 'bf0b6W6plGE6kYvyyV/180g=='
-      }
-    });
-    return state;
+  const loadCharts = async (stateForCharts) => {
+    setCharts([
+      chartsClientes.createGroupsChart("chartGroups", stateForCharts.gruposFamiliares),
+      chartsClientes.createAreasChart("chartAreas", stateForCharts.areasProtegidas),
+      chartsClientes.createCovenantsChart("chartCovenants", stateForCharts.convenios),
+      chartsClientes.createServicesPerCovenantChart("chartServicesPerCovenant", stateForCharts.serviciosPorConvenio),
+    ]);
+  }
+
+  if(stateClients == null){
+    return <p>Loading Clients...</p>;
   }
 
   return (

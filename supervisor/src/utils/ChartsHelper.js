@@ -2,6 +2,7 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import * as am4core from "@amcharts/amcharts4/core";
 
 export function createStandardBarChart(chartContainer, data, titleText, series){
+  if(data == null) return;
   let chart = am4core.create(chartContainer, am4charts.XYChart);
   addTitle(titleText, chart);
   chart.colors.list = [
@@ -12,8 +13,6 @@ export function createStandardBarChart(chartContainer, data, titleText, series){
   ]
   addLegend(chart);
 
-  console.log(data);
-  console.log(titleText);
   // Add category field and pass data.
   data["category"] = "Servicios";
   chart.data = [data]; 
@@ -48,6 +47,7 @@ export function createStandardBarChart(chartContainer, data, titleText, series){
 }
 
 export function createStackedBarChart(chartContainer, data, title, series){
+  if(data == null) return;
   let chart = am4core.create(chartContainer, am4charts.XYChart);
   addTitle(title, chart);
   chart.colors.list = [
@@ -97,6 +97,7 @@ export function createStackedBarChart(chartContainer, data, title, series){
 
 
 export function createLinesChart(chartContainer, data, titleText){
+  if(data == null) return;
   let chart = am4core.create(chartContainer, am4charts.XYChart);
   addTitle(titleText, chart);
   chart.colors.list = [
@@ -117,10 +118,11 @@ export function createLinesChart(chartContainer, data, titleText){
 
   const quantity = data[0].cantidadPorHora.length;
   let dates = [];
+  
   for(let i = 0 ; i < quantity; i++){
     let dateToAdd = new Date();
     dateToAdd.setHours(dateToAdd.getHours() - i);
-    dates.push(dateToAdd.getDate() + ' ' + dateToAdd.getHours());
+    dates.push(dateToAdd.getHours());
     
     dateAxis.data.unshift({
       date: dates[i]
