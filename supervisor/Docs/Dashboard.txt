@@ -29,6 +29,8 @@ Grisar el menu de filtros globales que no lo vamos a usar por ahora.
 En todos los llamados a las APIs revisar el result.Code si es token invalido redirecciono al login.
 
 
+
+
 TODO :
 
 Version 2.0:

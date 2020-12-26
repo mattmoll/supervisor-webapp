@@ -14,27 +14,36 @@ export default function Home() {
 
   const stateAPI = useApi("/State")
 
+  const recreateCharts = () => {
+    destroyCharts();
+    loadCharts(stateHome);
+  }
+
   React.useEffect(() => {
     stateAPI.makeRequest(onStateRetrieved);
 
     return () => {
-      charts.forEach(chart => {
-        if(chart) chart.dispose();
-      });
+      destroyCharts();
     };
   }, []);
+
+  const destroyCharts = () =>{
+    charts.forEach(chart => {
+      if(chart) chart.dispose();
+    });
+  }
 
   const onStateRetrieved = (stateFromAPI) => {
     setStateHome(stateFromAPI);
     loadCharts(stateFromAPI);
   }
 
-  const loadCharts = (stateForCharts) => {
+  const loadCharts = (stateFromAPI) => {
     setCharts([
-      chartsHome.createServicesChart("chartServices", stateForCharts.totalesPorEstadoServicio),
-      chartsHome.createMobilesChart("chartMobiles", stateForCharts.estadosPorTipoDeMovil),
-      chartsHome.createEmployeesServicesChart("chartEmployeesServices", stateForCharts.serviciosRecibidosDespachados),
-      chartsHome.createEmployeesServicesAveragesChart("chartEmployeesServicesAverages", stateForCharts.promediosServiciosRecibidosDespachados),
+      chartsHome.createServicesChart("chartServices", stateFromAPI.totalesPorEstadoServicio),
+      chartsHome.createMobilesChart("chartMobiles", stateFromAPI.estadosPorTipoDeMovil),
+      chartsHome.createEmployeesServicesChart("chartEmployeesServices", stateFromAPI.serviciosRecibidosDespachados),
+      chartsHome.createEmployeesServicesAveragesChart("chartEmployeesServicesAverages", stateFromAPI.promediosServiciosRecibidosDespachados),
     ]);
   }
   

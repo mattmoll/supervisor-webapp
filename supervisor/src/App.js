@@ -56,7 +56,7 @@ export default function App() {
             <Topbar toggleSidebar={toggleSidebar}></Topbar>
             <div id="full-container">
               <Sidebar isSidebarCompressed={isSidebarCompressed} toggleSidebar={toggleSidebar}></Sidebar>
-              <main>
+              <main id="main">
                 <Switch>
                   <Route exact path="/" component={Home}></Route>
                   <Route exact path="/clientes" component={Clientes}></Route>

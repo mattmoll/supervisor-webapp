@@ -5,6 +5,14 @@
   --topbar-height: 50px;
 
   --box-shadow-standard: 0 5px 10px rgba(0,0,0,0.10), 0 3px 3px rgba(0,0,0,0.15);
+
+  --topbar-color:#a1cbff;
+  --main-color:#f0f0f0;
+  --panel-color: white;
+  --sidebar-color:#2B3E4D;
+
+  --main-dark-color: #37373D;
+  --panel-dark-color: #1E1E1E;
 }
 
 /* Base Styles*/
@@ -104,7 +112,7 @@ body a{
   position:sticky;
   height:var(--topbar-height);
   width:100%;
-  background-color:#a1cbff;
+  background-color:var(--topbar-color);
   box-shadow: var(--box-shadow-standard);
   display:flex;
   z-index:100;
@@ -139,7 +147,7 @@ body a{
   width:220px;
   display: flex;
   flex-direction: column;
-  background-color:#FFFFFF;
+  background-color:var(--panel-color);
   border:rgba(0,0,0,0.1) 1px solid;
   border-top:none;
 }
@@ -223,7 +231,7 @@ body a{
 #sidebar{
   color:white;
   width:var(--sidebar-size);
-  background-color:#2B3E4D;
+  background-color:var(--sidebar-color);
   box-shadow: var(--box-shadow-standard);
   z-index:20;
   padding:50px 0px 0px 0px;
@@ -300,12 +308,16 @@ body a{
 /* Main Container */
 
 main{
-  background-color:#f0f0f0;
+  background-color:var(--main-color);
   width:100%;
   
   z-index:5;
   display:grid;
   grid-auto-rows: max-content;
+}
+
+main.dark-theme{
+  background-color:var(--main-dark-color);
 }
 
 #main-doc{
@@ -322,8 +334,14 @@ main{
 }
 
 .panel{
-  background-color:white;
+  background-color:var(--panel-color);
   box-shadow: var(--box-shadow-standard);
+  color: black;
+}
+
+.panel.dark-theme{
+  background-color:var(--panel-dark-color);
+  color:white;
 }
 
 .summary{
