@@ -18,6 +18,7 @@ export default function App() {
   }}); 
   const [isSidebarCompressed, setIsSidebarCompressed] = React.useState(() => window.localStorage.getItem("Supervisor-IsSidebarCompressed") == "true" || false)
   const [sessionExpired, setSessionExpired] = React.useState(false);
+  const [themeToggle, setThemeToggle] = React.useState(false);
 
   React.useEffect(() =>{
       window.localStorage.setItem("Supervisor-IsSidebarCompressed", isSidebarCompressed)
@@ -43,10 +44,14 @@ export default function App() {
     setSessionInfo({ user, token });
   }
 
+  const themeChangedNeedsHandling = () => {
+    setThemeToggle(!themeToggle);
+  }
+
   const apiUrl = "http://192.168.222.4:7881/SuWebApi";
 
   return (
-    <AppContext.Provider value={{sessionInfo, logOut, setSessionExpired, apiUrl}}>
+    <AppContext.Provider value={{sessionInfo, logOut, setSessionExpired, apiUrl, themeToggle, themeChangedNeedsHandling}}>
       <Router>
         { 
           !sessionInfo.user ? 

@@ -13,6 +13,10 @@ export function darkMode(){
   am4core.useTheme(am4themes_dark);
 }
 
+export function lightMode(){
+  am4core.unuseTheme(am4themes_dark);
+}
+
 export function createServicesChart(chartContainer, data){
   let series = [{code:"activos", title:"Activos"},
                 {code:"demorados", title:"Demorados"},

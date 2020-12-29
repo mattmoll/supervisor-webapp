@@ -7,7 +7,7 @@ export default function UserPanel() {
 
   const [isDarkTheme,setIsDarkTheme] = React.useState(false);
 
-  const {sessionInfo, logOut} = useContext(AppContext);
+  const {sessionInfo, logOut, themeChangedNeedsHandling} = useContext(AppContext);
 
   const toggleTheme = (e) => {
 
@@ -23,8 +23,11 @@ export default function UserPanel() {
 
       let panels = [...document.getElementsByClassName("panel")];
       panels.forEach(panel => panel.classList.remove("dark-theme"));
+
+      chartsHome.lightMode();
     }
-    
+
+    themeChangedNeedsHandling();
     setIsDarkTheme(!isDarkTheme);
   };
 

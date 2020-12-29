@@ -4,6 +4,7 @@ import SummaryHome from "./SummaryHome";
 import * as chartsHome from "./ChartsHome";
 import ServicesTable from "./ServicesTable";
 import useApi from "../../utils/APIHelper";
+import {AppContext} from "../../AppContext";
 
 
 chartsHome.initializeChartsLibrary();
@@ -14,18 +15,21 @@ export default function Home() {
 
   const stateAPI = useApi("/State")
 
-  const recreateCharts = () => {
-    destroyCharts();
-    loadCharts(stateHome);
-  }
+  const {themeToggle} = React.useContext(AppContext);
+
 
   React.useEffect(() => {
-    stateAPI.makeRequest(onStateRetrieved);
+    if(stateHome == undefined){
+      stateAPI.makeRequest(onStateRetrieved);
+    }
+    else{
+      recreateCharts(stateHome);
+    }
 
     return () => {
       destroyCharts();
     };
-  }, []);
+  }, [themeToggle]);
 
   const destroyCharts = () =>{
     charts.forEach(chart => {
@@ -46,7 +50,11 @@ export default function Home() {
       chartsHome.createEmployeesServicesAveragesChart("chartEmployeesServicesAverages", stateFromAPI.promediosServiciosRecibidosDespachados),
     ]);
   }
-  
+
+  const recreateCharts = (state) => {
+    destroyCharts();
+    loadCharts(state);
+  }
   
   if(stateHome == null){
     return <p>Loading Home...</p>;
