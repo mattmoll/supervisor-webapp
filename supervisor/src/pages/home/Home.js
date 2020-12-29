@@ -5,13 +5,13 @@ import * as chartsHome from "./ChartsHome";
 import ServicesTable from "./ServicesTable";
 import useApi from "../../utils/APIHelper";
 import {AppContext} from "../../AppContext";
-
+import {getStateFromAPI} from "../../utils/StateHelper"; 
 
 chartsHome.initializeChartsLibrary();
 
 export default function Home() {
   const [charts, setCharts] = React.useState([]);  
-  const [stateHome, setStateHome] = React.useState();
+  const [stateHome, setStateHome] = React.useState(getStateFromAPI());
 
   const stateAPI = useApi("/State")
 

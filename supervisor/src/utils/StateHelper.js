@@ -103,10 +103,14 @@ export function getStateFromAPI(){
         type: "Receptor",
         tomados: 20,
         cancelados: 5,
+        enCurso: 0,
+        cerrados: 0
       }, {
         type: "Despachador",
-        tomados: 11,
-        cancelados: 2,
+        tomados: 0,
+        cancelados: 0,
+        enCurso: 11,
+        cerrados: 2
       },
     ],
     promediosServiciosRecibidosDespachados: {

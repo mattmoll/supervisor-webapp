@@ -28,10 +28,48 @@ Grisar el menu de filtros globales que no lo vamos a usar por ahora.
 
 En todos los llamados a las APIs revisar el result.Code si es token invalido redirecciono al login.
 
+Agregado dark theme
+
+- Cambiar chart del home Servicios Operadores.
+En vez de recibir 2 dimensiones, voy a recibir 4.
+Tomados, Cancelados, En Curso y Cerrados.
 
 
 
 TODO :
+
+
+- Apply dark theme working to all tabs.
+- Save dark theme config in local storage.
+
+- Refactorizar ServicesTable, quitar arrays hardcoded. Tengo que tomar la lista de colores de la API. Matchear el array de 
+color hexa por posicion con el nombre del sub zero.
+
+- Revisar tema de primer login que no carga. No esta navegando la URL necesaria. Cuando hace bien el login tengo que redireccionar
+
+- Revisar tema de inicio  
+
+
+- Operativos:
+https://www.amcharts.com/demos/gantt-chart/
+
+2 charts verticales largos de tipo gantt.
+
+Eje x 24 hrs, en el eje Y son descripciones de moviles, variable.
+Nota: Revisar si me deja fijar el rango de fechas para el eje x.
+
+El primero es servicios por movil.
+
+El segundo es servicios por prestador.
+
+En la api vienen los colores. Ver el ejemplo de cada punto del gantt en la demo.
+
+
+
+
+
+
+
 
 Version 2.0:
 revisar integracion con MQTT para react:

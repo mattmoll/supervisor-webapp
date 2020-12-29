@@ -38,7 +38,7 @@ export default function UserPanel() {
       <div>
         <div className="settings-item">
           <i className="fas fa-user mr-2"></i> Usuario:
-          <div className="setting-value ml-2">{sessionInfo.username}</div>
+          <div className="setting-value ml-2">{sessionInfo.user}</div>
         </div>
         <div className="settings-item">
           <i className="fas fa-filter mr-2"></i> Filtros:

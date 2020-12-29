@@ -53,6 +53,8 @@ export function createStackedBarChart(chartContainer, data, title, series){
   chart.colors.list = [
     am4core.color("#67DC75"),
     am4core.color("#DC6967"),
+    am4core.color("#67DCC5"),
+    am4core.color("#DC8C67"),
   ]
   addLegend(chart);
   chart.data = data;

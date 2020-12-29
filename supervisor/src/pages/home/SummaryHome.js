@@ -16,10 +16,10 @@ export default function SummaryHome({summary}) {
           ]}
         />
         <SummaryPanel
-          category={{ title: "Móviles", icon: "fas fa-ambulance fa-3x" }}
+          category={{ title: "Recursos", icon: "fas fa-ambulance fa-3x" }}
           items={[
             { key: "Activos", value: moviles.activos },
-            { key: "Fuera Serv.", value: moviles.fueraServicio },
+            { key: "Inactivos", value: moviles.fueraServicio },
           ]}
         />
         <SummaryPanel

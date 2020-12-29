@@ -40,6 +40,8 @@ export function createEmployeesServicesChart(chartContainer, data){
   chart.colors.list = [
     am4core.color("#67DC75"),
     am4core.color("#DC6967"),
+    am4core.color("#67DCC5"),
+    am4core.color("#DC8C67"),
   ]
   chartHelper.addLegend(chart);
   chart.data = data;
@@ -79,6 +81,8 @@ export function createEmployeesServicesChart(chartContainer, data){
 
   createSeries("tomados", "Tomados");
   createSeries("cancelados", "Cancelados");
+  createSeries("enCurso", "En Curso");
+  createSeries("cerrados", "Cerrados");
 
   return chart;
 }
