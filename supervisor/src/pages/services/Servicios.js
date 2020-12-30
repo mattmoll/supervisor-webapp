@@ -2,6 +2,7 @@ import React from 'react'
 
 import * as chartsServicios from "./ChartsServicios";
 import useApi from "../../utils/APIHelper";
+import {AppContext} from "../../AppContext";
 
 export default function Servicios() {
   const [charts, setCharts] = React.useState([]);  
@@ -9,15 +10,21 @@ export default function Servicios() {
 
   const servicesAPI = useApi("/StateService")
 
-  React.useEffect(() => {
-    servicesAPI.makeRequest(onStateRetrieved);
+  const {themeToggle} = React.useContext(AppContext);
 
+
+  React.useEffect(() => {
+    if(stateServices == undefined){
+      servicesAPI.makeRequest(onStateRetrieved);
+    }
+    else{
+      recreateCharts(stateServices);
+    }
+  
     return () => {
-      charts.forEach(chart => {
-        if(chart) chart.dispose();
-      });
+      destroyCharts();
     };
-  }, []);
+  }, [themeToggle]);
 
   const onStateRetrieved = (stateServicesFromAPI) => {
     setStateServices(stateServicesFromAPI);
@@ -31,6 +38,17 @@ export default function Servicios() {
       chartsServicios.createDelayedPerStandardChart("chartDelayedPerHour", stateForCharts.demoradosPorEstandar),
       chartsServicios.createResponseTimesPerColorChart("chartResponseTimesPerColor", stateForCharts.tiempoRtaPorColor),
     ]);
+  }
+
+  const destroyCharts = () =>{
+    charts.forEach(chart => {
+      if(chart) chart.dispose();
+    });
+  }
+
+  const recreateCharts = (state) => {
+    destroyCharts();
+    loadCharts(state);
   }
 
   if(stateServices == null){

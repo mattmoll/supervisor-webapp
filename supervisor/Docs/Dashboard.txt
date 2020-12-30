@@ -49,6 +49,8 @@ color hexa por posicion con el nombre del sub zero.
 
 - Revisar tema de inicio  
 
+- Refactor: Crear un hook para useCharts() que devuelva las funciones necesarias dado un array. Esto evita la repeticion de codigo en las 4 paginas.
+
 
 - Operativos:
 https://www.amcharts.com/demos/gantt-chart/
