@@ -2,22 +2,28 @@ import React from 'react'
 import SummaryClientes from "./SummaryClientes";
 import * as chartsClientes from "./ChartsClientes";
 import useApi from "../../utils/APIHelper";
+import {AppContext} from "../../AppContext";
 
 export default function Clientes() {
   const [charts, setCharts] = React.useState([]);  
-  const [stateClients, setStateClients] = React.useState({});
+  const [stateClients, setStateClients] = React.useState();
 
   const clientAPI = useApi("/StateClient")
 
+  const {themeToggle} = React.useContext(AppContext);
+
   React.useEffect(() => {
-    clientAPI.makeRequest(onStateRetrieved);
+    if(stateClients == undefined){
+      clientAPI.makeRequest(onStateRetrieved);
+    }
+    else{
+      recreateCharts(stateClients);
+    }
   
     return () => {
-      charts.forEach(chart => {
-        if(chart) chart.dispose();
-      });
+      destroyCharts();
     };
-  }, []);
+  }, [themeToggle]);
 
   const onStateRetrieved = (stateClientsFromAPI) => {
     setStateClients(stateClientsFromAPI);
@@ -31,6 +37,17 @@ export default function Clientes() {
       chartsClientes.createCovenantsChart("chartCovenants", stateForCharts.convenios),
       chartsClientes.createServicesPerCovenantChart("chartServicesPerCovenant", stateForCharts.serviciosPorConvenio),
     ]);
+  }
+
+  const destroyCharts = () =>{
+    charts.forEach(chart => {
+      if(chart) chart.dispose();
+    });
+  }
+
+  const recreateCharts = (state) => {
+    destroyCharts();
+    loadCharts(state);
   }
 
   if(stateClients == null){

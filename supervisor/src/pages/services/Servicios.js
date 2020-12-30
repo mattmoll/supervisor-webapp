@@ -5,7 +5,7 @@ import useApi from "../../utils/APIHelper";
 
 export default function Servicios() {
   const [charts, setCharts] = React.useState([]);  
-  const [stateServices, setStateServices] = React.useState({});
+  const [stateServices, setStateServices] = React.useState();
 
   const servicesAPI = useApi("/StateService")
 
