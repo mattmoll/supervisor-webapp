@@ -101,7 +101,9 @@ export function createStackedBarChart(chartContainer, data, title, series){
 
 export function createLinesChart(chartContainer, data, titleText){
   if(data == null) return;
+
   let chart = am4core.create(chartContainer, am4charts.XYChart);
+  
   addTitle(titleText, chart);
   chart.colors.list = [
     am4core.color("#67DC75"),
@@ -249,3 +251,4 @@ export function addTitle(titleText, chart){
 export function addStandardTooltip(series){
   series.columns.template.tooltipText = "[bold]{name}[/]\n[font-size:14px]{categoryX}: {valueY}";
 }
+

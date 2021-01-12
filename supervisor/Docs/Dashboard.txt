@@ -22,25 +22,13 @@ Agregar Spinning Wheel para todos los metodos asyncronicos. Especialmente el log
 
 Done from last meeting:
 
-Borrar la modal y el menu de cambio de password.
+- Apply dark theme working to all tabs.
+- Save dark theme config in local storage.
 
-Grisar el menu de filtros globales que no lo vamos a usar por ahora.
-
-En todos los llamados a las APIs revisar el result.Code si es token invalido redirecciono al login.
-
-Agregado dark theme
-
-- Cambiar chart del home Servicios Operadores.
-En vez de recibir 2 dimensiones, voy a recibir 4.
-Tomados, Cancelados, En Curso y Cerrados.
 
 
 
 TODO :
-
-
-- Apply dark theme working to all tabs.
-- Save dark theme config in local storage.
 
 - Refactorizar ServicesTable, quitar arrays hardcoded. Tengo que tomar la lista de colores de la API. Matchear el array de 
 color hexa por posicion con el nombre del sub zero.
