@@ -1,34 +1,12 @@
 import React, { useContext } from "react";
 import {AppContext} from "../AppContext";
 
-import * as chartsHome from "../pages/home/ChartsHome";
-
 export default function UserPanel() {
 
-  const [isDarkTheme,setIsDarkTheme] = React.useState(false);
-
-  const {sessionInfo, logOut, themeChangedNeedsHandling} = useContext(AppContext);
+  const {sessionInfo, logOut, isDarkThemeEnabled, themeChangedNeedsHandling} = useContext(AppContext);
 
   const toggleTheme = (e) => {
-
-    if(!isDarkTheme){
-      document.getElementById("main").classList.add("dark-theme");
-      let panels = [...document.getElementsByClassName("panel")];
-
-      panels.forEach(panel => panel.classList.add("dark-theme"));
-  
-      chartsHome.darkMode();
-    } else {
-      document.getElementById("main").classList.remove("dark-theme");
-
-      let panels = [...document.getElementsByClassName("panel")];
-      panels.forEach(panel => panel.classList.remove("dark-theme"));
-
-      chartsHome.lightMode();
-    }
-
     themeChangedNeedsHandling();
-    setIsDarkTheme(!isDarkTheme);
   };
 
   return (
@@ -55,7 +33,7 @@ export default function UserPanel() {
           <i className="fas fa-adjust mr-2"></i> Tema Oscuro:
           <div className="setting-value ml-2">
             <label className="switch">
-              <input type="checkbox" onClick={toggleTheme}/>
+              <input type="checkbox" onChange={toggleTheme} checked={isDarkThemeEnabled}/>
               <span className="slider round"></span>
             </label>
           </div>

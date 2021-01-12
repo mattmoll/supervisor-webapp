@@ -1,13 +1,15 @@
 import React from "react";
 
+import ContentPanel from "../../layout/ContentPanel";
 import SummaryHome from "./SummaryHome";
 import * as chartsHome from "./ChartsHome";
 import ServicesTable from "./ServicesTable";
 import useApi from "../../utils/APIHelper";
 import {AppContext} from "../../AppContext";
 import {getStateFromAPI} from "../../utils/StateHelper"; 
+import {initializeTheme} from "../../utils/ThemeHelper";
 
-chartsHome.initializeChartsLibrary();
+initializeTheme();
 
 export default function Home() {
   const [charts, setCharts] = React.useState([]);  
@@ -16,7 +18,6 @@ export default function Home() {
   const stateAPI = useApi("/State")
 
   const {themeToggle} = React.useContext(AppContext);
-
 
   React.useEffect(() => {
     if(stateHome == undefined){
@@ -66,25 +67,25 @@ export default function Home() {
 
       <div id="content-container">
         
-        <div className="panel content">
+        <ContentPanel>
           <div id="chartServices" className="chart"></div>
-        </div>
+        </ContentPanel>
 
-        <div className="panel content">
+        <ContentPanel>
           <div id="chartMobiles" className="chart"></div>
-        </div>
+        </ContentPanel>
 
-        <div className="panel content">
+        <ContentPanel>
           <div id="chartEmployeesServices" className="chart"></div>
-        </div>
+        </ContentPanel>
         
-        <div className="panel content">
+        <ContentPanel>
           <div id="chartEmployeesServicesAverages" className="chart"></div>
-        </div>
+        </ContentPanel>
 
-        <div className="panel content">
+        <ContentPanel>
           <ServicesTable servicesPerStatusAndColor={stateHome.serviciosPorEstadoYColor}/>
-        </div>
+        </ContentPanel>
 
       </div>
     </div>

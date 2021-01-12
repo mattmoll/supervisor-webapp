@@ -1,9 +1,10 @@
 import React from "react";
+import {AppContext} from "../AppContext";
 
 export default function SummaryPanel({ category, items }) {
-
+  const {isDarkThemeEnabled} = React.useContext(AppContext);
   return (
-    <div className="panel summary">
+    <div className={`panel summary ${isDarkThemeEnabled ? "dark-theme" : ""}`}>
       <div className="summary-panel-title">
         <h4>{category.title}</h4>
         <i className={category.icon}></i>

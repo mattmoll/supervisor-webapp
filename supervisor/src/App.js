@@ -10,22 +10,29 @@ import Clientes from "./pages/clients/Clientes";
 import Servicios from "./pages/services/Servicios";
 import Moviles from "./pages/vehicles/Moviles";
 import Login from "./pages/login/Login"
+import * as ThemeHelper from "./utils/ThemeHelper";
 
 export default function App() {
   const [sessionInfo, setSessionInfo] = React.useState( () => { return {
     user: window.localStorage.getItem("Supervisor-User") || "",
     token: window.localStorage.getItem("Supervisor-Token")  || ""
   }}); 
+  const [isDarkThemeEnabled, setIsDarkThemeEnabled] = React.useState(() => window.localStorage.getItem("Supervisor-IsDarkThemeEnabled") == "true" || false);
   const [isSidebarCompressed, setIsSidebarCompressed] = React.useState(() => window.localStorage.getItem("Supervisor-IsSidebarCompressed") == "true" || false)
   const [sessionExpired, setSessionExpired] = React.useState(false);
   const [themeToggle, setThemeToggle] = React.useState(false);
 
   React.useEffect(() =>{
-      window.localStorage.setItem("Supervisor-IsSidebarCompressed", isSidebarCompressed)
       window.localStorage.setItem("Supervisor-User", sessionInfo.user)
       window.localStorage.setItem("Supervisor-Token", sessionInfo.token)
+      window.localStorage.setItem("Supervisor-IsDarkThemeEnabled", isDarkThemeEnabled)
+      window.localStorage.setItem("Supervisor-IsSidebarCompressed", isSidebarCompressed)
+
+      ThemeHelper.updateVisualTheme(isDarkThemeEnabled);
+      notifyComponentsThemeToggled();
+      
     },
-    [isSidebarCompressed, sessionInfo]
+    [sessionInfo, isDarkThemeEnabled, isSidebarCompressed]
   );
 
   const toggleSidebar = (e) => {
@@ -45,13 +52,17 @@ export default function App() {
   }
 
   const themeChangedNeedsHandling = () => {
+    setIsDarkThemeEnabled(!isDarkThemeEnabled);
+  }
+
+  const notifyComponentsThemeToggled = () => {
     setThemeToggle(!themeToggle);
   }
 
   const apiUrl = "http://192.168.222.4:7881/SuWebApi";
 
   return (
-    <AppContext.Provider value={{sessionInfo, logOut, setSessionExpired, apiUrl, themeToggle, themeChangedNeedsHandling}}>
+    <AppContext.Provider value={{sessionInfo, logOut, setSessionExpired, apiUrl, themeToggle, isDarkThemeEnabled, themeChangedNeedsHandling}}>
       <Router>
         { 
           !sessionInfo.user ? 
@@ -61,7 +72,7 @@ export default function App() {
             <Topbar toggleSidebar={toggleSidebar}></Topbar>
             <div id="full-container">
               <Sidebar isSidebarCompressed={isSidebarCompressed} toggleSidebar={toggleSidebar}></Sidebar>
-              <main id="main">
+              <main id="main" className={`${isDarkThemeEnabled ? "dark-theme" : ""}`}>
                 <Switch>
                   <Route exact path="/" component={Home}></Route>
                   <Route exact path="/clientes" component={Clientes}></Route>

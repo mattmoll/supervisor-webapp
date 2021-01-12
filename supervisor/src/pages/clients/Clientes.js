@@ -1,8 +1,12 @@
 import React from 'react'
 import SummaryClientes from "./SummaryClientes";
+import ContentPanel from "../../layout/ContentPanel";
 import * as chartsClientes from "./ChartsClientes";
 import useApi from "../../utils/APIHelper";
 import {AppContext} from "../../AppContext";
+import {initializeTheme} from "../../utils/ThemeHelper";
+
+initializeTheme();
 
 export default function Clientes() {
   const [charts, setCharts] = React.useState([]);  
@@ -56,23 +60,28 @@ export default function Clientes() {
 
   return (
     <div>
-      <div>
-        <SummaryClientes summary={stateClients.resumen}/>
-      </div>
 
-      <div id="content-container">    
-        <div className="panel content">
+      <SummaryClientes summary={stateClients.resumen}/>
+
+
+      <div id="content-container">   
+
+        <ContentPanel>
           <div id="chartGroups" className="chart"></div>
-        </div>
-        <div className="panel content">
-          <div id="chartAreas" className="chart"></div>
-        </div>
-        <div className="panel content">
-          <div id="chartCovenants" className="chart"></div>
-        </div>
-        <div className="panel content">
-          <div id="chartServicesPerCovenant" className="chart"></div>
-        </div>
+        </ContentPanel>
+
+        <ContentPanel>
+        <div id="chartAreas" className="chart"></div>
+        </ContentPanel>
+
+        <ContentPanel>
+        <div id="chartCovenants" className="chart"></div>
+        </ContentPanel>
+
+        <ContentPanel>
+        <div id="chartServicesPerCovenant" className="chart"></div>
+        </ContentPanel>
+
       </div>
     </div>
   )

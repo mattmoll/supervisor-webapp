@@ -1,6 +1,7 @@
 import * as am4charts from "@amcharts/amcharts4/charts";
 import * as am4core from "@amcharts/amcharts4/core";
 
+
 export function createStandardBarChart(chartContainer, data, titleText, series){
   if(data == null) return;
   let chart = am4core.create(chartContainer, am4charts.XYChart);

@@ -1,8 +1,12 @@
 import React from 'react'
 
+import ContentPanel from "../../layout/ContentPanel";
 import * as chartsServicios from "./ChartsServicios";
 import useApi from "../../utils/APIHelper";
 import {AppContext} from "../../AppContext";
+import {initializeTheme} from "../../utils/ThemeHelper";
+
+initializeTheme();
 
 export default function Servicios() {
   const [charts, setCharts] = React.useState([]);  
@@ -58,21 +62,21 @@ export default function Servicios() {
   return (
     <div id="content-container">
                 
-      <div className="panel content">
+      <ContentPanel>
         <div id="chartClosedServices" className="chart pr-3"></div>
-      </div>
+      </ContentPanel>
 
-      <div className="panel content">
+      <ContentPanel>
         <div id="chartClosedPerColor" className="chart pr-3"></div>
-      </div>
+      </ContentPanel>
 
-      <div className="panel content">
+      <ContentPanel>
         <div id="chartDelayedPerHour" className="chart pr-3"></div>
-      </div>
+      </ContentPanel>
 
-      <div className="panel content">
+      <ContentPanel>
         <div id="chartResponseTimesPerColor" className="chart pr-3"></div>
-      </div>
+      </ContentPanel>
     
   </div>
   )
