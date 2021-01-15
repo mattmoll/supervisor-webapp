@@ -54,13 +54,19 @@ export default function Mobiles() {
     loadCharts(state);
   }
 
-  if(stateMobiles == null){
-    return <p>Loading Móviles...</p>;
-  }
+  // if(stateMobiles == null){
+  //   return <p>Loading Móviles...</p>;
+  // }
 
   return (
-    <div>
-      <h1>Móviles</h1>
+    <div id="content-container">    
+      <ContentPanel isVerticalPanel={true}>
+        <div id="chartServicesPerMobile" className="chart pr-3"></div>
+      </ContentPanel>
+
+      <ContentPanel isVerticalPanel={true}>
+        <div id="chartServicesPerVendor" className="chart pr-3"></div>
+      </ContentPanel>
     </div>
   );
 }

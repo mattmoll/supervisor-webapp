@@ -387,6 +387,10 @@ main.dark-theme{
   padding:50px;
 }
 
+.vertical-content{
+  height: 90vh !important;
+}
+
 .info-item{
   margin: 0;
   font-size: 1.2em;
