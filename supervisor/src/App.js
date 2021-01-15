@@ -6,9 +6,9 @@ import Topbar from "./layout/Topbar";
 import Sidebar from "./layout/Sidebar";
 import FiltersModal from "./settings/FiltersModal";
 import Home from "./pages/home/Home";
-import Clientes from "./pages/clients/Clientes";
-import Servicios from "./pages/services/Servicios";
-import Moviles from "./pages/vehicles/Moviles";
+import Clientes from "./pages/clients/Clients";
+import Services from "./pages/services/Services";
+import Mobiles from "./pages/vehicles/Mobiles";
 import Login from "./pages/login/Login"
 import * as ThemeHelper from "./utils/ThemeHelper";
 
@@ -76,8 +76,8 @@ export default function App() {
                 <Switch>
                   <Route exact path="/" component={Home}></Route>
                   <Route exact path="/clientes" component={Clientes}></Route>
-                  <Route exact path="/servicios" component={Servicios}></Route>
-                  <Route exact path="/moviles" component={Moviles}></Route>
+                  <Route exact path="/servicios" component={Services}></Route>
+                  <Route exact path="/moviles" component={Mobiles}></Route>
                 </Switch>
               </main>
             </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import SummaryClientes from "./SummaryClientes";
 import ContentPanel from "../../layout/ContentPanel";
-import * as chartsClientes from "./ChartsClientes";
+import * as chartsClientes from "./ChartsClients";
 import useApi from "../../utils/APIHelper";
 import {AppContext} from "../../AppContext";
 import {initializeTheme} from "../../utils/ThemeHelper";
@@ -55,14 +55,12 @@ export default function Clientes() {
   }
 
   if(stateClients == null){
-    return <p>Loading Clients...</p>;
+    return <p>Loading Clientes...</p>;
   }
 
   return (
     <div>
-
       <SummaryClientes summary={stateClients.resumen}/>
-
 
       <div id="content-container">   
 

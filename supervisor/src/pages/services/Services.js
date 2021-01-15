@@ -1,14 +1,14 @@
 import React from 'react'
 
 import ContentPanel from "../../layout/ContentPanel";
-import * as chartsServicios from "./ChartsServicios";
+import * as chartsServicios from "./ChartsServices";
 import useApi from "../../utils/APIHelper";
 import {AppContext} from "../../AppContext";
 import {initializeTheme} from "../../utils/ThemeHelper";
 
 initializeTheme();
 
-export default function Servicios() {
+export default function Services() {
   const [charts, setCharts] = React.useState([]);  
   const [stateServices, setStateServices] = React.useState();
 
@@ -56,7 +56,7 @@ export default function Servicios() {
   }
 
   if(stateServices == null){
-    return <p>Loading Clients...</p>;
+    return <p>Loading Servicios...</p>;
   }
 
   return (
