@@ -13,7 +13,6 @@ export function lightMode(){
 export function initializeTheme(){
   am4core.useTheme(am4themes_animated);
   let isDarkThemeEnabled = window.localStorage.getItem("Supervisor-IsDarkThemeEnabled");
-  console.log(isDarkThemeEnabled);
   if(isDarkThemeEnabled){
     darkMode();
   }else{
