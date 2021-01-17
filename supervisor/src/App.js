@@ -25,15 +25,18 @@ export default function App() {
   React.useEffect(() =>{
       window.localStorage.setItem("Supervisor-User", sessionInfo.user)
       window.localStorage.setItem("Supervisor-Token", sessionInfo.token)
-      window.localStorage.setItem("Supervisor-IsDarkThemeEnabled", isDarkThemeEnabled)
       window.localStorage.setItem("Supervisor-IsSidebarCompressed", isSidebarCompressed)
-
-      ThemeHelper.updateVisualTheme(isDarkThemeEnabled);
-      notifyComponentsThemeToggled();
-      
     },
-    [sessionInfo, isDarkThemeEnabled, isSidebarCompressed]
+    [sessionInfo, isSidebarCompressed]
   );
+
+  React.useEffect(() =>{
+    window.localStorage.setItem("Supervisor-IsDarkThemeEnabled", isDarkThemeEnabled)
+    ThemeHelper.updateVisualTheme(isDarkThemeEnabled);
+    notifyComponentsThemeToggled();
+  },
+  [isDarkThemeEnabled]
+);
 
   const toggleSidebar = (e) => {
     e.preventDefault();

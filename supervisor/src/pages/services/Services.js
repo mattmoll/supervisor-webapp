@@ -47,6 +47,7 @@ export default function Services() {
   const destroyCharts = () =>{
     charts.forEach(chart => {
       if(chart) chart.dispose();
+      console.log("test");
     });
   }
 

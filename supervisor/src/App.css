@@ -472,10 +472,9 @@ th a {
   #summary-container{
     grid-template-columns: 300px;
     justify-content: space-evenly;
-    font-size: 10px;
   }
   .content{
-    width: 350px;
+    width: 400px;
     height: 400px;
   }
   .content h4{
@@ -486,11 +485,10 @@ th a {
     font-size: 12px;
   }
   .summary{
-    width: 250px;
+    width: 350px;
   }
-  h4{
-    font-size: 15px;
-  }
+  
+
 
 
 }
