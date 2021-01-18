@@ -18,6 +18,7 @@ export default function Mobiles() {
 
   React.useEffect(() => {
     if(stateMobiles == undefined){
+      loadCharts(null);
       //servicesAPI.makeRequest(onStateRetrieved);
     }
     else{
@@ -36,8 +37,9 @@ export default function Mobiles() {
 
   const loadCharts = async (stateForCharts) => {
     setCharts([
-      /*
-      chartsServicios.createClosedServicesChart("chartClosedServices", stateForCharts.cerradosPorEstado),
+
+      chartsMobiles.createServicesPerMobile("chartServicesPerMobile", null),
+            /*
       chartsServicios.createClosedPerColorChart("chartClosedPerColor", stateForCharts.cerradosPorColor),
       */
     ]);

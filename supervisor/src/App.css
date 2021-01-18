@@ -488,12 +488,24 @@ th a {
     width: 350px;
   }
 
+  #menu-btn{
+    margin-left: 20px;
+  }
+
+  #action-bar{
+    margin-right: 20px;
+  }
+
 }
 
 @media (max-width: 400px){
   .content{
     width: 300px;
     height: 400px;
+  }
+
+  .summary{
+    width: 300px;
   }
 }
 

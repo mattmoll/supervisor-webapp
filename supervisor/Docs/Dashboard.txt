@@ -55,8 +55,28 @@ El segundo es servicios por prestador.
 En la api vienen los colores. Ver el ejemplo de cada punto del gantt en la demo.
 
 
-
-
+StateMobiles
+Respetando todo tal cual los pedidos de clients y services.
+El formato del json esperado es este:
+"
+serviciosPorMovil: [
+    {
+      "movil": "UTIM 1",
+      "fromDate": "2021-01-01 08:00",
+      "toDate": "2021-01-01 10:00",
+      "color": "#FFC"
+    },
+    ...
+],
+serviciosPorPrestador:[
+    {
+      "prestador": "AYUDA MEDICA",
+      "fromDate": "2021-01-01 08:00",
+      "toDate": "2021-01-01 10:00",
+      "color": "#FFC"
+    },
+    ...
+],
 
 
 

@@ -225,11 +225,146 @@ export function createLinesChartWithScrollAndZoom(chartContainer, data, titleTex
   }
 
   data.serviciosPorEstado.forEach(serviciosPorEstado => createSeries(dates, serviciosPorEstado.cantidadPorHora));
-  
 
   return chart;
 }
 
+
+export function createGanttChart(chartContainer, data, titleText, series){
+  var chart = am4core.create(chartContainer, am4charts.XYChart);
+  addTitle(titleText, chart);
+  chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+  chart.paddingRight = 30;
+  chart.dateFormatter.inputDateFormat = "yyyy-MM-dd HH:mm";
+
+  var colorSet = new am4core.ColorSet();
+  colorSet.saturation = 0.4;
+
+  chart.data = [
+    {
+      movil: "UTIM 1",
+      fromDate: "2021-01-01 08:00",
+      toDate: "2021-01-01 10:00",
+      color: "#FFC"
+    },
+    {
+      movil: "UTIM 1",
+      fromDate: "2021-01-01 10:00",
+      toDate: "2021-01-01 12:00",
+      color: "#FFD"
+    },
+    {
+      movil: "UTIM 1",
+      fromDate: "2021-01-01 18:00",
+      toDate: "2021-01-01 20:00",
+      color: "#DDD"
+    },
+    {
+      movil: "Movil 4",
+      fromDate: "2021-01-01 12:00",
+      toDate: "2021-01-01 15:00",
+      color: colorSet.getIndex(0).brighten(0.4)
+    },
+    {
+      movil: "Movil 2",
+      fromDate: "2021-01-01 15:30",
+      toDate: "2021-01-01 21:30",
+      color: colorSet.getIndex(0).brighten(0.8)
+    },
+
+    {
+      movil: "UTIM 3",
+      fromDate: "2021-01-01 09:00",
+      toDate: "2021-01-01 12:00",
+      color: colorSet.getIndex(2).brighten(0)
+    },
+    {
+      movil: "UTIM Sprint",
+      fromDate: "2021-01-01 13:00",
+      toDate: "2021-01-01 17:00",
+      color: colorSet.getIndex(2).brighten(0.4)
+    },
+
+    {
+      movil: "Movil VW",
+      fromDate: "2021-01-01 11:00",
+      toDate: "2021-01-01 16:00",
+      color: colorSet.getIndex(4).brighten(0)
+    },
+    {
+      movil: "Ambulancia",
+      fromDate: "2021-01-01 16:00",
+      toDate: "2021-01-01 19:00",
+      color: colorSet.getIndex(4).brighten(0.4)
+    },
+
+    {
+      movil: "Ambulancia 4",
+      fromDate: "2021-01-01 16:00",
+      toDate: "2021-01-01 20:00",
+      color: colorSet.getIndex(6).brighten(0)
+    },
+    {
+      movil: "UTIM 10",
+      fromDate: "2021-01-01 20:30",
+      toDate: "2021-01-01 24:00",
+      color: colorSet.getIndex(6).brighten(0.4)
+    },
+
+    {
+      movil: "UTIM 8",
+      fromDate: "2021-01-01 13:00",
+      toDate: "2021-01-01 24:00",
+      color: colorSet.getIndex(8).brighten(0)
+    },
+    {
+      movil: "Ambulancia 7",
+      fromDate: "2021-01-01 16:00",
+      toDate: "2021-01-01 20:00",
+      color: colorSet.getIndex(6).brighten(0)
+    },
+    {
+      movil: "UTIM 12",
+      fromDate: "2021-01-01 20:30",
+      toDate: "2021-01-01 24:00",
+      color: colorSet.getIndex(6).brighten(0.4)
+    },
+
+    {
+      movil: "UTIM 22",
+      fromDate: "2021-01-01 13:00",
+      toDate: "2021-01-01 24:00",
+      color: colorSet.getIndex(8).brighten(0)
+    }
+  ];
+
+  var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+  categoryAxis.dataFields.category = "movil";
+  categoryAxis.renderer.grid.template.location = 0;
+  categoryAxis.renderer.inversed = true;
+
+  var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+  dateAxis.dateFormatter.dateFormat = "yyyy-MM-dd HH:mm";
+  dateAxis.renderer.minGridDistance = 70;
+  dateAxis.baseInterval = { count: 30, timeUnit: "minute" };
+  dateAxis.max = new Date(2021, 0, 1, 24, 0, 0, 0).getTime();
+  dateAxis.strictMinMax = true;
+  dateAxis.renderer.tooltipLocation = 0;
+
+  var series1 = chart.series.push(new am4charts.ColumnSeries());
+  series1.columns.template.width = am4core.percent(80);
+  series1.columns.template.tooltipText = "{movil}: {openDateX} - {dateX}";
+
+  series1.dataFields.openDateX = "fromDate";
+  series1.dataFields.dateX = "toDate";
+  series1.dataFields.categoryY = "movil";
+  series1.columns.template.propertyFields.fill = "color"; // get color from data
+  series1.columns.template.propertyFields.stroke = "color";
+  series1.columns.template.strokeOpacity = 1;
+
+  chart.scrollbarX = new am4core.Scrollbar();
+}
 
 export function addLegend(chart){
   let legend = new am4charts.Legend();
