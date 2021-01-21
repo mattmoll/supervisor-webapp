@@ -1,28 +1,33 @@
 import React from 'react'
 
 export default function ServicesTable({servicesPerStatusAndColor}) {
-  const [colorsVisibility, setColorsVisibility] = React.useState({
-    "Rojos": true,
-    "Amarillos": true,
-    "Verdes" : true,
-    "Traslados": true,
-    "Eventos": true,
-    "Otros": true
-  });
-  const [windowWidth, setWindowWidth] = React.useState(1200);
 
-  const [colors, setColors] = React.useState({
-    "Rojos": "#DC6967",
-    "Amarillos": "#DCD267",
-    "Verdes" : "#67DC75",
-    "Traslados": "#4472C4",
-    "Eventos": "#FFE699",
-    "Otros": "#D9D9D9",
-  })
+  const getColorsVisibilityDefault = (colorNamesArray) => {
+    const colorsVisibilityDefault = {};
+    colorNamesArray.forEach( color => {
+      colorsVisibilityDefault[color] = true;
+    });
+    return colorsVisibilityDefault;
+  }
+
+  const colorNamesArray = servicesPerStatusAndColor[0].serviciosPorColor.map(servicePerColor => servicePerColor.color);
+  const [colorsVisibility, setColorsVisibility] = React.useState(getColorsVisibilityDefault(colorNamesArray));
+  const [windowWidth, setWindowWidth] = React.useState(1200);
 
   React.useEffect(() => {
     window.addEventListener("resize", handleResize);
   }, []);
+
+  const getColorsMap = (colorNamesArray, hexadecimalColors) => {
+    const hexaColorsDefault = {};
+    for(let index =0; index < colorNamesArray.length; index++){
+      hexaColorsDefault[colorNamesArray[index]] = hexadecimalColors[index];
+    }
+    return hexaColorsDefault;
+  }
+
+  const hexadecimalColors = ["#DC6967", "#DCD267", "#67DC75", "#4472C4", "#FFE699", "#D9D9D9"];
+  const colors = getColorsMap(colorNamesArray, hexadecimalColors);
 
   const handleResize = e => {
     setWindowWidth(window.innerWidth);
