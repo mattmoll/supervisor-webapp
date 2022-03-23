@@ -10,4 +10,3 @@ Built with React + ChartJS this WebApp allows the supervisors of several compani
 
 You can check out the Demo here:
 -Pending Link to netlify-
-
